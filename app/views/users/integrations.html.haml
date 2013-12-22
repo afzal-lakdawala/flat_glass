@@ -1,0 +1,27 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li.active Settings
+
+.row
+  .col-sm-2=render partial: "users/sidebar"
+  .col-sm-10
+    .panel.panel-default
+      .panel-heading Pull data from APIs
+      .panel-body
+        - if @api_accounts.first.present?
+          %table.table.table-condensed.table-hover.table-striped
+            %tr
+              %th Name
+              %th Provider
+              %th Account ID
+            - @api_accounts.each do |api_account|
+              %tr
+                %td= api_account.name
+                %td Google Analytics
+                %td= api_account.api_account_id
+        %hr    
+        %a{href: GRuby::Auth.oauth2(current_user.username, "https://www.googleapis.com/auth/plus.profile.emails.read%20https://www.googleapis.com/auth/analytics.readonly")}
+          = image_tag("/ga.jpg", class: "col-sm-1")
+          %br
+          Google Analytics

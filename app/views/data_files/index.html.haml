@@ -1,0 +1,26 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li.active= @folder
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading
+        %b= @folder
+        .pull-right
+          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> Pull data from APIs".html_safe, apis_user_account_data_files_path(@account.owner, @account.slug, folder_id: @folder), class: "btn btn-success btn-xs"
+          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New data set".html_safe, new_user_account_data_files_path(@account.owner, @account.slug, folder_id: @folder), class: "btn btn-success btn-xs"
+      .panel-content{style: "padding: 10px;"}
+        %table.table.table-condensed
+          %tr
+            %td= link_to "..", user_account_path(@account.owner, @account.slug)
+            %td
+            %td
+          - if @data_files.first.present?
+            - @data_files.each do |data_file|
+              %tr
+                %td.col-sm-6= link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;#{data_file.file_file_name}".html_safe, user_account_data_file_path(@account.owner, @account.slug, folder_id: @folder, file_id: data_file.slug)
+                %td.f11.gray.col-sm-4= data_file.commit_message
+                %td.f11.gray.col-sm-2= "#{time_ago_in_words(data_file.updated_at)} ago"

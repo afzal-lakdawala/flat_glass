@@ -1,0 +1,45 @@
+1. Account creation up
+====
+
+Account show page -- 
+You will have descript
+
+https://github.com/afzal-lakdawala/sdsd/tree/master
+
+You can go to following oages:
+* Collaborator
+* Add license
+* Add ReadMe
+
+====
+2. Permission (invitee )
+
+https://github.com/afzal-lakdawala/sdsd/collaboration
+
+====
+User dashboard UI -- create two tables 
+1) My repo
+2) Repos shared with me
+https://github.com/
+
+====
+Create a license page
+localhost/afxal/reopname/license
+where you allow user to seelct from a list of licenses or add a custom one
+https://github.com/afzal-lakdawala/sdsd/new/master?filename=LICENSE.md
+Account edit page with only license:string license_desc:text
+
+====
+Create a readme page
+localhost/afxal/reopname/readme
+Account edit page with only readme_descript:text showing that
+
+
+
+https://developers.google.com/oauthplayground/?code=4/hTT7rpDQuYCln0Cg9K7xHArM5Sir.omdIdp01kWIQXE-sT2ZLcbTtOMrfhQI
+
+https://github.com/vmg/redcarpet
+
+https://code.google.com/p/pagedown/wiki/PageDown
+
+http://import.io/features
