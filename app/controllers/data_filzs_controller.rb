@@ -1,4 +1,4 @@
-class DataFilesController < ApplicationController
+class DataFilzsController < ApplicationController
   
   before_filter :authenticate_user!, except: [:show, :index, :raw]
   before_filter :find_objects
