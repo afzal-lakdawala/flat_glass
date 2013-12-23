@@ -15,8 +15,8 @@ class Data::Filz < ActiveRecord::Base
   #ASSOCIATIONS
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
   belongs_to :updator, :class_name => 'User', :foreign_key => "updated_by"
+  belongs_to :api_filz, class_name: "Api::Filz", foreign_key: "data_filz_id", dependent: :destroy
   belongs_to :account
-  has_one :api_filz, class_name: "Api::Filz", foreign_key: "data_filz_id", dependent: :destroy
   
   #VALIDATIONS
   validates :file_file_name, length: {minimum: 5}, presence: true
