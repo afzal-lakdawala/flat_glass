@@ -46,11 +46,13 @@ class Api::Filz < ActiveRecord::Base
     self.last_requested_at = Time.now
     self.status = "New"
     self.last_requested_by = User.current.id if User.current.present?
+    d = Data::Filz.new(:account_id => self.account_id, :genre => "API", :is_pending => true, :file_file_name => "#{self.data_query.source_s}: #{self.data_query.name}", :category => "data", :commit_message => "First pull")
+    d.save
+    self.data_filz_id = d.id
     true
   end
   
   def after_create_set
-    Data::Filz.create!(:account_id => self.account_id, :created_by => User.current.id, :genre => "API", :is_pending => true, :file_file_name => "#{self.data_query.source_s}: #{self.data_query.name}", :category => "data", :commit_message => "First pull")
     Jobs::Ga.delay.new(self.id, "first")
     true
   end

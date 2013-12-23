@@ -86,14 +86,13 @@ class DataFilzsController < ApplicationController
   private
   
   def find_objects
+    @editor = "csv"
     if params[:folder_id].present?
       @folder = params[:folder_id]
       if params[:file_id].present? 
         @data_filz = @account.data_filzs.find(params[:file_id])
         if @data_filz.genre == "license" or @data_filz.genre == "readme"
           @editor = "text"
-        else
-          @editor = "csv"
         end
       end
     end
