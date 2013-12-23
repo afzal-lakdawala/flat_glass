@@ -10,6 +10,7 @@ class DataFilesController < ApplicationController
   
   def apis
     @data_queries = Data::Query.all_(current_user, @account)
+    @api_file = Api::File.new
   end
   
   def pull

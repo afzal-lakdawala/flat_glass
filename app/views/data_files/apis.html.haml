@@ -31,4 +31,8 @@
                   - elsif query.is_used
                     Already pulled
                   - else
-                    = link_to "Pull", pull_user_account_data_files_path(@account.owner, @account.slug, folder_id: @folder, qid: query.id), class: "btn btn-success"
+                    = form_for(@api_file, url: pull_user_account_data_files_path(@account.owner, @account.slug, folder_id: @folder, qid: query.id), :html => { method: :post,  role: "form" }) do |f|
+                      %table
+                        %tr
+                          %td= select(:api_file, :api_account_id, current_user.api_accounts.joins(:api_oauth).where(api_oauth: {app: query.source}).map{|z| [z.name, z.id]})
+                          %td= f.submit "Pull", class: "btn btn-success", id: "submit"

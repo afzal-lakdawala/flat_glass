@@ -37,7 +37,7 @@ Pykhub::Application.routes.draw do
   get "/:user_id/:account_id/:folder_id", to: "data_files#index", as: "user_account_data_files"
   get "/:user_id/:account_id/:folder_id/new", to: "data_files#new", as: "new_user_account_data_files"
   get "/:user_id/:account_id/:folder_id/apis", to: "data_files#apis", as: "apis_user_account_data_files"
-  get "/:user_id/:account_id/:folder_id/apis/pull", to: "data_files#pull", as: "pull_user_account_data_files"
+  post "/:user_id/:account_id/:folder_id/apis/pull", to: "data_files#pull", as: "pull_user_account_data_files"
   get "/:user_id/:account_id/:folder_id/:file_id/edit", to: "data_files#edit", as: "edit_user_account_data_file"
   post "/:user_id/:account_id/:folder_id/create", to: "data_files#create", as: "create_user_account_data_files"
   put "/:user_id/:account_id/:folder_id/:file_id/update", to: "data_files#update", as: "update_user_account_data_file"
