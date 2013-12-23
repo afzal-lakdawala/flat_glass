@@ -26,6 +26,11 @@ class Core::Services
     User.where(email: e).limit(1)
   end
   
+  #Core::Services.convert_date_to_google_analytics_format(d)
+  def self.convert_date_to_google_analytics_format(d)
+    "#{d.year.to_s}-#{d.month.to_s}-#{d.day.to_s}" #"2013-06-14"
+  end
+  
   #Core::Services.get_json(nestful_response)
   def self.get_json(nestful_response)
     begin

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222214121) do
+ActiveRecord::Schema.define(:version => 20131223060942) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20131222214121) do
     t.string   "api_account_id"
   end
 
-  create_table "api_filzs", :force => true do |t|
-    t.integer  "data_filz_id"
+  create_table "api_files", :force => true do |t|
+    t.integer  "data_file_id"
     t.integer  "api_account_id"
     t.string   "api_account_name"
     t.text     "error_string"
@@ -108,15 +108,15 @@ ActiveRecord::Schema.define(:version => 20131222214121) do
     t.integer  "account_id"
   end
 
-  create_table "data_filz_columns", :force => true do |t|
-    t.integer  "data_filz_id"
+  create_table "data_file_columns", :force => true do |t|
+    t.integer  "data_file_id"
     t.string   "name"
     t.string   "datatype"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "data_filzs", :force => true do |t|
+  create_table "data_files", :force => true do |t|
     t.integer  "account_id"
     t.string   "genre"
     t.string   "slug"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20131222214121) do
     t.text     "commit_message"
   end
 
-  add_index "data_filzs", ["slug"], :name => "index_core_files_on_slug"
+  add_index "data_files", ["slug"], :name => "index_core_files_on_slug"
 
   create_table "data_queries", :force => true do |t|
     t.string   "name"
@@ -146,6 +146,22 @@ ActiveRecord::Schema.define(:version => 20131222214121) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"

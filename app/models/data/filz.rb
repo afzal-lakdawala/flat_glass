@@ -27,6 +27,7 @@ class Data::Filz < ActiveRecord::Base
   #CALLBACKS
   before_create :before_create_set
   after_save :after_save_set
+  after_create :after_create_set
   
   #SCOPES
   scope :license, where(genre: "license")
@@ -68,6 +69,12 @@ class Data::Filz < ActiveRecord::Base
       self.account.update_attributes(license: self.category)
     end
     true    
+  end
+  
+  def after_create_set
+    
+    Delayed::Job.enqueue Jobs::Ga.new(uid, self.id, sd.to_s, ed.to_s, srange)
+    
   end
   
 end

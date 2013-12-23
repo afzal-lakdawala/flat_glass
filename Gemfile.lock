@@ -88,6 +88,11 @@ GEM
       mail
     daemons (1.1.9)
     debug_inspector (0.0.2)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -240,6 +245,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails (~> 3.2.1)
   csv_validator
+  delayed_job_active_record
   devise
   friendly_id (~> 4.0.1)
   g_ruby (= 0.0.11)

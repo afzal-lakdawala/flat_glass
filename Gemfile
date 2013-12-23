@@ -44,6 +44,7 @@ gem 'agent_orange', git: "https://github.com/kevinelliott/agent_orange.git"
 gem 'paper_trail'
 gem "railties"
 gem 'paperclip'
+gem 'delayed_job_active_record'
 gem 'aws-s3'
 gem 'aws-sdk'
 # PYKIH ENVIRONMENT GEMS - END
