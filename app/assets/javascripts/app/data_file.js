@@ -60,17 +60,9 @@ $(window).scroll(function () {
 function handsontable_with_filter(selector, data, readonly) {
 
     var columns = [];
-    var spare_row = 15;
-    
-    for (var i = 10 - 1; i >= 0; i--) {
-      columns.push([{type: 'checkbox'}])
-    };
-
     
     if (data.length > 0) {
       spare_row = 1;
-      
-      columns = [];
 
       for (var i = data[1].length - 1; i >= 0; i--) { 
         var value = data[1][i];
@@ -87,6 +79,17 @@ function handsontable_with_filter(selector, data, readonly) {
         
       }
       
+    }else {
+
+      var spare_row = 15;
+      
+      for (var i = 10 - 1; i >= 0; i--) {
+        columns.push([{type: 'checkbox'}])
+      };
+
+      data = createDummyData();
+
+
     }
 
     if (readonly) {
@@ -98,7 +101,7 @@ function handsontable_with_filter(selector, data, readonly) {
       colHeaders: true,
       rowHeaders: true,
       minSpareRows: spare_row,
-      minSpareCols: 1,
+      minSpareCols: 15,
       type: 'numeric',
       stretchH: 'all',      
       readOnly: readonly,
@@ -230,6 +233,23 @@ function handsontable_with_filter(selector, data, readonly) {
   }
 
   console.log(ConvertToCSV(data));
+
+  function createDummyData() {
+          var rows = []
+            , i
+            , j;
+        
+          for (i = 0; i < 15; i++) {
+            var row = [];
+            for (j = 0; j < 16; j++) {
+              //row.push(Handsontable.helper.spreadsheetColumnLabel(j) + i);
+            }
+            rows.push(row);
+          }
+        
+          return rows;
+        }
+
 
 
 
