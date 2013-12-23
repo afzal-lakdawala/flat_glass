@@ -13,6 +13,14 @@
           %td.col-sm-4
           %td.col-sm-2
         %tr
+          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;visualizations".html_safe, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: "visualizations")
+          %td.col-sm-4
+          %td.col-sm-2
+        %tr
+          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;articles".html_safe, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: "articles")
+          %td.col-sm-4
+          %td.col-sm-2
+        %tr
           %td.col-sm-6= link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;README.md".html_safe, readme_user_account_data_filz_path(@account.owner, @account.slug)
           %td.f11.gray.col-sm-4= @readme.commit_message
           %td.f11.gray.col-sm-2= "#{time_ago_in_words(@readme.updated_at)} ago"

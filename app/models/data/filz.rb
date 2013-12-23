@@ -67,6 +67,11 @@ class Data::Filz < ActiveRecord::Base
     if self.genre == "license" and self.category_changed?
       self.account.update_attributes(license: self.category)
     end
+    if self.content.present?
+      JSON.parse(self.content).first.each do |col|
+        
+      end
+    end
     true    
   end
   
