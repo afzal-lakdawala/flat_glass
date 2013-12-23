@@ -38,15 +38,14 @@ class Data::Query < ActiveRecord::Base
   end
   
   def self.query_1(formatted_output)
-    json_output = JSON.parse(formatted_output)
-    json_output.each do |j|
-      j["16"] = j["0"][0..3]
-      j["17"] = j["0"][4..5]
-      j["18"] = j["0"][6..7]
-      j["19"] = j["2"].split("/")[0].strip
-      j["20"] = j["2"].split("/")[1].strip
+    formatted_output.each do |j|
+      j << j[0][0..3]
+      j << j[0][4..5]
+      j << j[0][6..7]
+      j << j[2].split("/")[0].strip
+      j << j[2].split("/")[1].strip
     end
-    return json_output.to_s
+    return formatted_output
   end
   
   #developers.google.com/analytics/devguides/reporting/core/dimsmets

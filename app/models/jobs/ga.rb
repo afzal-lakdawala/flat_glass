@@ -17,9 +17,12 @@ class Jobs::Ga < Struct.new(:api_filz_id, :scope)
       api_output = query.ga(account.api_oauth.token, start_date, end_date, account.api_profile_id)
       formatted_output = Core::Services.array_of_array_to_handsontable(api_output)
       final_output = Data::Query.query_1(formatted_output)
-      #TODO APPEND output into data filz
-      data_filz.update_attributes(:content => final_output)
-      #EmailMailer.send_email(user.email, "Google Analytics - #{ak.to_s}").deliver
+      o = []
+      if data_filz.content.blank?
+        o << api_filz.data_query.header_row.split(",")
+      end
+      o = o + final_output
+      data_filz.update_attributes(:content => o)
     rescue Exception => ex
       api_filzs.update_attributes(error_string: ex.message.to_s)
     end

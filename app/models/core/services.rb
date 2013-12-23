@@ -5,19 +5,17 @@ class Core::Services
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(e.downcase)}.png?s=#{size}"    
   end
   
-  #Data::Filz.array_of_array_to_handsontable(array_of_array)
+  #Core::Services.array_of_array_to_handsontable(array_of_array)
   def self.array_of_array_to_handsontable(array_of_array)
-    str = "["
+    output = []
     array_of_array.each do |array|
-      str = "#{str}{"
-      i = 0
+      internal_array = []
       array.each do |a|
-        str = str + "\"#{i.to_s}\": \"#{a.to_s.gsub('"', "'")}\","
-        i = i + 1
+        internal_array << a.to_s.gsub('"', "'")
       end
-      str = "#{str[0..(str.length-2)]}},"
+      output << internal_array
     end
-    return "#{str[0..(str.length-2)]}]"
+    output
   end
   
   #Core::Services.get_user(e)
