@@ -37,7 +37,9 @@
   
   var content =  eval(#{@data_filz[:content]});
   handsontable_with_filter("#grid", content, false);
-  $('#submit').click(function() {
+  $('#submit').click(function() {    
+    remove_null_rows("#grid");
+    remove_null_cols("#grid");
     var rowList = $("#grid").handsontable("getData");
     $('#content').val(JSON.stringify(rowList)); 
   });

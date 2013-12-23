@@ -62,8 +62,11 @@ function handsontable_with_filter(selector, data, readonly) {
     var columns = [];
     
     if (data.length > 0) {
-      spare_row = 1;
 
+      $.each(data, function(index, value) {
+        
+      });
+      spare_row = 1;
       for (var i = data[1].length - 1; i >= 0; i--) { 
         var value = data[1][i];
         var type = "checkbox"
@@ -100,8 +103,8 @@ function handsontable_with_filter(selector, data, readonly) {
       data: data,
       colHeaders: true,
       rowHeaders: true,
-      minSpareRows: spare_row,
-      minSpareCols: 15,
+      minSpareRows: 1,
+      minSpareCols: 1,
       type: 'numeric',
       stretchH: 'all',      
       readOnly: readonly,
@@ -116,7 +119,7 @@ function handsontable_with_filter(selector, data, readonly) {
       contextMenu: true,
       outsideClickDeselects: false,
       cells: function (row, col, prop) {
-          if (row === 0) {
+          if (row <= 0) {
             var cellProperties = {
               type: 'text' //force text type for first row
             }
@@ -235,22 +238,50 @@ function handsontable_with_filter(selector, data, readonly) {
   console.log(ConvertToCSV(data));
 
   function createDummyData() {
-          var rows = []
-            , i
-            , j;
-        
-          for (i = 0; i < 15; i++) {
-            var row = [];
-            for (j = 0; j < 16; j++) {
-              //row.push(Handsontable.helper.spreadsheetColumnLabel(j) + i);
-            }
-            rows.push(row);
-          }
-        
-          return rows;
+    var rows = []
+      , i
+      , j;
+  
+    for (i = 0; i < 8; i++) {
+      var row = [];
+      for (j = 0; j < 7; j++) {
+        if (i <= 0) {
+          row.push("Header-"+j);
+        }else {
+          row.push([null]);
         }
+        
+      }
+      rows.push(row);
+    }
+  
+    return rows;
+  }
 
+}
 
+function remove_null_rows(selector) {
+  var total_rows =  $(selector).handsontable('countRows');  
 
+  for (var i = total_rows - 1; i >= 0; i--) {
+
+    if ($(selector).handsontable("isEmptyRow",i)) {
+      $(selector).handsontable("alter", "remove_row", i );  
+    }
+    
+  }  
+
+}
+
+function remove_null_cols(selector) {
+  var total_cols =  $(selector).handsontable('countCols');  
+
+  for (var i = total_cols - 1; i >= 0; i--) {
+    console.log($(selector).handsontable("isEmptyCol",i));
+    if ($(selector).handsontable("isEmptyCol",i)) {
+      $(selector).handsontable("alter", "remove_col", i );  
+    }
+    
+  }  
 
 }

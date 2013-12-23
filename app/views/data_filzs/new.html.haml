@@ -40,6 +40,8 @@
   handsontable_with_filter("#grid", [], false);
 
   $('#submit').click(function() {
+    remove_null_rows("#grid");
+    remove_null_cols("#grid");  
     var rowList = $("#grid").handsontable("getData");
     $('#content').val(JSON.stringify(rowList));
   });
