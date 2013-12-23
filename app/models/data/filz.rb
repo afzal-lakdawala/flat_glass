@@ -2,7 +2,7 @@ class Data::Filz < ActiveRecord::Base
   
   #GEMS USED
   require 'roo'
-  self.table_name = :data_files
+  self.table_name = :data_filzs
   
   extend FriendlyId
   friendly_id :file_file_name, use: [:slugged, :scoped], scope: :account
@@ -27,7 +27,6 @@ class Data::Filz < ActiveRecord::Base
   #CALLBACKS
   before_create :before_create_set
   after_save :after_save_set
-  after_create :after_create_set
   
   #SCOPES
   scope :license, where(genre: "license")
@@ -69,10 +68,6 @@ class Data::Filz < ActiveRecord::Base
       self.account.update_attributes(license: self.category)
     end
     true    
-  end
-  
-  def after_create_set
-    Delayed::Job.enqueue Jobs::Ga.new(self.api_filz.id, "first")
   end
   
 end

@@ -1,7 +1,7 @@
 class Api::Filz < ActiveRecord::Base
 
   #GEMS USED
-  self.table_name = :api_files
+  self.table_name = :api_filzs
   
   #CONSTANTS
   #ACCESSORS
@@ -51,7 +51,8 @@ class Api::Filz < ActiveRecord::Base
   
   def after_create_set
     Data::Filz.create!(:account_id => self.account_id, :created_by => User.current.id, :genre => "API", :is_pending => true, :file_file_name => "#{self.data_query.source_s}: #{self.data_query.name}", :category => "data", :commit_message => "First pull")
+    Jobs::Ga.delay.new(self.id, "first")
     true
   end
-  
+    
 end

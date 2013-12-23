@@ -26,6 +26,21 @@ class Core < ActiveRecord::Migration
       t.string   "api_account_id"
     end
 
+    create_table "api_filzs", :force => true do |t|
+      t.integer  "data_filz_id"
+      t.integer  "api_account_id"
+      t.string   "api_account_name"
+      t.text     "error_string"
+      t.string   "status"
+      t.datetime "last_requested_at"
+      t.integer  "last_requested_by"
+      t.integer  "user_id"
+      t.integer  "account_id"
+      t.datetime "created_at",        :null => false
+      t.datetime "updated_at",        :null => false
+      t.integer  "data_query_id"
+    end
+
     create_table "api_oauths", :force => true do |t|
       t.string   "app"
       t.string   "token"
@@ -120,6 +135,22 @@ class Core < ActiveRecord::Migration
       t.datetime "updated_at",  :null => false
     end
 
+    create_table "delayed_jobs", :force => true do |t|
+      t.integer  "priority",   :default => 0, :null => false
+      t.integer  "attempts",   :default => 0, :null => false
+      t.text     "handler",                   :null => false
+      t.text     "last_error"
+      t.datetime "run_at"
+      t.datetime "locked_at"
+      t.datetime "failed_at"
+      t.string   "locked_by"
+      t.string   "queue"
+      t.datetime "created_at",                :null => false
+      t.datetime "updated_at",                :null => false
+    end
+
+    add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
     create_table "permissions", :force => true do |t|
       t.integer  "user_id"
       t.integer  "account_id"
@@ -177,7 +208,6 @@ class Core < ActiveRecord::Migration
       t.datetime "created_at"
     end
 
-    add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
-        
+    add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"        
   end
 end

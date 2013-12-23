@@ -1,4 +1,4 @@
-class Core::DelayedJob < ActiveRecord::Base
+class DelayedJob < ActiveRecord::Base
   
   #GEMS USED
   self.table_name = :delayed_jobs
