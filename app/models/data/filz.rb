@@ -1,4 +1,4 @@
-class Data::File < ActiveRecord::Base
+class Data::Filz < ActiveRecord::Base
   
   #GEMS USED
   require 'roo'
@@ -16,17 +16,18 @@ class Data::File < ActiveRecord::Base
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
   belongs_to :updator, :class_name => 'User', :foreign_key => "updated_by"
   belongs_to :account
-  has_one :api_file, class_name: "Api::File", foreign_key: "data_file_id", dependent: :destroy
+  has_one :api_filz, class_name: "Api::Filz", foreign_key: "data_filz_id", dependent: :destroy
   
   #VALIDATIONS
   validates :file_file_name, length: {minimum: 5}, presence: true
-  validates :file_content_type, length: {minimum: 2}, presence: true
+  #validates :file_content_type, length: {minimum: 2}, presence: true
   validates :content, length: {minimum: 5, message: "is too short (minimum is 5 rows)"}, allow_blank: true
   validate :has_unique_file_name?, on: :create
   
   #CALLBACKS
   before_create :before_create_set
   after_save :after_save_set
+  after_create :after_create_set
   
   #SCOPES
   scope :license, where(genre: "license")
@@ -51,7 +52,7 @@ class Data::File < ActiveRecord::Base
   private
   
   def has_unique_file_name?
-    if Data::File.where(file_file_name: self.file_file_name, category: self.category, account_id: self.account_id).first.present?
+    if Data::Filz.where(file_file_name: self.file_file_name, category: self.category, account_id: self.account_id).first.present?
       errors.add(:file_file_name, "already taken")
     end
   end
@@ -68,6 +69,12 @@ class Data::File < ActiveRecord::Base
       self.account.update_attributes(license: self.category)
     end
     true    
+  end
+  
+  def after_create_set
+    
+    Delayed::Job.enqueue Jobs::Ga.new(uid, self.id, sd.to_s, ed.to_s, srange)
+    
   end
   
 end

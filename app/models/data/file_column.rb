@@ -1,14 +1,14 @@
-class Data::FileColumn < ActiveRecord::Base
+class Data::FilzColumn < ActiveRecord::Base
   
   #GEMS USED
-  self.table_name = :data_file_columns
+  self.table_name = :data_filz_columns
   has_paper_trail
   
   #ACCESSORS
-  attr_accessible :data_file_id, :datatype, :name
+  attr_accessible :data_filz_id, :datatype, :name
   
   #ASSOCIATIONS
-  belongs_to :data_file, :class_name => 'Data::File', :foreign_key => "data_file_id"
+  belongs_to :data_filz, :class_name => 'Data::Filz', :foreign_key => "data_filz_id"
   
   
   

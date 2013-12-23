@@ -5,7 +5,7 @@ class Core::Services
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(e.downcase)}.png?s=#{size}"    
   end
   
-  #Data::File.array_of_array_to_handsontable(array_of_array)
+  #Data::Filz.array_of_array_to_handsontable(array_of_array)
   def self.array_of_array_to_handsontable(array_of_array)
     str = "["
     array_of_array.each do |array|
@@ -24,6 +24,11 @@ class Core::Services
   def self.get_user(e)
     e = e.downcase
     User.where(email: e).limit(1)
+  end
+  
+  #Core::Services.convert_date_to_google_analytics_format(d)
+  def self.convert_date_to_google_analytics_format(d)
+    "#{d.year.to_s}-#{d.month.to_s}-#{d.day.to_s}" #"2013-06-14"
   end
   
   #Core::Services.get_json(nestful_response)

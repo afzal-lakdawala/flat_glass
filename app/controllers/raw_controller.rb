@@ -32,7 +32,7 @@ class RawController < ApplicationController
 #     require_dependency 'data/file'
 #     #Saving to database
 # #    file_which_saved = string_data
-#     new_data = Data::File.new(params)
+#     new_data = Data::Filz.new(params)
 #     # new_data.title = "test"
 #     # new_data.data  = file_which_saved
 #     new_data.save!
