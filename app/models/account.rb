@@ -15,8 +15,8 @@ class Account < ActiveRecord::Base
   has_many :users, through: :permissions
   has_many :core_visits, class_name: "Core::Visit", dependent: :destroy
   has_many :core_alerts, class_name: "Core::Alert"
-  has_many :data_files, class_name: "Data::File", dependent: :destroy
-  has_many :api_files, class_name: "Api::File", dependent: :destroy
+  has_many :data_filzs, class_name: "Data::Filz", dependent: :destroy
+  has_many :api_filzs, class_name: "Api::Filz", dependent: :destroy
 
   #VALIDATIONS
   validates :name, presence: true, length: {minimum: 5}, on: :create
@@ -50,15 +50,15 @@ class Account < ActiveRecord::Base
   def after_create_set
     Permission.create!(user_id: self.created_by, account_id: self.id, role: "O", email: self.creator.email)
     Core::Alert.log(self.id, "created")
-    Data::File.create!(account_id: self.id, genre: "readme", file_content_type: "md", file_file_name: "README.md")
-    Data::File.create!(account_id: self.id, genre: "license", file_content_type: "md", file_file_name: "License.md", category: self.license)
+    Data::Filz.create!(account_id: self.id, genre: "readme", file_content_type: "md", file_file_name: "README.md")
+    Data::Filz.create!(account_id: self.id, genre: "license", file_content_type: "md", file_file_name: "License.md", category: self.license)
     true
   end
   
   def after_update_set
     Core::Alert.log(self.id, "updated")
     if self.license_changed?
-      self.data_files.license.first.update_attributes(category: self.license)
+      self.data_filzs.license.first.update_attributes(category: self.license)
     end
     true
   end

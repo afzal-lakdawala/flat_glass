@@ -30,20 +30,20 @@ Pykhub::Application.routes.draw do
   post '/:user_id/:account_id/transfer', to: "accounts#transfer", as: "transfer_user_account"
 
   #specfic files
-  get "/:user_id/:account_id/readme.md", to: "data_files#readme", as: "readme_user_account_data_file"
-  get "/:user_id/:account_id/license.md", to: "data_files#license", as: "license_user_account_data_file"
+  get "/:user_id/:account_id/readme.md", to: "data_filzs#readme", as: "readme_user_account_data_filz"
+  get "/:user_id/:account_id/license.md", to: "data_filzs#license", as: "license_user_account_data_filz"
   
   #files
-  get "/:user_id/:account_id/:folder_id", to: "data_files#index", as: "user_account_data_files"
-  get "/:user_id/:account_id/:folder_id/new", to: "data_files#new", as: "new_user_account_data_files"
-  get "/:user_id/:account_id/:folder_id/apis", to: "data_files#apis", as: "apis_user_account_data_files"
-  get "/:user_id/:account_id/:folder_id/apis/pull", to: "data_files#pull", as: "pull_user_account_data_files"
-  get "/:user_id/:account_id/:folder_id/:file_id/edit", to: "data_files#edit", as: "edit_user_account_data_file"
-  post "/:user_id/:account_id/:folder_id/create", to: "data_files#create", as: "create_user_account_data_files"
-  put "/:user_id/:account_id/:folder_id/:file_id/update", to: "data_files#update", as: "update_user_account_data_file"
-  get "/:user_id/:account_id/:folder_id/:file_id/delete", to: "data_files#destroy", as: "delete_user_account_data_file"
-  get "/:user_id/:account_id/:folder_id/:file_id/raw", to: "data_files#raw", as: "raw_user_account_data_file"
-  get "/:user_id/:account_id/:folder_id/:file_id", to: "data_files#show", as: "user_account_data_file"
+  get "/:user_id/:account_id/:folder_id", to: "data_filzs#index", as: "user_account_data_filzs"
+  get "/:user_id/:account_id/:folder_id/new", to: "data_filzs#new", as: "new_user_account_data_filzs"
+  get "/:user_id/:account_id/:folder_id/apis", to: "data_filzs#apis", as: "apis_user_account_data_filzs"
+  post "/:user_id/:account_id/:folder_id/apis/pull", to: "data_filzs#pull", as: "pull_user_account_data_filzs"
+  get "/:user_id/:account_id/:folder_id/:file_id/edit", to: "data_filzs#edit", as: "edit_user_account_data_filz"
+  post "/:user_id/:account_id/:folder_id/create", to: "data_filzs#create", as: "create_user_account_data_filzs"
+  put "/:user_id/:account_id/:folder_id/:file_id/update", to: "data_filzs#update", as: "update_user_account_data_filz"
+  get "/:user_id/:account_id/:folder_id/:file_id/delete", to: "data_filzs#destroy", as: "delete_user_account_data_filz"
+  get "/:user_id/:account_id/:folder_id/:file_id/raw", to: "data_filzs#raw", as: "raw_user_account_data_filz"
+  get "/:user_id/:account_id/:folder_id/:file_id", to: "data_filzs#show", as: "user_account_data_filz"
 
   #most specific routes come last
   get "/:user_id/:account_id", to: "accounts#show", as: "user_account"

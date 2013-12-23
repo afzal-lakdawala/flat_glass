@@ -8,7 +8,7 @@ class Data::Query < ActiveRecord::Base
   attr_accessor :is_oauth_done, :is_used
   
   #ASSOCIATIONS
-  has_many :api_files, class_name: "Api::File", dependent: :destroy, foreign_key: "api_file_id"
+  has_many :api_filzs, class_name: "Api::Filz", dependent: :destroy, foreign_key: "api_filz_id"
   
   #VALIDATIONS
   validates :name, uniqueness: true, presence: true
@@ -34,7 +34,7 @@ class Data::Query < ActiveRecord::Base
   end
   
   def is_used?(account)
-    account.api_files.where(data_query_id: self.id).first.present? ? true : false
+    account.api_filzs.where(data_query_id: self.id).first.present? ? true : false
   end
   
   def self.query_1(formatted_output)
