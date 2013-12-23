@@ -245,6 +245,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails (~> 3.2.1)
   csv_validator
+  daemons
   delayed_job_active_record
   devise
   friendly_id (~> 4.0.1)
