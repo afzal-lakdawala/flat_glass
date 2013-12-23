@@ -12,7 +12,7 @@ class Api::Account < ActiveRecord::Base
   #ASSOCIATIONS
   belongs_to :api_oauth, class_name: "Api::Oauth", foreign_key: "api_oauth_id"
   belongs_to :user
-  has_many :api_files, class_name: "Api::File", foreign_key: "api_account_id", dependent: :destroy
+  has_many :api_filzs, class_name: "Api::Filz", foreign_key: "api_account_id", dependent: :destroy
   
   #VALIDATIONS
   validates :name, presence: :true

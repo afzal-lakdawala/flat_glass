@@ -3,7 +3,7 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to @data_file.file_file_name, user_account_data_file_path()
+    %li= link_to @data_filz.file_file_name, user_account_data_filz_path()
     %li.active Edit
 .row
   .col-sm-12
@@ -11,15 +11,15 @@
       .panel-heading
         %i.glyphicon.glyphicon-list-alt
         &nbsp;
-        %b= @data_file.file_file_name
+        %b= @data_filz.file_file_name
       .panel-content{style: "padding: 10px;"}
-        = form_for(@data_file, url: update_user_account_data_file_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_file.slug), :html => { method: :put,  role: "form" }) do |f|
+        = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
           .form-group
             - if @editor == "text"
               = f.text_area :content, class: "form-control"
             - elsif @editor == "csv"
-              -if @data_file.errors.present?
-                - @data_file.errors[:content].each do |c_error|
+              -if @data_filz.errors.present?
+                - @data_filz.errors[:content].each do |c_error|
                   %span.label.label-danger
                     = c_error
               %button#transpose_hands_grid Transpose
@@ -35,7 +35,7 @@
 
 :javascript
   
-  var content =  eval(#{@data_file[:content]});
+  var content =  eval(#{@data_filz[:content]});
   handsontable_with_filter("#grid", content, false);
   $('#submit').click(function() {
     var rowList = $("#grid").handsontable("getData");

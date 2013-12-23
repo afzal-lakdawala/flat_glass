@@ -1,7 +1,7 @@
 class CreateApiFiles < ActiveRecord::Migration
   def change
-    create_table :api_files do |t|
-      t.integer :data_file_id
+    create_table :api_filzs do |t|
+      t.integer :data_filz_id
       t.integer :api_account_id
       t.string :api_account_name
       t.text :error_string

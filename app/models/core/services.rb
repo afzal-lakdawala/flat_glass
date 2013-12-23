@@ -5,7 +5,7 @@ class Core::Services
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(e.downcase)}.png?s=#{size}"    
   end
   
-  #Data::File.array_of_array_to_handsontable(array_of_array)
+  #Data::Filz.array_of_array_to_handsontable(array_of_array)
   def self.array_of_array_to_handsontable(array_of_array)
     str = "["
     array_of_array.each do |array|
