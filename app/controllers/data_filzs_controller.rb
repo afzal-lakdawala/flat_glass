@@ -17,12 +17,12 @@ class DataFilzsController < ApplicationController
     @data_query = Data::Query.find(params[:qid])
     @api_account = Api::Account.find(params[:api_filz][:api_account_id])
     if !@data_query.is_oauth_done?(current_user)
-      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder), error: "Source is not authenticated."
+      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug), error: "Source is not authenticated."
     elsif @data_query.is_used?(@account)
-      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder), error: "Already pulling"
+      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug), error: "Already pulling"
     else
       Api::Filz.upsert(@account.id, @api_account.id, @data_query.id)
-      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder), notice: "All well"
+      redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug), notice: "All well"
     end      
   end
   
@@ -42,7 +42,7 @@ class DataFilzsController < ApplicationController
     @data_filz = Data::Filz.new(params[:data_filz])
     if @data_filz.save
       flash[:notice] = t("c.s")
-      redirect_to user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), :locals => {:flash => flash}
+      redirect_to user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :locals => {:flash => flash}
     else
       gon.errors = @data_filz.errors 
       flash[:error] = t("c.f")
@@ -55,7 +55,7 @@ class DataFilzsController < ApplicationController
   
   def update
     if @data_filz.update_attributes(params[:data_filz])
-      redirect_to user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), notice: t("u.s")
+      redirect_to user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), notice: t("u.s")
     else
       gon.errors = @data_filz.errors
       render action: "edit" 
@@ -64,7 +64,7 @@ class DataFilzsController < ApplicationController
   
   def destroy
     @data_filz.destroy
-    redirect_to user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder)
+    redirect_to user_account_data_filzs_path(@account.owner, @account.slug)
   end
   
   def license
@@ -87,13 +87,10 @@ class DataFilzsController < ApplicationController
   
   def find_objects
     @editor = "csv"
-    if params[:folder_id].present?
-      @folder = params[:folder_id]
-      if params[:file_id].present? 
-        @data_filz = @account.data_filzs.find(params[:file_id])
-        if @data_filz.genre == "license" or @data_filz.genre == "readme"
-          @editor = "text"
-        end
+    if params[:file_id].present? 
+      @data_filz = @account.data_filzs.find(params[:file_id])
+      if @data_filz.genre == "license" or @data_filz.genre == "readme"
+        @editor = "text"
       end
     end
   end

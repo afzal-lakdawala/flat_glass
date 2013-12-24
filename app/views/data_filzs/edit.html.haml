@@ -13,7 +13,7 @@
         &nbsp;
         %b= @data_filz.file_file_name
       .panel-content{style: "padding: 10px;"}
-        = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
+        = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
           .form-group
             - if @editor == "text"
               = f.text_area :content, class: "form-control"

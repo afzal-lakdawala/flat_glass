@@ -1,0 +1,11 @@
+= simple_form_for(@cms_article, html: {class: 'form-vertical', role: "form"}) do |f|
+  = f.error_notification
+  = f.input :account_id, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :title, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :description, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :published_at, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :is_published, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :created_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :updated_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.button :submit, (@cms_article.id.present? ? 'Update' : 'Add'), class: "btn btn-success"
+  = link_to "Cancel", nil, style: "font-size: 11px;"

@@ -5,7 +5,7 @@
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
     - if @folder.present?
       - if @folder != "_"
-        %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder)
+        %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active= @data_filz.file_file_name
 .row
   .col-sm-12
@@ -24,10 +24,10 @@
         &nbsp;
         %b= @data_filz.file_file_name
         %span.pull-right
-          = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
-          = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           - if !@disable_delete
-            = link_to "Delete", delete_user_account_data_filz_path(@account.owner, @account.slug, folder_id: @folder, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
+            = link_to "Delete", delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
       .panel-content{style: "padding: 10px;"}        
         - if @editor == "text"
           = @data_filz.content

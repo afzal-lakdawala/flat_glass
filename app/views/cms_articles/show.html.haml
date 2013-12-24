@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Account:
+  = @cms_article.account_id
+%p
+  %b Title:
+  = @cms_article.title
+%p
+  %b Description:
+  = @cms_article.description
+%p
+  %b Published at:
+  = @cms_article.published_at
+%p
+  %b Is published:
+  = @cms_article.is_published
+%p
+  %b Created by:
+  = @cms_article.created_by
+%p
+  %b Updated by:
+  = @cms_article.updated_by
+
+= link_to 'Edit', edit_cms_article_path(@cms_article)
+\|
+= link_to 'Back', cms_articles_path

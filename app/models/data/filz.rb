@@ -47,13 +47,13 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_create_set
-    self.created_by = User.current.id if self.id.blank?
-    self.updated_by = User.current.id
-    self.is_pending = false           if self.is_pending.blank?
+    self.created_by = User.current.id
+    self.is_pending = false if self.is_pending.blank?
     true
   end
   
   def before_save_set
+    self.updated_by = User.current.id
     if self.content.present?
       con = self.content.class.to_s == "String" ? JSON.parse(self.content) : self.content
       new_header = Data::FilzColumn.get_headers(con)

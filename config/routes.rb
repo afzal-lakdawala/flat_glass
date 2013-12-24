@@ -34,16 +34,25 @@ Pykhub::Application.routes.draw do
   get "/:user_id/:account_id/license.md", to: "data_filzs#license", as: "license_user_account_data_filz"
   
   #files
-  get "/:user_id/:account_id/:folder_id", to: "data_filzs#index", as: "user_account_data_filzs"
-  get "/:user_id/:account_id/:folder_id/new", to: "data_filzs#new", as: "new_user_account_data_filzs"
-  get "/:user_id/:account_id/:folder_id/apis", to: "data_filzs#apis", as: "apis_user_account_data_filzs"
-  post "/:user_id/:account_id/:folder_id/apis/pull", to: "data_filzs#pull", as: "pull_user_account_data_filzs"
-  get "/:user_id/:account_id/:folder_id/:file_id/edit", to: "data_filzs#edit", as: "edit_user_account_data_filz"
-  post "/:user_id/:account_id/:folder_id/create", to: "data_filzs#create", as: "create_user_account_data_filzs"
-  put "/:user_id/:account_id/:folder_id/:file_id/update", to: "data_filzs#update", as: "update_user_account_data_filz"
-  get "/:user_id/:account_id/:folder_id/:file_id/delete", to: "data_filzs#destroy", as: "delete_user_account_data_filz"
-  get "/:user_id/:account_id/:folder_id/:file_id/raw", to: "data_filzs#raw", as: "raw_user_account_data_filz"
-  get "/:user_id/:account_id/:folder_id/:file_id", to: "data_filzs#show", as: "user_account_data_filz"
+  get "/:user_id/:account_id/data", to: "data_filzs#index", as: "user_account_data_filzs"
+  get "/:user_id/:account_id/data/new", to: "data_filzs#new", as: "new_user_account_data_filzs"
+  get "/:user_id/:account_id/data/apis", to: "data_filzs#apis", as: "apis_user_account_data_filzs"
+  post "/:user_id/:account_id/data/apis/pull", to: "data_filzs#pull", as: "pull_user_account_data_filzs"
+  get "/:user_id/:account_id/data/:file_id/edit", to: "data_filzs#edit", as: "edit_user_account_data_filz"
+  post "/:user_id/:account_id/data/create", to: "data_filzs#create", as: "create_user_account_data_filzs"
+  put "/:user_id/:account_id/data/:file_id/update", to: "data_filzs#update", as: "update_user_account_data_filz"
+  get "/:user_id/:account_id/data/:file_id/delete", to: "data_filzs#destroy", as: "delete_user_account_data_filz"
+  get "/:user_id/:account_id/data/:file_id/raw", to: "data_filzs#raw", as: "raw_user_account_data_filz"
+  get "/:user_id/:account_id/data/:file_id", to: "data_filzs#show", as: "user_account_data_filz"
+  
+  #articles
+  get "/:user_id/:account_id/articles", to: "cms_articles#index", as: "user_account_cms_articles"
+  get "/:user_id/:account_id/articles/new", to: "cms_articles#new", as: "new_user_account_cms_articles"
+  get "/:user_id/:account_id/articles/:file_id/edit", to: "cms_articles#edit", as: "edit_user_account_cms_article"
+  post "/:user_id/:account_id/articles/create", to: "cms_articles#create", as: "create_user_account_cms_articles"
+  put "/:user_id/:account_id/articles/:file_id/update", to: "cms_articles#update", as: "update_user_account_cms_article"
+  get "/:user_id/:account_id/articles/:file_id/delete", to: "cms_articles#destroy", as: "delete_user_account_cms_article"
+  get "/:user_id/:account_id/articles/:file_id", to: "cms_articles#show", as: "user_account_cms_article"
 
   #most specific routes come last
   get "/:user_id/:account_id", to: "accounts#show", as: "user_account"

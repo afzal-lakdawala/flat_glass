@@ -3,7 +3,7 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder)
+    %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active Pull data from APIs
 .row
   .col-sm-12
@@ -31,7 +31,7 @@
                   - elsif query.is_used
                     Already pulled
                   - else
-                    = form_for(@api_filz, url: pull_user_account_data_filzs_path(@account.owner, @account.slug, folder_id: @folder, qid: query.id), :html => { method: :post,  role: "form" }) do |f|
+                    = form_for(@api_filz, url: pull_user_account_data_filzs_path(@account.owner, @account.slug, qid: query.id), :html => { method: :post,  role: "form" }) do |f|
                       = select(:api_filz, :api_account_id, current_user.api_accounts.joins(:api_oauth).where(api_oauths: {app: query.source}).map{|z| [z.name, z.id]})
                       %br  
                       = f.submit "Pull", class: "btn btn-success", id: "submit"
