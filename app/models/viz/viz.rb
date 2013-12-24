@@ -36,21 +36,17 @@ class Viz::Viz < ActiveRecord::Base
     JSON.parse(self.data_filz.content)[0]
   end
   
-  def reference_map
-    JSON.parse(self.viz_chart.mapping.gsub("'", '"'))
-  end
-  
   def generate_map
     map_json = JSON.parse(self.map).invert
     data = JSON.parse(self.data_filz.content)
-    headings = data[0]
+    headings = data.shift
     headings = headings.collect{|h| h.split(":").first }
-    data.shift
+    
     json_data = [{"key" => "Chart","values" => []}]
     data.each do |row|
       h = {}
-      label = row[headings.index(map_json["data"])]
-      value = row[headings.index(map_json["value"])]
+      label = row[headings.index(map_json["Data"])]
+      value = row[headings.index(map_json["Value"])]
       el = false
       json_data[0]["values"].each_with_index do |set, i|
         if set["label"] == label
@@ -65,7 +61,9 @@ class Viz::Viz < ActiveRecord::Base
         hash["value"] += value
         json_data[0]["values"][el] = hash
       end
-      json_data[0]["values"].push(h);
+      if h != {}
+        json_data[0]["values"].push(h);
+      end
     end
     self.mapped_output = json_data
   end
