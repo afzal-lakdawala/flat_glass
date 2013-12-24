@@ -60,12 +60,12 @@ class Viz::Viz < ActiveRecord::Base
       unless el
         h["label"] = label
         h["value"] = value.to_i
+        json_data[0]["values"].push(h);
       else
         hash = json_data[0]["values"][el]
         hash["value"] += value.to_i
         json_data[0]["values"][el] = hash
       end
-      json_data[0]["values"].push(h);
     end
     self.mapped_output = json_data
   end
