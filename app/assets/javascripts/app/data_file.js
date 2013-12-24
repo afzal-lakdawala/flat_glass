@@ -121,7 +121,8 @@ function handsontable_with_filter(selector, data, readonly) {
       cells: function (row, col, prop) {
           if (row <= 0) {
             var cellProperties = {
-              type: 'text' //force text type for first row
+              type: 'text',
+              renderer: firstRowRenderer
             }
             return cellProperties;
           }
@@ -215,7 +216,8 @@ function handsontable_with_filter(selector, data, readonly) {
   });
 
   $(selector+' table').addClass('table-hover table-condensed');
-  $(selector+' table tbody tr:first').css("background-color", "blue").css('font-weight', 'bold');  
+  $(selector+' table tbody tr:first').css('font-weight', 'bold');  
+
 
   function ConvertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -246,7 +248,7 @@ function handsontable_with_filter(selector, data, readonly) {
       var row = [];
       for (j = 0; j < 7; j++) {
         if (i <= 0) {
-          row.push("Header-"+j);
+          row.push(null);
         }else {
           row.push([null]);
         }
