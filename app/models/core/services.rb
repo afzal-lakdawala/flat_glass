@@ -31,6 +31,11 @@ class Core::Services
   
   #Core::Services.get_json(nestful_response)
   def self.get_json(nestful_response)
+    Rails.logger.info "============================="
+    Rails.logger.info "============================="
+    Rails.logger.info "============================="
+    Rails.logger.info nestful_response
+    
     begin
       if !nestful_response.blank?
         if !nestful_response.body.blank?

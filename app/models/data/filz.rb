@@ -25,6 +25,7 @@ class Data::Filz < ActiveRecord::Base
   validate :has_unique_file_name?, on: :create
   
   #CALLBACKS
+  before_save :before_save_set
   before_create :before_create_set
   after_save :after_save_set
   
@@ -33,18 +34,7 @@ class Data::Filz < ActiveRecord::Base
   scope :readme, where(genre: "readme")  
   
   #CUSTOM SCOPES
-  #OTHER METHODS  
-  
-  def self.csv_to_handsontable(csv)
-    str = ""
-    return str
-  end
-  
-  def handsontable_to_csv
-    str = self.content
-    return str
-  end
-  
+  #OTHER METHODS    
   #UPSERT
   #JOBS
   #PRIVATE
@@ -63,14 +53,19 @@ class Data::Filz < ActiveRecord::Base
     true
   end
   
+  def before_save_set
+    if self.content.present?
+      con = self.content.class.to_s == "String" ? JSON.parse(self.content) : self.content
+      new_header = Data::FilzColumn.get_headers(con)
+      con[0] = new_header.split(",")
+      self.content = con.to_s
+    end    
+    true
+  end
+  
   def after_save_set
     if self.genre == "license" and self.category_changed?
       self.account.update_attributes(license: self.category)
-    end
-    if self.content.present?
-      JSON.parse(self.content).first.each do |col|
-        
-      end
     end
     true    
   end

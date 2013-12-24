@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: pykhub
-  host: 192.168.0.119
+  host: 192.168.0.120
   pool: 5
   username: devrp
   password: developer

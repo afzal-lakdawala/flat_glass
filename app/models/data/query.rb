@@ -42,6 +42,7 @@ class Data::Query < ActiveRecord::Base
       j << j[0][0..3]
       j << j[0][4..5]
       j << j[0][6..7]
+      j[0] = "#{j[0][0..3]}-#{j[0][4..5]}-#{j[0][6..7]}"
       j << j[2].split("/")[0].strip
       j << j[2].split("/")[1].strip
     end
@@ -51,7 +52,7 @@ class Data::Query < ActiveRecord::Base
   #developers.google.com/analytics/devguides/reporting/core/dimsmets
   #ga(token, sd, ed, profile_id)
   def ga(token, sd, ed, profile_id)
-    begin
+    #begin
       url = "https://www.googleapis.com/analytics/v3/data/ga?access_token=#{token}&start-date=#{sd}&end-date=#{ed}&ids=ga:#{profile_id}&metrics=#{self.metrics}"
       url = url + "&dimensions=#{self.dimensions}"  if self.dimensions.present?
       a = Core::Services.get_json(Nestful.get(url))
@@ -61,9 +62,9 @@ class Data::Query < ActiveRecord::Base
         end
       end
       return nil
-    rescue => e
-      return {status: "fail", message: e.inspect}
-    end
+      #rescue => e
+      #return {status: "fail", message: e.inspect}
+      #end
   end
   
   def source_s

@@ -1,3 +1,4 @@
+#TODO - Fails when we try to delete Api::Filz from Rails
 class Api::Filz < ActiveRecord::Base
 
   #GEMS USED
@@ -5,7 +6,7 @@ class Api::Filz < ActiveRecord::Base
   
   #CONSTANTS
   #ACCESSORS
-  attr_accessible :account_id, :api_account_id, :api_account_name, :data_filz_id, :error_string, :last_requested_at, :last_requested_by, :status, :user_id, :data_query_id
+  attr_accessible :account_id, :api_account_id, :api_account_name, :data_filz_id, :error_string, :last_requested_at, :last_requested_by, :status, :data_query_id #, :user_id
   
   #ASSOCIATIONS
   belongs_to :data_filz, class_name: "Data::Filz", foreign_key: "data_filz_id", dependent: :destroy
@@ -53,7 +54,7 @@ class Api::Filz < ActiveRecord::Base
   end
   
   def after_create_set
-    Jobs::Ga.delay.new(self.id, "first")
+    Jobs::Ga.delay.query(self.id, "first")
     true
   end
     
