@@ -5,7 +5,7 @@ var PieMapper = function(){
         this.map = {};
         this.data = DATA;
         this.getType();
-        this.fillSampleTable();
+        //this.fillSampleTable();
         this.fillVarList();
     }
 
@@ -62,7 +62,7 @@ var PieMapper = function(){
                 hoverClass: "hover-drop",
                 tolerance: "fit",
                 drop: function(e, u){
-                    var param = $(this).attr("id").split("-")[0];
+                    var param = $(this).attr("map_identifier");
                     var local_param = $(u.draggable).attr("data-colname");
                     if(that.map[local_param] === undefined) that.map[local_param] = param;
                     if(that.map[local_param] === undefined) $(this).attr("data-full", param)
@@ -108,8 +108,6 @@ var PieMapper = function(){
     };
 
     this._isValue = function(v){
-        console.log(this.map);
-        console.log(v);
         for(var i in this.map){
             var k = this.map[i];
             if(k === v) return true;
