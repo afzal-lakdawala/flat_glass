@@ -14,4 +14,10 @@
 //= require_tree ./vendor/app/
 //= require_tree ./vendor/pyk/
 //= require_tree ./app/
+//= require vendor/lib/jquery-ui-1.10.0.custom.min
+//= require vendor/lib/rangy-core-1.2.3
+//= require vendor/lib/hallo
+//= require vendor/lib/showdown
+//= require vendor/lib/to-markdown
+//= require vendor/lib/editor
 
