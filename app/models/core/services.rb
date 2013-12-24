@@ -5,6 +5,15 @@ class Core::Services
     "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(e.downcase)}.png?s=#{size}"    
   end
   
+  #Core::Services.twod_to_csv(twod_array)
+  def self.twod_to_csv(twodarray, options = {})
+    CSV.generate(options) do |csv|
+      twodarray.each do |row|
+        csv << row
+      end
+    end
+  end
+  
   #Core::Services.array_of_array_to_handsontable(array_of_array)
   def self.array_of_array_to_handsontable(array_of_array)
     output = []

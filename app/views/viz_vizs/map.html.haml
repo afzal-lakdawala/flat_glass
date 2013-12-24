@@ -17,15 +17,12 @@
         %h4 Map columns to Chart
         #pie-mapper
           #user-variables.col-sm-4
-          / To be populated with the CSV from the JS
           = debug @viz_viz.reference_map
           - @viz_viz.reference_map.each do |m|
             .col-sm-2
               %h5= m[0]
               #data-drop.takes-drop{"data-droptype" => m[1], "map_identifier" => m[0]} Drop Here
         %button.btn.btn-primary#get-pie Next &raquo;
-        #sample-table
-          %table.table.table-bordered.table-striped.table-condensed
 = javascript_include_tag("/mapper")
 :javascript
   DATA = [#{@viz_viz.headers}];
