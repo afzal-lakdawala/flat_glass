@@ -60,10 +60,11 @@ Pykhub::Application.routes.draw do
   #viz
   get "/:user_id/:account_id/visualizations", to: "viz_vizs#index", as: "user_account_viz_vizs"
   get "/:user_id/:account_id/visualizations/new", to: "viz_vizs#new", as: "new_user_account_viz_vizs"
-  get "/:user_id/:account_id/visualizations/:file_id/map", to: "viz_vizs#map", as: "map_user_account_viz_viz"
+  get "/:user_id/:account_id/visualizations/:file_id/map", to: "viz_vizs#map", as: "map_user_account_viz_viz"  
   get "/:user_id/:account_id/visualizations/:file_id/edit", to: "viz_vizs#edit", as: "edit_user_account_viz_viz"
   post "/:user_id/:account_id/visualizations/create", to: "viz_vizs#create", as: "create_user_account_viz_vizs"
   put "/:user_id/:account_id/visualizations/:file_id/update", to: "viz_vizs#update", as: "update_user_account_viz_viz"
+  get "/:user_id/:account_id/visualizations/:file_id/put_map", to: "viz_vizs#put_map", as: "put_map_user_account_viz_viz"
   get "/:user_id/:account_id/visualizations/:file_id/delete", to: "viz_vizs#destroy", as: "delete_user_account_viz_viz"
   get "/:user_id/:account_id/visualizations/:file_id", to: "viz_vizs#show", as: "user_account_viz_viz"
 

@@ -5,6 +5,8 @@ class Viz::Viz < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :scoped], scope: :account
   has_paper_trail
+  require 'json'
+  require 'csv'
   
   #ACCESSORS
   attr_accessible :data_filz_id, :map, :mapped_output, :settings, :title, :viz_chart_id, :created_by, :updated_by, :account_id, :slug
@@ -38,6 +40,36 @@ class Viz::Viz < ActiveRecord::Base
     JSON.parse(self.viz_chart.mapping.gsub("'", '"'))
   end
   
+  def generate_map
+    map_json = JSON.parse(self.map).invert
+    data = JSON.parse(self.data_filz.content)
+    headings = data[0]
+    headings = headings.collect{|h| h.split(":").first }
+    data.shift
+    json_data = [{"key" => "Chart","values" => []}]
+    data.each do |row|
+      h = {}
+      label = row[headings.index(map_json["data"])]
+      value = row[headings.index(map_json["value"])]
+      el = false
+      json_data[0]["values"].each_with_index do |set, i|
+        if set["label"] == label
+          el = i
+        end
+      end
+      unless el
+        h["label"] = label
+        h["value"] = value
+      else
+        hash = json_data[0]["values"][el]
+        hash["value"] += value
+        json_data[0]["values"][el] = hash
+      end
+      json_data[0]["values"].push(h);
+    end
+    self.mapped_output = json_data
+  end
+  
   #UPSERT
   #JOBS
   #PRIVATE
@@ -50,6 +82,11 @@ class Viz::Viz < ActiveRecord::Base
   
   def before_save_set
     self.updated_by = User.current.id
+    if self.map_changed?
+      if self.map.present?
+        self.generate_map
+      end
+    end
     true
   end 
   

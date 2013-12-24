@@ -15,19 +15,19 @@
         %b= @viz_viz.title
       .panel-content{style: "padding: 10px;"}
         %h4 Map columns to Chart
-        #mapper
+        #pie-mapper
           #user-variables.col-sm-4
-          = @viz_viz.headers
           / To be populated with the CSV from the JS
+          = debug @viz_viz.reference_map
           - @viz_viz.reference_map.each do |m|
             .col-sm-2
               %h5= m[0]
               #data-drop.takes-drop{"data-droptype" => m[1]} Drop Here
-              
+        %button.btn.btn-primary#get-pie Next &raquo;
+        #sample-table
+          %table.table.table-bordered.table-striped.table-condensed
 :javascript
-    $(document).ready(){
-        var k = new mapperHeaders() {
-            DATA : '#{@viz_viz.headers}' 
-        }
-        k.exec();
-    }
+  DATA = [#{@viz_viz.headers}];
+  URL = "/#{@account.owner.slug}/#{@account.slug}/visualizations/#{@viz_viz.slug}/put_map"
+
+%script{type:"text/javascript", src:"/mapper.js"}

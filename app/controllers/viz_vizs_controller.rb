@@ -38,6 +38,11 @@ class VizVizsController < ApplicationController
       render action: "new", :locals => {:flash => flash}
     end
   end
+  
+  def put_map
+    @viz_viz.update_attributes(map: params[:data])
+    redirect_to edit_user_account_viz_viz_path(@account.owner.slug, @account.slug, @viz_viz.slug)
+  end
 
   def update
     if @viz_viz.update_attributes(params[:viz_viz])

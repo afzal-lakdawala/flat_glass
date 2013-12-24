@@ -1,30 +1,9 @@
-// This needs to come from the ERB //
-//DATA = [
-//    ["Browser:string", "OS:string", "Visits:number", "Country:string"],
-//    ["IE", "Win8", 10, "India"],
-//    ["FF", "Ubuntu", 13, "Sri Lanka"],
-//    ["Safari", "Mac OS", 2, "Nepal"]
-//]
-var mapperHeaders = function(options){
-    this.exec = function(){
-        var that = this;
-        that.header_data = options.DATA;
-        console.log(that.header_data);
-    }
-};
-// This needs to come from the ERB //
 
-var Mapper = function(){
-    var that = this;
-    this.exec = function(){
-        var that = this;
-        that.header_data = options.DATA;
-        console.log(that.header_data);
-    }
 
+var PieMapper = function(){
     this.init = function(d){
         this.map = {};
-        this.data = that.header_data;
+        this.data = DATA;
         this.getType();
         this.fillSampleTable();
         this.fillVarList();
@@ -37,7 +16,7 @@ var Mapper = function(){
             alert("Mapping incomplete!");
             return false;
         }
-        console.log(JSON.stringify(this.map));
+        window.open(URL + "?data=" + JSON.stringify(this.map), "_self");
         // This is what needs to be posted
     }
 
@@ -141,7 +120,7 @@ var Mapper = function(){
 
 
 $(function(){
-    var pm = new Mapper;
+    var pm = new PieMapper;
     pm.init();
 
     $("#get-pie").click(function(){

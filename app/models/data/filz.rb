@@ -2,6 +2,7 @@ class Data::Filz < ActiveRecord::Base
   
   #GEMS USED
   require 'roo'
+  require 'csv'
   self.table_name = :data_filzs
   
   extend FriendlyId
@@ -34,7 +35,17 @@ class Data::Filz < ActiveRecord::Base
   scope :readme, where(genre: "readme")  
   
   #CUSTOM SCOPES
-  #OTHER METHODS    
+  #OTHER METHODS   
+  
+  def to_csv
+    csv_string = CSV.generate  do |csv|
+      JSON.parse(self.content).each do |c|
+        csv << c
+      end
+    end
+    csv_string.gsub("\n", "<BR>")
+  end
+   
   #UPSERT
   #JOBS
   #PRIVATE
