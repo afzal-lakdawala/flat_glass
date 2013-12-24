@@ -24,8 +24,6 @@
               %h5= m[0]
               #data-drop.takes-drop{"data-droptype" => m[1], "map_identifier" => m[0]} Drop Here
         %button.btn.btn-primary#get-pie Next &raquo;
-        #sample-table
-          %table.table.table-bordered.table-striped.table-condensed
 :javascript
   DATA = [#{@viz_viz.headers}];
   URL = "/#{@account.owner.slug}/#{@account.slug}/visualizations/#{@viz_viz.slug}/put_map"
