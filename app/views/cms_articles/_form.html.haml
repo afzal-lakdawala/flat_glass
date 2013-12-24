@@ -7,22 +7,22 @@
   .form-group
     %label Title
     = f.text_field :title, class: "form-control", required: true
+  
+  .form-group
+    .row  
+      .col-sm-6   
+        %label Description
+        = f.text_area :description, value: "", class: "form-control", required: true, id: "source"
 
-  .col-sm-6  
-    .form-group
-      %label Description
-      = f.text_area :description, value: "", class: "form-control", required: true, id: "source"
-
-  .col-sm-6  
-    #epiceditor-preview{:style => "min-height: 200px; overflow:auto"}
-      %article
-        .editable
-          = simple_format(@cms_article.description.to_s.html_safe)
+      .col-sm-6{:style => "max-height: 420px;"}  
+        %br
+        #epiceditor-preview{:style => "min-height: 420px; overflow:auto; background-color:#e7cb94"}
+          %article{style: "margin-left:20px;"}
+            .editable
+              = simple_format(@cms_article.description.to_s.html_safe)
 
   .form-group
     %label 
     = f.submit 'Save as Draft', class: "btn btn-success", id: "submit"
-
     = f.submit "Publish", class: "btn btn-info", id: "submit"
-
     = link_to "Cancel", user_account_cms_articles_path, class: "btn btn-danger"
