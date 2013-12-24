@@ -37,14 +37,9 @@ class Data::Filz < ActiveRecord::Base
   #CUSTOM SCOPES
   #OTHER METHODS   
   
-  def to_csv
-    csv_string = CSV.generate  do |csv|
-      JSON.parse(self.content).each do |c|
-        csv << c
-      end
-    end
-    csv_string.gsub("\n", "<BR>")
-  end
+  #def to_csv
+    #JSON.parse(self.content)[0..4].inject([]) { |csv, row|  csv << CSV.generate_line(row, {row_sep: "/\n"}) }.join("")
+    #end
    
   #UPSERT
   #JOBS

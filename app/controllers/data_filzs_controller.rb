@@ -1,11 +1,11 @@
 class DataFilzsController < ApplicationController
   
-  before_filter :authenticate_user!, except: [:show, :index, :raw]
+  before_filter :authenticate_user!, except: [:show, :index, :raw, :to_csv]
   before_filter :find_objects
   before_filter :authorize, except: [:index, :show, :license, :readme, :raw]
   
   def index
-    @data_filzs = @account.data_filzs.where(category: @folder)
+    @data_filzs = @account.data_filzs.where(category: "data")
   end
   
   def apis
@@ -24,6 +24,10 @@ class DataFilzsController < ApplicationController
       Api::Filz.upsert(@account.id, @api_account.id, @data_query.id)
       redirect_to apis_user_account_data_filzs_path(@account.owner, @account.slug), notice: "All well"
     end      
+  end
+  
+  def csv
+    send_data Core::Services.twod_to_csv(JSON.parse(@data_filz.content), {@data_filz.file_file_name})
   end
   
   def show

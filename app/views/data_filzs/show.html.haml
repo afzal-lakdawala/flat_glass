@@ -24,6 +24,7 @@
         %b= @data_filz.file_file_name
         %span.pull-right
           = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          = link_to "CSV", csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           - if !@disable_delete
             = link_to "Delete", delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
