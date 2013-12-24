@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: pykhub
+  host: localhost
+  pool: 5
+  username: afzal
+  password: afzal
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: pykhub
+  pool: 5
+  username: ritvvijparrikh
+  password:

@@ -1,0 +1,40 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "Articles", user_account_cms_articles_path(@account.owner, @account.slug)
+    %li.active= @cms_article.slug
+.row
+  .col-sm-12
+    .panel.panel-info
+      .panel-heading
+        = image_tag @cms_article.updator.gravatar
+        = link_to @cms_article.updator.username, user_path(@cms_article.updator.username)
+        %span.gray= "-- #{''}"
+        .pull-right
+          updated
+          = time_ago_in_words(@cms_article.updated_at)
+          ago
+    .panel.panel-default
+      .panel-heading
+        %i.glyphicon.glyphicon-list-alt
+        &nbsp;
+        %b= @cms_article.slug
+        %span.pull-right
+          = link_to "Edit", edit_user_account_cms_article_path(@account.owner, @account.slug, @cms_article), class: "btn btn-default btn-xs"
+          - if !@disable_delete
+            = link_to "Delete", delete_user_account_cms_article_path(@account.owner, @account.slug, @cms_article),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
+      .panel-content{style: "padding: 10px;"}
+        #epiceditor-preview{:style => "min-height: 200px; overflow:auto"}
+          %article
+            .editable
+              = text_area_tag 'description', "", hidden: true, id: "source"
+              = simple_format(@cms_article.description)
+
+:javascript
+  
+  $(document).ready(function() {
+    $('.editable').hallo({editable: false});
+    $("#source").val($(".editable").text());    
+  });

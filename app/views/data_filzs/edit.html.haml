@@ -1,0 +1,46 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
+    %li= link_to @data_filz.file_file_name, user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug)
+    %li.active Edit
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading
+        %i.glyphicon.glyphicon-list-alt
+        &nbsp;
+        %b= @data_filz.file_file_name
+      .panel-content{style: "padding: 10px;"}
+        = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
+          .form-group
+            - if @editor == "text"
+              = f.text_area :content, class: "form-control"
+            - elsif @editor == "csv"
+              -if @data_filz.errors.present?
+                - @data_filz.errors[:content].each do |c_error|
+                  %span.label.label-danger
+                    = c_error
+              %button#transpose_hands_grid Transpose
+              |               
+              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}         
+              #grid{style: "height: 250px;"}
+          .form-group
+            %label Commit Message
+            = f.text_field :commit_message, class: "form-control"
+          .form-group
+            = f.submit "Save", class: "btn btn-success", id: "submit"
+            = f.text_area :content, value: "", id: "content", hidden: true
+
+:javascript
+  
+  var content =  eval(#{@data_filz[:content]});
+  handsontable_with_filter("#grid", content, false);
+  $('#submit').click(function() {    
+    remove_null_rows("#grid");
+    remove_null_cols("#grid");
+    var rowList = $("#grid").handsontable("getData");
+    $('#content').val(JSON.stringify(rowList)); 
+  });
