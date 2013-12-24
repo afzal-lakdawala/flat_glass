@@ -1,18 +1,26 @@
 - url = create_user_account_cms_articles_path
 - if @cms_article.id
   - url = update_user_account_cms_article_path(@account.owner, @account.slug, @cms_article.slug)
-   
-= form_for(@cms_article, url: url, html: {role: "form"}) do |f|
+.row
+  .col-sm-10
+    .panel.panel-default
+      = form_for(@cms_article, url: url, html: {role: "form"}) do |f|
+        .panel-heading{style: "background: #F2F2F2;"}
+          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true 
+        .panel-content{style: "padding: 10px;"}
+          .form-group
+            .row  
+              .col-sm-6   
+                = f.text_area :description, value: "", class: "form-control", required: true, id: "source", placeholder: "Write here"
+              .col-sm-6{:style => "max-height: 420px;"}  
+                #epiceditor-preview{:style => "min-height: 420px; overflow:auto; background-color:#e7cb94"}
+                  %article{style: "margin-left:20px;"}
+                    .editable
+                      = simple_format(@cms_article.description.to_s.html_safe)
+          .form-group 
+            = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
+            = f.submit "Publish", class: "btn btn-success", id: "submit"
 
-  .form-group
-    %label Title
-    = f.text_field :title, class: "form-control", required: true
-  
-  .form-group
-    .row  
-      .col-sm-6   
-        %label Description
-        = f.text_area :description, value: "", class: "form-control", required: true, id: "source"
 
       .col-sm-6{:style => "max-height: 420px;"}  
         %br

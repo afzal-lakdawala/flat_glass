@@ -1,9 +1,8 @@
 
-
-var PieMapper = function(){
+var PieMapper = function(options){
     this.init = function(d){
         this.map = {};
-        this.data = DATA;
+        this.data = options.DATA;
         this.getType();
         this.fillVarList();
     }
@@ -15,7 +14,7 @@ var PieMapper = function(){
             alert("Mapping incomplete!");
             return false;
         }
-        window.open(URL + "?data=" + JSON.stringify(this.map), "_self");
+        window.open(options.URL + "?data=" + JSON.stringify(this.map), "_self");
         // This is what needs to be posted
     }
 
@@ -70,6 +69,8 @@ var PieMapper = function(){
         });
     }
 
+
+
     // Get headings and their types and save it in an array
     // Use if for both the table and the variable list
     this.getType = function(){
@@ -91,13 +92,3 @@ var PieMapper = function(){
         return false;
     }
 };
-
-
-$(function(){
-    var pm = new PieMapper;
-    pm.init();
-
-    $("#get-pie").click(function(){
-        pm.mappingData();
-    });
-});

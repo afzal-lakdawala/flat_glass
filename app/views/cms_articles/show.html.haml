@@ -3,7 +3,7 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to "Articles", user_account_cms_articles_path(@account.owner, @account.slug)
+    %li= link_to "articles", user_account_cms_articles_path(@account.owner, @account.slug)
     %li.active= @cms_article.slug
 .row
   .col-sm-12
