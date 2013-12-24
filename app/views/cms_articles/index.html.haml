@@ -1,31 +1,24 @@
-%h1 Listing cms_articles
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li.active= "Articles"
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading
+        %b= "Articles"
+        .pull-right
+          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New Article".html_safe, new_user_account_cms_articles_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
+      .panel-content{style: "padding: 10px;"}
+        %table.table.table-condensed
+          %tr
+            %td= link_to "..", user_account_path(@account.owner, @account.slug)
+            %td
+          - if @cms_articles.first.present?
+            - @cms_articles.each do |cms_article|
+              %tr
+                %td.col-sm-6= link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;#{cms_article.slug}".html_safe, user_account_cms_article_path(@account.owner,@account.slug, cms_article)
 
-%table
-  %tr
-    %th Account
-    %th Title
-    %th Description
-    %th Published at
-    %th Is published
-    %th Created by
-    %th Updated by
-    %th
-    %th
-    %th
-
-  - @cms_articles.each do |cms_article|
-    %tr
-      %td= cms_article.account_id
-      %td= cms_article.title
-      %td= cms_article.description
-      %td= cms_article.published_at
-      %td= cms_article.is_published
-      %td= cms_article.created_by
-      %td= cms_article.updated_by
-      %td= link_to 'Show', cms_article
-      %td= link_to 'Edit', edit_cms_article_path(cms_article)
-      %td= link_to 'Destroy', cms_article, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Cms article', new_cms_article_path
+                %td.f11.gray.col-sm-2= "#{time_ago_in_words(cms_article.updated_at)} ago"

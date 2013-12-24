@@ -2,10 +2,10 @@ development:
   adapter: postgresql
   encoding: unicode
   database: pykhub
-  host: 192.168.0.120
+  host: localhost
   pool: 5
-  username: devrp
-  password: developer
+  username: afzal
+  password: afzal
 
 production:
   adapter: postgresql

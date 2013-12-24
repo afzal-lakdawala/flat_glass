@@ -5,7 +5,6 @@ var PieMapper = function(){
         this.map = {};
         this.data = DATA;
         this.getType();
-        this.fillSampleTable();
         this.fillVarList();
     }
 
@@ -62,7 +61,7 @@ var PieMapper = function(){
                 hoverClass: "hover-drop",
                 tolerance: "fit",
                 drop: function(e, u){
-                    var param = $(this).attr("id").split("-")[0];
+                    var param = $(this).attr("map_identifier");
                     var local_param = $(u.draggable).attr("data-colname");
                     if(that.map[local_param] === undefined) that.map[local_param] = param;
                     if(that.map[local_param] === undefined) $(this).attr("data-full", param)
@@ -70,29 +69,6 @@ var PieMapper = function(){
             });
         });
     }
-
-
-    // Table Makers
-    this.fillSampleTable = function(){
-        var headings = this.data.splice(0,1);
-        var d = this.data;
-        var headings = this.column_names;
-        $("#sample-table table").append(this.makeRow(headings, "th"));
-
-        for(var i in d){
-            $("#sample-table table").append(this.makeRow(d[i], "td"));
-        };
-    };
-
-    this.makeRow = function(d, el){
-        var tr = $("<tr>");
-        for(var i in d){
-            var e = $("<" + el + ">");
-            e.html(d[i]);
-            tr.append(e);
-        }
-        return tr;
-    };
 
     // Get headings and their types and save it in an array
     // Use if for both the table and the variable list
@@ -108,8 +84,6 @@ var PieMapper = function(){
     };
 
     this._isValue = function(v){
-        console.log(this.map);
-        console.log(v);
         for(var i in this.map){
             var k = this.map[i];
             if(k === v) return true;
