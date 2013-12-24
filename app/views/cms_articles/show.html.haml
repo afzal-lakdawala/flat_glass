@@ -31,12 +31,10 @@
             .editable
               = text_area_tag 'description', "", hidden: true, id: "source"
               = simple_format(@cms_article.description)
+
 :javascript
   
   $(document).ready(function() {
-    $('#source').bind("enterKey",function(e){
-      
-    });
-
-    $("#source").trigger("enterKey");
+    $('.editable').hallo({editable: false});
+    $("#source").val($(".editable").text());    
   });
