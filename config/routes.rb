@@ -1,5 +1,8 @@
 Pykhub::Application.routes.draw do
   
+  resources :viz_vizs
+
+
   #oauth2callback
   match '/auth/google_oauth2/callback' => 'api_oauths#create'
   match '/auth/google_oauth2/revalidate' => 'api_oauths#revalidate'
@@ -53,6 +56,16 @@ Pykhub::Application.routes.draw do
   put "/:user_id/:account_id/articles/:file_id/update", to: "cms_articles#update", as: "update_user_account_cms_article"
   get "/:user_id/:account_id/articles/:file_id/delete", to: "cms_articles#destroy", as: "delete_user_account_cms_article"
   get "/:user_id/:account_id/articles/:file_id", to: "cms_articles#show", as: "user_account_cms_article"
+  
+  #viz
+  get "/:user_id/:account_id/visualizations", to: "viz_vizs#index", as: "user_account_viz_vizs"
+  get "/:user_id/:account_id/visualizations/new", to: "viz_vizs#new", as: "new_user_account_viz_vizs"
+  get "/:user_id/:account_id/visualizations/:file_id/map", to: "viz_vizs#map", as: "map_user_account_viz_viz"
+  get "/:user_id/:account_id/visualizations/:file_id/edit", to: "viz_vizs#edit", as: "edit_user_account_viz_viz"
+  post "/:user_id/:account_id/visualizations/create", to: "viz_vizs#create", as: "create_user_account_viz_vizs"
+  put "/:user_id/:account_id/visualizations/:file_id/update", to: "viz_vizs#update", as: "update_user_account_viz_viz"
+  get "/:user_id/:account_id/visualizations/:file_id/delete", to: "viz_vizs#destroy", as: "delete_user_account_viz_viz"
+  get "/:user_id/:account_id/visualizations/:file_id", to: "viz_vizs#show", as: "user_account_viz_viz"
 
   #most specific routes come last
   get "/:user_id/:account_id", to: "accounts#show", as: "user_account"

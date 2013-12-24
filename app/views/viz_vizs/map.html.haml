@@ -1,0 +1,33 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "visualizations", user_account_viz_vizs_path(@account.owner, @account.slug)
+    %li= link_to @viz_viz.title, user_account_viz_viz_path(@account.owner, @account.slug, file_id: @viz_viz.slug)
+    %li.active Map
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading
+        %i.glyphicon.glyphicon-list-alt
+        &nbsp;
+        %b= @viz_viz.title
+      .panel-content{style: "padding: 10px;"}
+        %h4 Map columns to Chart
+        #mapper
+          #user-variables.col-sm-4
+          = @viz_viz.headers
+          / To be populated with the CSV from the JS
+          - @viz_viz.reference_map.each do |m|
+            .col-sm-2
+              %h5= m[0]
+              #data-drop.takes-drop{"data-droptype" => m[1]} Drop Here
+              
+:javascript
+    $(document).ready(){
+        var k = new mapperHeaders() {
+            DATA : '#{@viz_viz.headers}' 
+        }
+        k.exec();
+    }

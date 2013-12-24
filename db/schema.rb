@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131224035137) do
+ActiveRecord::Schema.define(:version => 20131224044025) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -241,6 +241,21 @@ ActiveRecord::Schema.define(:version => 20131224035137) do
     t.text     "mapping"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "viz_vizs", :force => true do |t|
+    t.string   "title"
+    t.integer  "data_filz_id"
+    t.integer  "viz_chart_id"
+    t.text     "map"
+    t.text     "mapped_output"
+    t.text     "settings"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.integer  "account_id"
+    t.string   "slug"
   end
 
 end

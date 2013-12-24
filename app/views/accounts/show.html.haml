@@ -9,11 +9,11 @@
     %div{style: "border: 1px #CFCFCF solid; background: #F6F6F6; padding: 4px;"}
       %table.table.table-condensed.table-border.f12{style: "background: white; margin-bottom: 2px;"}
         %tr
-          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;data".html_safe, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: "data")
+          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;data".html_safe, user_account_data_filzs_path(@account.owner, @account.slug)
           %td.col-sm-4
           %td.col-sm-2
         %tr
-          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;visualizations".html_safe, user_account_data_filzs_path(@account.owner, @account.slug, folder_id: "visualizations")
+          %td.col-sm-6= link_to "<i class='glyphicon glyphicon-folder-close'></i>&nbsp;&nbsp;visualizations".html_safe, user_account_viz_vizs_path(@account.owner, @account.slug)
           %td.col-sm-4
           %td.col-sm-2
         %tr

@@ -3,7 +3,7 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug)
+    %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active Pull data from APIs
 .row
   .col-sm-12
