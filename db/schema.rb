@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131223092339) do
+ActiveRecord::Schema.define(:version => 20131224045834) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(:version => 20131223092339) do
     t.string   "name"
     t.string   "email"
   end
+
+  create_table "cms_articles", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "title"
+    t.text     "description"
+    t.date     "published_at"
+    t.boolean  "is_published"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "slug"
+  end
+
+  add_index "cms_articles", ["slug"], :name => "index_cms_articles_on_slug"
 
   create_table "core_alerts", :force => true do |t|
     t.integer  "account_id"

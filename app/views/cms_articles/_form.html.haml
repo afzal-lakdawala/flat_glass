@@ -1,11 +1,28 @@
-= simple_form_for(@cms_article, html: {class: 'form-vertical', role: "form"}) do |f|
-  = f.error_notification
-  = f.input :account_id, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :title, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :description, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :published_at, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :is_published, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :created_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :updated_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.button :submit, (@cms_article.id.present? ? 'Update' : 'Add'), class: "btn btn-success"
-  = link_to "Cancel", nil, style: "font-size: 11px;"
+- url = create_user_account_cms_articles_path
+- if @cms_article.id
+  - url = update_user_account_cms_article_path(@account.owner, @account.slug, @cms_article.slug)
+   
+= form_for(@cms_article, url: url, html: {role: "form"}) do |f|
+
+  .form-group
+    %label Title
+    = f.text_field :title, class: "form-control", required: true
+
+  .col-sm-6  
+    .form-group
+      %label Description
+      = f.text_area :description, value: "", class: "form-control", required: true, id: "source"
+
+  .col-sm-6  
+    #epiceditor-preview{:style => "min-height: 200px; overflow:auto"}
+      %article
+        .editable
+          = simple_format(@cms_article.description.to_s.html_safe)
+
+  .form-group
+    %label 
+    = f.submit 'Save as Draft', class: "btn btn-success", id: "submit"
+
+    = f.submit "Publish", class: "btn btn-info", id: "submit"
+
+    = link_to "Cancel", user_account_cms_articles_path, class: "btn btn-danger"

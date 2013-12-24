@@ -2,6 +2,11 @@ class Cms::Article < ActiveRecord::Base
   
   #GEMS USED
   self.table_name = :cms_articles
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :scoped], scope: :account
+  #has_attached_file :file
+  has_paper_trail
+
   
   #ACCESSORS
   attr_accessible :account_id, :created_by, :description, :is_published, :published_at, :title, :updated_by

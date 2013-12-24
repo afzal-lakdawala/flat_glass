@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @cms_article
+= link_to 'Show', user_account_cms_article_path(@account.owner,@account.slug, @cms_article)
 \|
-= link_to 'Back', cms_articles_path
+= link_to 'Back', user_account_cms_articles_path(@account.owner, @account.slug)
