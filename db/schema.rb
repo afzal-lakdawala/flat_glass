@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20131224045834) do
 
   add_index "cms_articles", ["slug"], :name => "index_cms_articles_on_slug"
 
+  end
+
   create_table "core_alerts", :force => true do |t|
     t.integer  "account_id"
     t.integer  "alertable_id"
@@ -236,5 +238,29 @@ ActiveRecord::Schema.define(:version => 20131224045834) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "viz_charts", :force => true do |t|
+    t.string   "name"
+    t.string   "genre"
+    t.text     "img"
+    t.text     "mapping"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "viz_vizs", :force => true do |t|
+    t.string   "title"
+    t.integer  "data_filz_id"
+    t.integer  "viz_chart_id"
+    t.text     "map"
+    t.text     "mapped_output"
+    t.text     "settings"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.integer  "account_id"
+    t.string   "slug"
+  end
 
 end

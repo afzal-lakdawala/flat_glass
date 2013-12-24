@@ -3,14 +3,14 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug)
+    %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active New Data Set
 .row
   .col-sm-10
     .panel.panel-default
       = form_for(@data_filz, url: create_user_account_data_filzs_path(@account.owner, @account.slug), :html => { method: :post,  role: "form" }) do |f|
         .panel-heading{style: "background: #F2F2F2;"}
-          .form-group= f.text_field :file_file_name, class: "form-control", placeholder: "File Name"
+          .form-group= f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true 
         .panel-content{style: "padding: 10px;"}
           .form-group
             - if @editor == "text"
@@ -20,13 +20,13 @@
               |                             
               %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
               #grid{style: "height: 250px;"}
+              = f.text_area :content, value: "", id: "content", hidden: true
+              = f.hidden_field :category, value: "data"
+              = f.hidden_field :file_content_type, value: "csv"
           .form-group
             %label Commit Message
             = f.text_field :commit_message, class: "form-control"
             = f.hidden_field :account_id, value: @account.id
-            = f.hidden_field :file_content_type, value: "csv"
-            = f.hidden_field :category, value: @folder
-            = f.text_area :content, value: "", id: "content", hidden: true
           .form-group
             = f.submit "Create", class: "btn btn-success", id: "submit"
   .col-sm-2

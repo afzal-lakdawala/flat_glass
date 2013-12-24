@@ -1,0 +1,26 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "visualizations", user_account_viz_vizs_path(@account.owner, @account.slug)
+    %li.active New Visualization
+.row
+  .col-sm-10
+    .panel.panel-default
+      = form_for(@viz_viz, url: create_user_account_viz_vizs_path(@account.owner, @account.slug), :html => { method: :post,  role: "form" }) do |f|
+        .panel-heading{style: "background: #F2F2F2;"}
+          .form-group= f.text_field :title, class: "form-control", placeholder: "Title", autofocus: true 
+        .panel-content{style: "padding: 10px;"}
+          .form-group
+            %label Data Set
+            %br
+            = f.select :data_filz_id, options_for_select(@data_filzs.map{|z| [z.file_file_name, z.id]})
+          .form-group
+            %label Chart
+            %br
+            = f.select :viz_chart_id, options_for_select(@viz_charts.map{|z| [z.name, z.id]})
+          .form-group
+            = f.hidden_field :account_id, value: @account.id
+          .form-group
+            = f.submit "Create", class: "btn btn-success", id: "submit"

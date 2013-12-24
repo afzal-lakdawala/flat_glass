@@ -3,9 +3,8 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    - if @folder.present?
-      - if @folder != "_"
-        %li= link_to @folder, user_account_data_filzs_path(@account.owner, @account.slug)
+    - if @folder.blank?
+      %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active= @data_filz.file_file_name
 .row
   .col-sm-12
