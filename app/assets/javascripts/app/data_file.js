@@ -87,7 +87,7 @@ function handsontable_with_filter(selector, data, readonly) {
       var spare_row = 15;
       
       for (var i = 10 - 1; i >= 0; i--) {
-        columns.push([{type: 'checkbox'}])
+        columns.push([{type: 'text'}])
       };
 
       data = createDummyData();
@@ -174,7 +174,7 @@ function handsontable_with_filter(selector, data, readonly) {
     function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
       Handsontable.TextCell.renderer.apply(this, arguments);
       td.style.fontWeight = 'bold';
-      td.style.color = 'black';
+      td.style.color = '#1B668B';
       td.style.background = '#f0f0f0';
     }
     function buildMenu(activeCellType) {
@@ -216,7 +216,7 @@ function handsontable_with_filter(selector, data, readonly) {
   });
 
   $(selector+' table').addClass('table-hover table-condensed');
-  $(selector+' table tbody tr:first').css('font-weight', 'bold');  
+  $(selector+' table tbody tr:first').css('font-weight', 'bold').css("color", "#1B668B");  
 
 
   function ConvertToCSV(objArray) {
@@ -237,7 +237,7 @@ function handsontable_with_filter(selector, data, readonly) {
     return str;
   }
 
-  console.log(ConvertToCSV(data));
+  //console.log(ConvertToCSV(data));
 
   function createDummyData() {
     var rows = []
