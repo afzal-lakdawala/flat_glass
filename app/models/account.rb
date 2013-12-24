@@ -18,6 +18,7 @@ class Account < ActiveRecord::Base
   has_many :data_filzs, class_name: "Data::Filz", dependent: :destroy
   has_many :api_filzs, class_name: "Api::Filz", dependent: :destroy
   has_many :viz_vizs, class_name: "Viz::Viz", dependent: :destroy
+  has_many :cms_articles, class_name: "Cms::Article", dependent: :destroy
 
   #VALIDATIONS
   validates :name, presence: true, length: {minimum: 5}, on: :create

@@ -4,7 +4,8 @@
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
     %li= link_to "articles", user_account_cms_articles_path(@account.owner, @account.slug)
-    %li.active= @cms_article.slug
+    %li= link_to @cms_article.title, user_account_cms_article_path(@account.owner, @account.slug, @cms_article.slug)
+lkandfad
 .row
   .col-sm-12
     .panel.panel-info
@@ -27,13 +28,11 @@
             = link_to "Delete", delete_user_account_cms_article_path(@account.owner, @account.slug, @cms_article),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
       .panel-content{style: "padding: 10px;"}
         #epiceditor-preview{:style => "min-height: 200px; overflow:auto"}
-          %article
-            .editable
-              = text_area_tag 'description', "", hidden: true, id: "source"
-              = simple_format(@cms_article.description)
+          .editable
+            = text_area_tag 'description', "", hidden: true, id: "source"
+            = simple_format(@cms_article.description)
 
 :javascript
-  
   $(document).ready(function() {
     $('.editable').hallo({editable: false});
     $("#source").val($(".editable").text());    
