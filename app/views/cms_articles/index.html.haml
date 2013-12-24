@@ -3,12 +3,12 @@
     %li= link_to "Home", root_url
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li.active= @folder
+    %li.active= "Articles"
 .row
   .col-sm-12
     .panel.panel-default
       .panel-heading
-        %b= @folder
+        %b= "Articles"
         .pull-right
           = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New Article".html_safe, new_user_account_cms_articles_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
       .panel-content{style: "padding: 10px;"}

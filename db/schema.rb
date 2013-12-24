@@ -82,8 +82,6 @@ ActiveRecord::Schema.define(:version => 20131224045834) do
 
   add_index "cms_articles", ["slug"], :name => "index_cms_articles_on_slug"
 
-  end
-
   create_table "core_alerts", :force => true do |t|
     t.integer  "account_id"
     t.integer  "alertable_id"
