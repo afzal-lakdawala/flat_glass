@@ -27,7 +27,7 @@ class DataFilzsController < ApplicationController
   end
   
   def csv
-    send_data Core::Services.twod_to_csv(JSON.parse(@data_filz.content), {@data_filz.file_file_name})
+    send_data Core::Services.twod_to_csv(JSON.parse(@data_filz.content)), :type => "application/vnd.ms-excel", :filename => "#{@data_filz.file_file_name}.csv", :stream => false
   end
   
   def show
