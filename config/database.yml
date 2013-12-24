@@ -12,5 +12,5 @@ production:
   encoding: unicode
   database: pykhub
   pool: 5
-  username: ritvvijparrikh
-  password:
+  username: devrp
+  password: developer
