@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131223092339) do
+ActiveRecord::Schema.define(:version => 20131224035137) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(:version => 20131223092339) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "email"
+  end
+
+  create_table "cms_articles", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "title"
+    t.text     "description"
+    t.date     "published_at"
+    t.boolean  "is_published"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "core_alerts", :force => true do |t|
@@ -221,5 +233,14 @@ ActiveRecord::Schema.define(:version => 20131223092339) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "viz_charts", :force => true do |t|
+    t.string   "name"
+    t.string   "genre"
+    t.text     "img"
+    t.text     "mapping"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
