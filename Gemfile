@@ -52,7 +52,6 @@ gem 'aws-sdk'
 
 # Development
 group :development do
-  gem "better_errors"
   gem "binding_of_caller"
   gem 'annotate', ">=2.5.0"
 end
