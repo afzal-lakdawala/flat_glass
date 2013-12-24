@@ -1,8 +1,8 @@
 
-var PieMapper = function(){
+var PieMapper = function(options){
     this.init = function(d){
         this.map = {};
-        this.data = DATA;
+        this.data = options.DATA;
         this.getType();
         this.fillVarList();
     }
@@ -14,7 +14,7 @@ var PieMapper = function(){
             alert("Mapping incomplete!");
             return false;
         }
-        window.open(URL + "?data=" + JSON.stringify(this.map), "_self");
+        window.open(options.URL + "?data=" + JSON.stringify(this.map), "_self");
         // This is what needs to be posted
     }
 

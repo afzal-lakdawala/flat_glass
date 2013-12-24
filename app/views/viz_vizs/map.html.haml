@@ -25,10 +25,10 @@
         %button.btn.btn-primary#get-pie Next &raquo;
 = javascript_include_tag("/mapper")
 :javascript
-  DATA = [#{@viz_viz.headers}];
-  URL = "/#{@account.owner.slug}/#{@account.slug}/visualizations/#{@viz_viz.slug}/put_map"
-
-  var pm = new PieMapper;
+  var pm = new PieMapper({
+    DATA: [#{@viz_viz.headers}],
+    URL: "/#{@account.owner.slug}/#{@account.slug}/visualizations/#{@viz_viz.slug}/put_map"
+  });
   pm.init();
 
   $("#get-pie").click(function(){
