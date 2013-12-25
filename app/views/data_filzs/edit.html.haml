@@ -9,10 +9,12 @@
 .row
   .col-sm-12
     .panel.panel-default
-      .panel-heading
-        %i.glyphicon.glyphicon-list-alt
-        &nbsp;
+      .panel-heading{style: "background: #F2F2F2; height: 50px;"}
         %b= @data_filz.file_file_name
+        .pull-right
+          %button.btn.btn-default.btn-xs#transpose_hands_grid Transpose
+          |                             
+          %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
       .panel-content{style: "padding: 10px;"}
         = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
           .form-group
@@ -23,12 +25,8 @@
                 - @data_filz.errors[:content].each do |c_error|
                   %span.label.label-danger
                     = c_error
-              %button#transpose_hands_grid Transpose
-              |               
-              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}         
-              #grid{style: "height: 250px;"}
+              #grid{style: "height: 350px;"}
           .form-group
-            %label Commit Message
             = f.text_field :commit_message, class: "form-control"
           .form-group
             = f.submit "Save", class: "btn btn-success", id: "submit"

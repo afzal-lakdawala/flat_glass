@@ -57,6 +57,7 @@ class Data::Filz < ActiveRecord::Base
 
   def before_create_set
     self.created_by = User.current.id
+    self.commit_message = "First commit"  if self.commit_message.blank?
     self.is_pending = false if self.is_pending.blank?
     true
   end

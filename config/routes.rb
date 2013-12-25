@@ -55,6 +55,12 @@ Pykhub::Application.routes.draw do
   get "/:user_id/:account_id/articles/:file_id/delete", to: "cms_articles#destroy", as: "delete_user_account_cms_article"
   get "/:user_id/:account_id/articles/:file_id", to: "cms_articles#show", as: "user_account_cms_article"
   
+  #tags
+  post "/:user_id/:account_id/tags/create", to: "core_tags#create", as: "create_user_account_core_tags"
+  put "/:user_id/:account_id/tags/:tag_id/update", to: "core_tags#update", as: "update_user_account_core_tag"
+  get "/:user_id/:account_id/tags/:tag_id/delete", to: "core_tags#destroy", as: "delete_user_account_core_tag"
+  get "/:user_id/:account_id/tags/:tag_id", to: "core_tags#show", as: "user_account_core_tag"
+  
   #images
   get "/:user_id/:account_id/images", to: "cms_images#index", as: "user_account_cms_images"
   get "/:user_id/:account_id/images/new", to: "cms_images#new", as: "new_user_account_cms_images"

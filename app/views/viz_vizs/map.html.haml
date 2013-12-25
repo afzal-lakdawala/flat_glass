@@ -17,6 +17,7 @@
         %h4 Map columns to Chart
         #pie-mapper
           #user-variables.col-sm-4
+          = debug @viz_viz.reference_map
           - @viz_viz.reference_map.each do |m|
             .col-sm-2
               %h5= m[0]
