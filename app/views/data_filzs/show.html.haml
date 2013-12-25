@@ -8,15 +8,6 @@
     %li.active= @data_filz.file_file_name
 .row
   .col-sm-12
-    .panel.panel-info
-      .panel-heading
-        = image_tag @data_filz.updator.gravatar
-        = link_to @data_filz.updator.username, user_path(@data_filz.updator.username)
-        %span.gray= "-- #{@data_filz.commit_message}"
-        .pull-right
-          updated
-          = time_ago_in_words(@data_filz.updated_at)
-          ago
     .panel.panel-default
       .panel-heading
         %i.glyphicon.glyphicon-list-alt
@@ -26,14 +17,15 @@
           = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           = link_to "CSV", csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          - if @editor == "csv"
+            %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
           - if !@disable_delete
             = link_to "Delete", delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
       .panel-content{style: "padding: 10px;"}        
         - if @editor == "text"
           = @data_filz.content
         - elsif @editor == "csv"
-          %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}      
-          #grid{style: "height: 250px;"}
+          #grid{style: "height: 470px;"}
 
 :javascript
   var content =   eval(#{@data_filz.content});

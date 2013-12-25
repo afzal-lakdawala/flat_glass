@@ -23,7 +23,7 @@ class Data::Filz < ActiveRecord::Base
   validates :file_file_name, length: {minimum: 5}, presence: true
   #validates :file_content_type, length: {minimum: 2}, presence: true
   validates :content, length: {minimum: 5, message: "is too short (minimum is 5 rows)"}, allow_blank: true
-  validate :has_unique_file_name?, on: :create
+  validate :is_name_unique?
   
   #CALLBACKS
   before_save :before_save_set
@@ -46,9 +46,12 @@ class Data::Filz < ActiveRecord::Base
   #PRIVATE
   private
   
-  def has_unique_file_name?
-    if Data::Filz.where(file_file_name: self.file_file_name, category: self.category, account_id: self.account_id).first.present?
-      errors.add(:file_file_name, "already taken")
+  def is_name_unique?
+    g = @account.data_filzs.where(file_file_name: self.file_file_name, category: self.category).first
+    if g.present? 
+      if g.id != self.id or self.id.present?
+        errors.add(:file_file_name, "already taken")
+      end
     end
   end
 

@@ -1,0 +1,10 @@
+= simple_form_for(@cms_image, html: {class: 'form-vertical', role: "form"}) do |f|
+  = f.error_notification
+  = f.input :account_id, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :created_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :updated_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :image_file_name, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :image_file_size, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.input :image_content_type, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
+  = f.button :submit, (@cms_image.id.present? ? 'Update' : 'Add'), class: "btn btn-success"
+  = link_to "Cancel", nil, style: "font-size: 11px;"

@@ -31,6 +31,7 @@ class DataFilzsController < ApplicationController
   end
   
   def show
+    @disable_footer = true
   end
   
   def raw

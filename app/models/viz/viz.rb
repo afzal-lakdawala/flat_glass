@@ -23,6 +23,7 @@ class Viz::Viz < ActiveRecord::Base
   validates :data_filz_id, presence: :true
   validates :viz_chart_id, presence: :true
   validates :map, presence: :true, on: :update
+  validate :is_name_unique?
 
   #CALLBACKS
   before_create :before_create_set
@@ -44,8 +45,7 @@ class Viz::Viz < ActiveRecord::Base
     map_json = JSON.parse(self.map).invert
     data = JSON.parse(self.data_filz.content)
     headings = data.shift
-    headings = headings.collect{|h| h.split(":").first }
-    
+    headings = headings.collect{|h| h.split(":").first}    
     json_data = [{"key" => "Chart","values" => []}]
     data.each do |row|
       h = {}
@@ -77,6 +77,16 @@ class Viz::Viz < ActiveRecord::Base
   #JOBS
   #PRIVATE
   private
+  
+  def is_name_unique?
+    g = @account.viz_vizs.where(title: self.title).first
+    if g.present? 
+      if g.id != self.id or self.id.present?
+        errors.add(:title, "already taken")
+      end
+    end
+  end
+  
 
   def before_create_set
     self.created_by = User.current.id

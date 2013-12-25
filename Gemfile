@@ -23,6 +23,7 @@ group :assets do
   gem 'jquery-rails'
   gem "chardinjs-rails"
   gem 'angularjs-rails'
+  gem 'jquery-fileupload-rails'
 end
 gem 'haml'
 gem 'haml-rails'

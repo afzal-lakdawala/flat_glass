@@ -2,7 +2,7 @@
 - if @cms_article.id
   - url = update_user_account_cms_article_path(@account.owner, @account.slug, @cms_article.slug)
 .row
-  .col-sm-10
+  .col-sm-12
     .panel.panel-default
       = form_for(@cms_article, url: url, html: {role: "form"}) do |f|
         .panel-heading{style: "background: #F2F2F2;"}
@@ -19,7 +19,8 @@
                       - if @cms_article.description.present?
                         = simple_format(@cms_article.description.to_s.html_safe)
           .form-group 
-            = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
+            - if !@cms_article.is_published
+              = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
             = f.submit "Publish", class: "btn btn-success", id: "submit"
 
 :javascript

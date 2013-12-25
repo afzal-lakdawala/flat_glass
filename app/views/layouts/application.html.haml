@@ -32,10 +32,7 @@
     .container
       %br/
       = yield
-      %br
-      %br
-      %br
-      %br
-    = render partial: "layouts/shared/footer"
+    - if @disable_footer.blank?
+      = render partial: "layouts/shared/footer"
     #scroll-topper
       %span.glyphicon.glyphicon-chevron-up

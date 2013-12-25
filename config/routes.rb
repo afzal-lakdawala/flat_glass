@@ -1,8 +1,5 @@
 Pykhub::Application.routes.draw do
   
-  resources :viz_vizs
-
-
   #oauth2callback
   match '/auth/google_oauth2/callback' => 'api_oauths#create'
   match '/auth/google_oauth2/revalidate' => 'api_oauths#revalidate'
@@ -57,6 +54,15 @@ Pykhub::Application.routes.draw do
   put "/:user_id/:account_id/articles/:file_id/update", to: "cms_articles#update", as: "update_user_account_cms_article"
   get "/:user_id/:account_id/articles/:file_id/delete", to: "cms_articles#destroy", as: "delete_user_account_cms_article"
   get "/:user_id/:account_id/articles/:file_id", to: "cms_articles#show", as: "user_account_cms_article"
+  
+  #images
+  get "/:user_id/:account_id/images", to: "cms_images#index", as: "user_account_cms_images"
+  get "/:user_id/:account_id/images/new", to: "cms_images#new", as: "new_user_account_cms_images"
+  get "/:user_id/:account_id/images/:file_id/edit", to: "cms_images#edit", as: "edit_user_account_cms_image"
+  post "/:user_id/:account_id/images/create", to: "cms_images#create", as: "create_user_account_cms_images"
+  put "/:user_id/:account_id/images/:file_id/update", to: "cms_images#update", as: "update_user_account_cms_image"
+  get "/:user_id/:account_id/images/:file_id/delete", to: "cms_images#destroy", as: "delete_user_account_cms_image"
+  get "/:user_id/:account_id/images/:file_id", to: "cms_images#show", as: "user_account_cms_image"
   
   #viz
   get "/:user_id/:account_id/visualizations", to: "viz_vizs#index", as: "user_account_viz_vizs"

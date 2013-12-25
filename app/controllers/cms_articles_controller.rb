@@ -22,7 +22,7 @@ class CmsArticlesController < ApplicationController
     @cms_article = Cms::Article.new(params[:cms_article])
     @cms_article.is_published = false
     if params[:commit] == "Publish"
-      @cms_article.is_published = true
+      @cms_article.is_published = params[:commit] == "Publish" ? true : false
     end
     @cms_article.description.to_s.html_safe
     if @cms_article.save

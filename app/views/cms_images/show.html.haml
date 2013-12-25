@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Account:
+  = @cms_image.account_id
+%p
+  %b Created by:
+  = @cms_image.created_by
+%p
+  %b Updated by:
+  = @cms_image.updated_by
+%p
+  %b Image file name:
+  = @cms_image.image_file_name
+%p
+  %b Image file size:
+  = @cms_image.image_file_size
+%p
+  %b Image content type:
+  = @cms_image.image_content_type
+
+= link_to 'Edit', edit_cms_image_path(@cms_image)
+\|
+= link_to 'Back', cms_images_path
