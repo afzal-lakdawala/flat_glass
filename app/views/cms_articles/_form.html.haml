@@ -30,8 +30,5 @@
     $("#source").val($(".editable").text().replace( /g | /  ,""));
   });
   var scrolleditor = function(){
-    //console.log($("#epiceditor-preview").scrollTop());
-
-    //$("#epiceditor-preview").animate({"marginTop": $("#source").scrollTop()+"px"}, {duration:500,queue:false} );
-    //$("#epiceditor-preview").scrollTop = $("#source").scrollTop;
+    $("#epiceditor-preview").scrollTop($("#source").scrollTop());
   }
