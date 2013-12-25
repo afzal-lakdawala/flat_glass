@@ -7,7 +7,6 @@ class Data::Filz < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :file_file_name, use: [:slugged, :scoped], scope: :account
-  #has_attached_file :file
   has_paper_trail
 
   #ACCESSORS

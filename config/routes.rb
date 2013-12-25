@@ -64,8 +64,8 @@ Pykhub::Application.routes.draw do
   #images
   get "/:user_id/:account_id/images", to: "cms_images#index", as: "user_account_cms_images"
   get "/:user_id/:account_id/images/new", to: "cms_images#new", as: "new_user_account_cms_images"
-  get "/:user_id/:account_id/images/:file_id/edit", to: "cms_images#edit", as: "edit_user_account_cms_image"
   post "/:user_id/:account_id/images/create", to: "cms_images#create", as: "create_user_account_cms_images"
+  get "/:user_id/:account_id/images/:file_id/edit", to: "cms_images#edit", as: "edit_user_account_cms_image"
   put "/:user_id/:account_id/images/:file_id/update", to: "cms_images#update", as: "update_user_account_cms_image"
   get "/:user_id/:account_id/images/:file_id/delete", to: "cms_images#destroy", as: "delete_user_account_cms_image"
   get "/:user_id/:account_id/images/:file_id", to: "cms_images#show", as: "user_account_cms_image"

@@ -11,9 +11,9 @@ gem 'friendly_id', "~> 4.0.1"
 gem 'kaminari'
 gem 'gon'
 gem 'jbuilder'
-gem 'meta_search'
+#gem 'meta_search'
 gem 'tinymce-rails'
-gem 'acts-as-taggable-on'
+#gem 'acts-as-taggable-on'
 
 # User Interface
 group :assets do
@@ -21,7 +21,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
-  gem "chardinjs-rails"
 end
 gem 'haml'
 gem 'haml-rails'
@@ -42,12 +41,11 @@ gem "lazy_high_charts"
 gem 'agent_orange', git: "https://github.com/kevinelliott/agent_orange.git"
 gem 'paper_trail'
 gem "railties"
-gem 'paperclip'
-gem "paperclip_database"
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'aws-s3'
-gem 'aws-sdk'
+gem "rmagick"
+gem "carrierwave"
+
 # PYKIH ENVIRONMENT GEMS - END
 
 # Development
