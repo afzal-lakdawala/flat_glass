@@ -8,7 +8,7 @@
     - if @data_filz.id.present?
       %li= link_to @data_filz.file_file_name, user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug)
       %li.active Edit
-      - url = update_user_account_data_filz_path(@account.owner, @account.slug, @data_filz.slug)      
+      - url = update_user_account_data_filz_path(@account.owner, @account.slug, @data_filz.slug)
     - else
       %li.active New file
 
@@ -22,7 +22,7 @@
           .pull-right
             %button.btn.btn-default.btn-xs#transpose_hands_grid Transpose
             %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
-        .panel-content{style: "padding: 10px;"}      
+        .panel-content{style: "padding: 10px;"}
           .form-group
             -if @data_filz.errors.present?
               - @data_filz.errors[:content].each do |c_error|
@@ -33,15 +33,17 @@
             = f.text_field :commit_message, class: "form-control", placeholder: "Commit Message"
           .form-group
             = f.submit "Save", class: "btn btn-success", id: "submit"
-            
 
 
-:javascript 
+
+:javascript
   var content =  eval(#{@data_filz[:content]});
+  content = (content === undefined) ? [] : content;
+
   handsontable_with_filter("#grid", content, false);
-  $('#submit').click(function() {    
+  $('#submit').click(function() {
     remove_null_rows("#grid");
     remove_null_cols("#grid");
     var rowList = $("#grid").handsontable("getData");
-    $('#content').val(JSON.stringify(rowList)); 
+    $('#content').val(JSON.stringify(rowList));
   });

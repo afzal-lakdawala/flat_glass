@@ -11,6 +11,6 @@
           = f.hidden_field :account_id, value: @account.id
         .panel-content{style: "padding: 10px;"}
           .form-group
-            = f.file_field :image, class: "form-control", required: true
+            = f.file_field :image_file, class: "form-control", required: true
           .form-group 
             = f.submit "Upload", class: "btn btn-success", id: "submit"

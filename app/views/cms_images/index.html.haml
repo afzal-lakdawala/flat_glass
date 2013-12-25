@@ -21,4 +21,4 @@
               %tr
                 %td.col-sm-6= link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;#{cms_image.slug}".html_safe, user_account_cms_image_path(@account.owner,@account.slug, cms_image)
 
-                %td.f11.gray.col-sm-2= "#{time_ago_in_words(cms_article.updated_at)} ago"
+                %td.f11.gray.col-sm-2= "#{time_ago_in_words(cms_image.updated_at)} ago"
