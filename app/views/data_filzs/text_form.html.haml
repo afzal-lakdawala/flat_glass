@@ -1,0 +1,24 @@
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
+    - if @data_filz.id.present?
+      %li= link_to @data_filz.file_file_name, user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug)
+      %li.active Edit
+      - url = update_user_account_data_filz_path(@account.owner, @account.slug, @data_filz.slug)      
+    - else
+      %li.active New file
+      - url = create_user_account_data_filzs_path(@account.owner, @account.slug)
+      
+.row
+  .col-sm-12
+    .panel.panel-default
+      = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :html => { method: :put,  role: "form" }) do |f|
+        .panel-heading{style: "background: #F2F2F2; height: 50px;"}
+          = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true
+        .panel-content{style: "padding: 10px;"}  
+          .form-group= f.text_area :content, class: "form-control"
+          .form-group= f.text_field :commit_message, class: "form-control", placeholder: "Commit Message"
+          .form-group= f.submit "Save", class: "btn btn-success", id: "submit"

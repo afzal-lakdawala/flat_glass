@@ -41,6 +41,7 @@ class DataFilzsController < ApplicationController
   def new
     @data_filz = Data::Filz.new
     @disable_footer = true
+    render action: (@editor == "text" ? "text_form" : "csv_form")
   end
   
   def create
@@ -51,12 +52,13 @@ class DataFilzsController < ApplicationController
     else
       gon.errors = @data_filz.errors 
       flash[:error] = t("c.f")
-      render action: "new", :locals => {:flash => flash}
+      render action: (@editor == "text" ? "text_form" : "csv_form"), :locals => {:flash => flash}
     end
   end
   
   def edit
     @disable_footer = true
+    render (@editor == "text" ? "text_form" : "csv_form")
   end
   
   def update
@@ -64,7 +66,7 @@ class DataFilzsController < ApplicationController
       redirect_to user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), notice: t("u.s")
     else
       gon.errors = @data_filz.errors
-      render action: "edit" 
+      render action: (@editor == "text" ? "text_form" : "csv_form"), :locals => {:flash => flash}
     end
   end
   
@@ -76,7 +78,7 @@ class DataFilzsController < ApplicationController
   def license
     @data_filz = @account.data_filzs.license.first
     @folder = "_"
-    @editor = "text"
+    @editor == "text"
     @disable_delete = true
     render "show"
   end
@@ -84,7 +86,7 @@ class DataFilzsController < ApplicationController
   def readme
     @data_filz = @account.data_filzs.readme.first
     @folder = "_"
-    @editor = "text"
+    @editor == "text"
     @disable_delete = true
     render "show"
   end
@@ -96,7 +98,7 @@ class DataFilzsController < ApplicationController
     if params[:file_id].present? 
       @data_filz = @account.data_filzs.find(params[:file_id])
       if @data_filz.genre == "license" or @data_filz.genre == "readme"
-        @editor = "text"
+        @editor == "text"
       end
     end
   end

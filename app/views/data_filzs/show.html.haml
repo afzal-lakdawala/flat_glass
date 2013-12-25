@@ -15,7 +15,8 @@
         %b= @data_filz.file_file_name
         %span.pull-right
           = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
-          = link_to "CSV", csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          - if @editor == "csv"
+            = link_to "CSV", csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           - if @editor == "csv"
             %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
@@ -27,7 +28,7 @@
         - elsif @editor == "csv"
           #grid{style: "height: 470px;"}
 
-:javascript
-  var content =   eval(#{@data_filz.content});
-  handsontable_with_filter("#grid", content, true);
-
+- if @editor == "csv"
+  :javascript
+    var content =   eval(#{@data_filz.content});
+    handsontable_with_filter("#grid", content, true);

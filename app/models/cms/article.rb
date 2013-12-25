@@ -34,7 +34,7 @@ class Cms::Article < ActiveRecord::Base
   def is_name_unique?
     g = @account.cms_articles.where(:title => self.name).first
     if g.present?
-      if g.id != self.id or self.id.present?
+      if g.id != self.id or self.id.blank?
         errors.add(:title, "already taken")
       end
     end
