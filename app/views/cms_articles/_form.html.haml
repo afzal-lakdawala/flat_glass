@@ -16,25 +16,11 @@
                 #epiceditor-preview{:style => "min-height: 420px; overflow:auto; background-color:#e7cb94"}
                   %article{style: "margin-left:20px;"}
                     .editable
-                      = simple_format(@cms_article.description.to_s.html_safe)
+                      - if @cms_article.description.present?
+                        = simple_format(@cms_article.description.to_s.html_safe)
           .form-group 
             = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
             = f.submit "Publish", class: "btn btn-success", id: "submit"
-
-
-      .col-sm-6{:style => "max-height: 420px;"}  
-        %br
-        #epiceditor-preview{:style => "min-height: 420px; overflow:auto; background-color:#e7cb94"}
-          %article{style: "margin-left:20px;"}
-            .editable
-              = simple_format(@cms_article.description.html_safe)
-
-
-  .form-group
-    %label 
-    = f.submit 'Save as Draft', class: "btn btn-success", id: "submit"
-    = f.submit "Publish", class: "btn btn-info", id: "submit"
-    = link_to "Cancel", user_account_cms_articles_path, class: "btn btn-danger"
 
 :javascript
   $(document).ready(function() {
