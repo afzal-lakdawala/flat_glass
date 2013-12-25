@@ -10,8 +10,8 @@
       .panel-heading
         %b data
         .pull-right
-          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> Pull data from APIs".html_safe, apis_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"
-          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New data set".html_safe, new_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"
+          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New".html_safe, new_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"
+          = link_to "<i class='glyphicon glyphicon-import'></i> Pull from APIs".html_safe, apis_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"
       .panel-content{style: "padding: 10px;"}
         %table.table.table-condensed
           %tr

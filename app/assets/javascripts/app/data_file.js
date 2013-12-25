@@ -67,28 +67,28 @@ function handsontable_with_filter(selector, data, readonly) {
         
       });
       spare_row = 1;
-      for (var i = data[1].length - 1; i >= 0; i--) { 
-        var value = data[1][i];
-        var type = "checkbox"
+      //for (var i = data[1].length - 1; i >= 0; i--) { 
+        //var value = data[1][i];
+        //var type = "checkbox"
         
-        if (typeof(value) == "number") {
-          type = 'numeric'
-        }
+        //if (typeof(value) == "number") {
+          //type = 'numeric'
+        //}
 
-        if (typeof(value) !== "object" || value) {
+        //if (typeof(value) !== "object" || value) {
 
-          columns.push([{type: type, data: data[0][i]}]);  
-        }        
+          //columns.push([{type: type, data: data[0][i]}]);  
+        //}        
         
-      }
+      //}
       
     }else {
 
       var spare_row = 15;
       
-      for (var i = 10 - 1; i >= 0; i--) {
-        columns.push([{type: 'text'}])
-      };
+      //for (var i = 10 - 1; i >= 0; i--) {
+        //columns.push([{type: 'text'}])
+      //};
 
       data = createDummyData();
 
@@ -105,7 +105,7 @@ function handsontable_with_filter(selector, data, readonly) {
       rowHeaders: true,
       minSpareRows: 1,
       minSpareCols: 1,
-      type: 'numeric',
+      //type: 'numeric',
       stretchH: 'all',      
       readOnly: readonly,
       manualColumnResize: true,
@@ -121,7 +121,7 @@ function handsontable_with_filter(selector, data, readonly) {
       cells: function (row, col, prop) {
           if (row <= 0) {
             var cellProperties = {
-              type: 'text',
+              //type: 'text',
               renderer: firstRowRenderer
             }
             return cellProperties;

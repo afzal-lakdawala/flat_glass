@@ -17,6 +17,7 @@
     .panel.panel-default
       = form_for(@data_filz, url: url, :html => { role: "form" }) do |f|
         = f.text_area :content, value: "", id: "content", hidden: true
+        = f.hidden_field :account_id, value: @account.id
         .panel-heading{style: "background: #F2F2F2; height: 50px;"}
           = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true, class: "col-sm-8"
           .pull-right

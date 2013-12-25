@@ -16,12 +16,11 @@
         %span.pull-right
           = link_to "Edit", edit_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           - if @editor == "csv"
-            = link_to "CSV", csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
-          = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
-          - if @editor == "csv"
             %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
+            = link_to "<i class='glyphicon glyphicon-cloud-download'></i>".html_safe, csv_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
+          = link_to "Raw", raw_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), class: "btn btn-default btn-xs"
           - if !@disable_delete
-            = link_to "Delete", delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
+            = link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
       .panel-content{style: "padding: 10px;"}        
         - if @editor == "text"
           = @data_filz.content

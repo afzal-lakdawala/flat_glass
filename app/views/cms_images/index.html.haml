@@ -10,7 +10,7 @@
       .panel-heading
         %b images
         .pull-right
-          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> Upload Image".html_safe, new_user_account_cms_images_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
+          = link_to "<i class='glyphicon glyphicon-cloud-upload'></i> Upload Image".html_safe, new_user_account_cms_images_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
       .panel-content{style: "padding: 10px;"}
         %table.table.table-condensed
           %tr

@@ -35,11 +35,6 @@ class Data::Filz < ActiveRecord::Base
 
   #CUSTOM SCOPES
   #OTHER METHODS
-
-  #def to_csv
-    #JSON.parse(self.content)[0..4].inject([]) { |csv, row|  csv << CSV.generate_line(row, {row_sep: "/\n"}) }.join("")
-    #end
-
   #UPSERT
   #JOBS
   #PRIVATE
