@@ -6,5 +6,4 @@ tmp/*
 test/*
 log/*
 config/database.yml
-
-
+public/uploads/*
