@@ -1,10 +1,16 @@
-= simple_form_for(@cms_image, html: {class: 'form-vertical', role: "form"}) do |f|
-  = f.error_notification
-  = f.input :account_id, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :created_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :updated_by, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :image_file_name, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :image_file_size, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.input :image_content_type, placeholder: "", input_html: {}, hint: "", label_html: {}, required: true
-  = f.button :submit, (@cms_image.id.present? ? 'Update' : 'Add'), class: "btn btn-success"
-  = link_to "Cancel", nil, style: "font-size: 11px;"
+- url = create_user_account_cms_images_path(@account.owner, @account.slug)
+- if @cms_image.id
+  - url = update_user_account_cms_image_path(@account.owner, @account.slug, @cms_image.slug)
+
+.row
+  .col-sm-12
+    .panel.panel-default
+      = form_for(@cms_image, url: url, html: {multipart: true, role: "form"}) do |f|
+        .panel-heading{style: "background: #F2F2F2;"}
+          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true 
+          = f.hidden_field :account_id, value: @account.id
+        .panel-content{style: "padding: 10px;"}
+          .form-group
+            = f.file_field :image, class: "form-control", required: true
+          .form-group 
+            = f.submit "Upload", class: "btn btn-success", id: "submit"

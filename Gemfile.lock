@@ -159,6 +159,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip_database (2.2.1)
+      paperclip (>= 2.3.0)
+      rails (>= 3.0.0)
     pg (0.17.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -266,6 +269,7 @@ DEPENDENCIES
   nokogiri
   paper_trail
   paperclip
+  paperclip_database
   pg
   pyk (= 0.2.7)
   rails (= 3.2.13)

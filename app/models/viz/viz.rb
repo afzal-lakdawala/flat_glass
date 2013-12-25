@@ -79,7 +79,7 @@ class Viz::Viz < ActiveRecord::Base
   private
   
   def is_name_unique?
-    g = @account.viz_vizs.where(title: self.title).first
+    g = self.account.viz_vizs.where(title: self.title).first
     if g.present? 
       if g.id != self.id or self.id.present?
         errors.add(:title, "already taken")

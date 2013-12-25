@@ -47,7 +47,7 @@ class Data::Filz < ActiveRecord::Base
   private
   
   def is_name_unique?
-    g = @account.data_filzs.where(file_file_name: self.file_file_name, category: self.category).first
+    g = self.account.data_filzs.where(file_file_name: self.file_file_name, category: self.category).first
     if g.present? 
       if g.id != self.id or self.id.present?
         errors.add(:file_file_name, "already taken")
@@ -65,10 +65,11 @@ class Data::Filz < ActiveRecord::Base
     self.updated_by = User.current.id
     if self.content.present?
       con = self.content.class.to_s == "String" ? JSON.parse(self.content) : self.content
+      con.compact!
       new_header = Data::FilzColumn.get_headers(con)
       con[0] = new_header.split(",")
-      self.content = con.to_s
-    end    
+      self.content = con.to_json
+    end
     true
   end
   

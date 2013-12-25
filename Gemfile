@@ -22,8 +22,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
   gem "chardinjs-rails"
-  gem 'angularjs-rails'
-  gem 'jquery-fileupload-rails'
 end
 gem 'haml'
 gem 'haml-rails'
@@ -45,6 +43,7 @@ gem 'agent_orange', git: "https://github.com/kevinelliott/agent_orange.git"
 gem 'paper_trail'
 gem "railties"
 gem 'paperclip'
+gem "paperclip_database"
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'aws-s3'

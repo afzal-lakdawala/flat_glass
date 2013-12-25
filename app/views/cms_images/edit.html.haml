@@ -1,7 +1,10 @@
-%h1 Editing cms_image
+= content_for :breadcrumb do
+  %ol.breadcrumb
+    %li= link_to "Home", root_url
+    %li= link_to @account.owner.username, user_path(@account.owner)
+    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
+    %li= link_to "images", user_account_cms_images_path(@account.owner, @account.slug)
+    %li= link_to @cms_image.image_file_name, user_account_cms_image_path(@account.owner, @account.slug, @cms_image.slug)
+    %li.active Modify image
 
 = render 'form'
-
-= link_to 'Show', @cms_image
-\|
-= link_to 'Back', cms_images_path
