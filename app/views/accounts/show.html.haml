@@ -33,7 +33,7 @@
           %td.f11.gray.col-sm-4= @license.commit_message
           %td.f11.gray.col-sm-2= "#{time_ago_in_words(@license.updated_at)} ago"
     %br
-    %div{style: "border: 1px #CFCFCF solid; background: #F6F6F6; padding: 4px;"}
+    %div.editable{style: "border: 1px #CFCFCF solid; background: #F6F6F6; padding: 4px;"}
       %h5 README.md
       %hr
       = @readme.content
