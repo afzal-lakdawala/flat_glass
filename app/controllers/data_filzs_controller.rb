@@ -78,7 +78,7 @@ class DataFilzsController < ApplicationController
   def license
     @data_filz = @account.data_filzs.license.first
     @folder = "_"
-    @editor == "text"
+    @editor = "text"
     @disable_delete = true
     render "show"
   end
@@ -86,7 +86,7 @@ class DataFilzsController < ApplicationController
   def readme
     @data_filz = @account.data_filzs.readme.first
     @folder = "_"
-    @editor == "text"
+    @editor = "text"
     @disable_delete = true
     render "show"
   end
@@ -98,7 +98,7 @@ class DataFilzsController < ApplicationController
     if params[:file_id].present? 
       @data_filz = @account.data_filzs.find(params[:file_id])
       if @data_filz.genre == "license" or @data_filz.genre == "readme"
-        @editor == "text"
+        @editor = "text"
       end
     end
   end
