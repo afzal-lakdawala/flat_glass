@@ -43,9 +43,3 @@
       - if @is_admin
         %li=link_to "Settings", edit_account_path(@account.owner.username,@account.slug)
         %li= link_to "Collaborators" , user_account_permissions_path(@account.owner.username, @account.slug)
-
-:javascript
-  $(document).ready(function() {
-    $('.editable').hallo({editable: false});
-    $("#source").val($(".editable").text());    
-  });
