@@ -20,5 +20,3 @@
 //= require vendor/lib/showdown
 //= require vendor/lib/to-markdown
 //= require vendor/lib/editor
-//= require jquery-fileupload/basic
-//= require jquery-fileupload/vendor/tmpl

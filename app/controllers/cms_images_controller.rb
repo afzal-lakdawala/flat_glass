@@ -20,6 +20,13 @@ class CmsImagesController < ApplicationController
 
   def create
     @cms_image = Cms::Image.new(params[:cms_image])
+    #@cms_image. = 
+    
+    #sdsds
+    
+    #attr_accessible :account_id, :created_by, :updated_by, :slug, :image_file, :title, :image_content_type, :image_file_name, :image_file_size
+    
+    
     if @cms_image.save
       redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")
     else

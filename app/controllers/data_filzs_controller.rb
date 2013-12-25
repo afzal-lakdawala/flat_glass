@@ -40,7 +40,7 @@ class DataFilzsController < ApplicationController
   
   def new
     @data_filz = Data::Filz.new
-    @data_filz.commit_message = "First commit"
+    @disable_footer = true
   end
   
   def create
@@ -56,6 +56,7 @@ class DataFilzsController < ApplicationController
   end
   
   def edit
+    @disable_footer = true
   end
   
   def update

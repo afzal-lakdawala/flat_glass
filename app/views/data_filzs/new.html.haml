@@ -6,35 +6,30 @@
     %li= link_to "data", user_account_data_filzs_path(@account.owner, @account.slug)
     %li.active New Data Set
 .row
-  .col-sm-10
+  .col-sm-12
     .panel.panel-default
       = form_for(@data_filz, url: create_user_account_data_filzs_path(@account.owner, @account.slug), :html => { method: :post,  role: "form" }) do |f|
-        .panel-heading{style: "background: #F2F2F2;"}
-          .form-group= f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true 
+        .panel-heading{style: "background: #F2F2F2; height: 50px;"}
+          .form-group
+            = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true, class: "col-sm-8"
+            .pull-right
+              %button.btn.btn-default.btn-xs#transpose_hands_grid Transpose
+              |                             
+              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
         .panel-content{style: "padding: 10px;"}
           .form-group
             - if @editor == "text"
               = f.text_area :content, class: "form-control"
             - elsif @editor == "csv"
-              %button#transpose_hands_grid Transpose
-              |                             
-              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
-              #grid{style: "height: 250px;"}
+              #grid{style: "height: 350px;"}
               = f.text_area :content, value: "", id: "content", hidden: true
               = f.hidden_field :category, value: "data"
               = f.hidden_field :file_content_type, value: "csv"
           .form-group
-            %label Commit Message
-            = f.text_field :commit_message, class: "form-control"
+            = f.text_field :commit_message, class: "form-control", placeholder: "Commit Message"
             = f.hidden_field :account_id, value: @account.id
           .form-group
             = f.submit "Create", class: "btn btn-success", id: "submit"
-  .col-sm-2
-    %h5 Pull data from DataStore
-    .data-store{style: "height: 500px; background: red; overflow-y: scroll;"}
-      %br
-    = link_to "Pull data", nil, class: "btn btn-success"
-
 :javascript
   
   handsontable_with_filter("#grid", [], false);
