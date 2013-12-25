@@ -4,7 +4,6 @@ class Cms::Article < ActiveRecord::Base
   self.table_name = :cms_articles
   extend FriendlyId
   friendly_id :title, use: [:slugged, :scoped], scope: :account
-  #has_attached_file :file
   has_paper_trail
 
   
