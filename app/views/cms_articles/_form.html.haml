@@ -11,9 +11,9 @@
           .form-group
             .row  
               .col-sm-6   
-                = f.text_area :description, value: "", class: "form-control", required: true, id: "source", placeholder: "Write here"
+                = f.text_area :description, value: "", class: "form-control", required: true, id: "source", placeholder: "Write here", :onscroll => "scrolleditor()"
               .col-sm-6{:style => "max-height: 420px;"}  
-                #epiceditor-preview{:style => "min-height: 420px; overflow:auto; background-color:#e7cb94"}
+                #epiceditor-preview{:style => "height: 414px; overflow:overlay; background-color:#e7cb94; border: 1px solid #CCCCCC; border-radius:5px;"}
                   %article{style: "margin-left:20px;"}
                     .editable
                       - if @cms_article.description.present?
@@ -28,3 +28,9 @@
     $('.editable').hallo({editable: false});
     $("#source").val($(".editable").text().replace( /g | /  ,""));
   });
+  var scrolleditor = function(){
+    //console.log($("#epiceditor-preview").scrollTop());
+
+    //$("#epiceditor-preview").animate({"marginTop": $("#source").scrollTop()+"px"}, {duration:500,queue:false} );
+    //$("#epiceditor-preview").scrollTop = $("#source").scrollTop;
+  }
