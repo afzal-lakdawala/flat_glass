@@ -72,7 +72,7 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_create_set
-    self.created_by = User.current.id
+    self.created_by = User.current.id if User.current.present?
     self.commit_message = "First commit"  if self.commit_message.blank?
     self.is_pending = false if self.is_pending.blank?
     self.file_content_type = "csv" if self.file_content_type.blank?
@@ -81,7 +81,7 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_save_set
-    self.updated_by = User.current.id
+    self.updated_by = User.current.id if User.current.present?
     if self.content.present? and self.genre != "readme" and self.genre != "license"
       con = Data::Filz.remove_nil_rows(self.content)
       new_header = Data::FilzColumn.get_headers(con)
