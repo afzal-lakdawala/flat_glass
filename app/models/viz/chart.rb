@@ -12,6 +12,17 @@ class Viz::Chart < ActiveRecord::Base
   #SCOPES
   #CUSTOM SCOPES
   #OTHER METHODS  
+  
+  def mapper
+    if self.genre == "1D"
+      Viz::Chart.1d_mapper
+    end
+  end
+  
+  def self.1d_mapper
+    
+  end
+  
   #UPSERT
   #JOBS
   #PRIVATE

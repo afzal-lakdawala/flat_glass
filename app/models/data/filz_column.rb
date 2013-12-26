@@ -15,15 +15,7 @@ class Data::FilzColumn < ActiveRecord::Base
   #SCOPES
   #CUSTOM SCOPES
   #OTHER METHODS
-  #UPSERT
-  #def self.upsert(dfid, dt, na)
-    #d = Data::FilzColumn.where(data_filz_id: dfid, name: na).first
-    #if d.blank?
-      #d = Data::FilzColumn.new(data_filz_id: dfid, name: na)
-      #end
-    #end
 
-  #Data::FilzColumn.get_headers(data)
   def self.get_headers(data)
     headings = data.shift
     stats = []
@@ -54,7 +46,8 @@ class Data::FilzColumn < ActiveRecord::Base
     end
     return headers.join(",")
   end
-
+  
+  #UPSERT
   #JOBS
   #PRIVATE
   private
