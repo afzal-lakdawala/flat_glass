@@ -26,14 +26,15 @@ lkandfad
           = link_to "Edit", edit_user_account_cms_article_path(@account.owner, @account.slug, @cms_article), class: "btn btn-default btn-xs"
           - if !@disable_delete
             = link_to "Delete", delete_user_account_cms_article_path(@account.owner, @account.slug, @cms_article),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
-      .panel-content{style: "padding: 10px;"}
-        #epiceditor-preview{:style => "min-height: 200px; overflow:auto"}
-          .editable
-            = text_area_tag 'description', "", hidden: true, id: "source"
-            = simple_format(@cms_article.description)
-
+      .panel-content{style: "padding: 10px;"}        
+        .row  
+          .col-sm-12
+            #editor
+              = text_area(:entry, :body, value: "#{@cms_article.description}", hidden: 'true', id: "input", class: "wmd-input")
+            #preview.wmd-preview
+          
 :javascript
   $(document).ready(function() {
-    $('.editable').hallo({editable: false});
-    $("#source").val($(".editable").text());    
+    $("#editor > #input").hide();
+    new WMD("input", "toolbar", { preview: "preview" });
   });
