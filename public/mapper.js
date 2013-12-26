@@ -10,7 +10,7 @@ var PieMapper = function(options){
     // Final Mapping Data
     this.mappingData = function(){
         // TODO: Add some validations here to check if the mapping truly is complete
-        if(Object.keys(this.map).length !== 2){
+        if(Object.keys(this.map).length !== 4){
             alert("Mapping incomplete!");
             return false;
         }
