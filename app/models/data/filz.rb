@@ -53,6 +53,8 @@ class Data::Filz < ActiveRecord::Base
     self.created_by = User.current.id
     self.commit_message = "First commit"  if self.commit_message.blank?
     self.is_pending = false if self.is_pending.blank?
+    self.file_content_type = "csv" if self.file_content_type.blank?
+    self.category = "data" if self.category.blank?
     true
   end
 
