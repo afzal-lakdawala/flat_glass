@@ -85,8 +85,15 @@ class Data::Filz < ActiveRecord::Base
     if self.content.present? and self.genre != "readme" and self.genre != "license"
       con = Data::Filz.remove_nil_rows(self.content)
       new_header = Data::FilzColumn.get_headers(con)
-      con[0] = new_header.split(",")
+      newa = []
+      newa = [new_header.split(",")] + con
+      con = newa
       self.content = con.to_json
+      puts "-==================="
+      puts "-==================="
+      puts con.to_json
+      puts "-==================="
+      puts "-==================="
     end
     true
   end
