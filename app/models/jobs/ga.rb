@@ -1,13 +1,7 @@
 class Jobs::Ga
   
   def self.query(api_filz_id, scope)
-    #begin
-    Rails.logger.info "============================="
-    Rails.logger.info "============================="
-    Rails.logger.info "============================="
-    Rails.logger.info "============================="
-    Rails.logger.info "============================="
-    Rails.logger.info "Running the Google Analytics FEED end"
+    begin
       if scope == "today"
         start_date = Core::Services.convert_date_to_google_analytics_format((Date.today - 1))
         end_date = start_date
@@ -30,13 +24,9 @@ class Jobs::Ga
       end
       o = o + final_output
       data_filz.update_attributes(:content => o)
-      
-      Rails.logger.info o.inspect
-      
-      
-      #rescue Exception => ex
-      #api_filzs.update_attributes(error_string: ex.message.to_s)
-      #end
+    rescue Exception => ex
+      api_filzs.update_attributes(error_string: ex.message.to_s)
+    end
   end
     
 end

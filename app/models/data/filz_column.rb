@@ -15,15 +15,7 @@ class Data::FilzColumn < ActiveRecord::Base
   #SCOPES
   #CUSTOM SCOPES
   #OTHER METHODS
-  #UPSERT
-  #def self.upsert(dfid, dt, na)
-    #d = Data::FilzColumn.where(data_filz_id: dfid, name: na).first
-    #if d.blank?
-      #d = Data::FilzColumn.new(data_filz_id: dfid, name: na)
-      #end
-    #end
 
-  #Data::FilzColumn.get_headers(data)
   def self.get_headers(data)
     headings = data.shift
     stats = []
@@ -38,21 +30,24 @@ class Data::FilzColumn < ActiveRecord::Base
     end
     headers = []
     stats.each do |s|
-      if s.keys.size == 2
-        name = s["col"]
-        name = (name.include? ":") ? name.split(":")[0] : name
-        headers.push "#{s['col']}:#{s.keys.last}"
-      else
-        name = s["col"]
-        name = (name.include? ":") ? name.split(":")[0] : name
-        s.delete("col")
-        type = s.sort.last.first
-        headers.push "#{name}:#{type}"
+      if s["col"].present?
+        if s.keys.size == 2
+          name = s["col"]
+          name = (name.include? ":") ? name.split(":")[0] : name
+          headers.push "#{s['col']}:#{s.keys.last}"
+        else
+          name = s["col"]
+          name = (name.include? ":") ? name.split(":")[0] : name
+          s.delete("col")
+          type = s.sort.last.first
+          headers.push "#{name}:#{type}"
+        end
       end
     end
     return headers.join(",")
   end
-
+  
+  #UPSERT
   #JOBS
   #PRIVATE
   private

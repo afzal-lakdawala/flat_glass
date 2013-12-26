@@ -24,3 +24,10 @@
             = f.hidden_field :account_id, value: @account.id
           .form-group
             = f.submit "Create", class: "btn btn-success", id: "submit"
+.row
+  .col-sm-12
+    - Viz::Chart.all.each do |viz|
+      .col-sm-2
+        = image_tag viz.img, class: "col-sm-12"
+        %br
+        .f12= viz.name

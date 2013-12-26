@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131226071637) do
+ActiveRecord::Schema.define(:version => 20131226133553) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -267,8 +267,9 @@ ActiveRecord::Schema.define(:version => 20131226071637) do
     t.string   "genre"
     t.text     "img"
     t.text     "mapping"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "viz_vizs", :force => true do |t|
