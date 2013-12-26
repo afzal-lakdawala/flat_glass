@@ -37,6 +37,28 @@ class Data::Filz < ActiveRecord::Base
   #OTHER METHODS
   #UPSERT
   #JOBS
+  
+  def self.remove_nil_rows(contenz)
+    con = contenz.class.to_s == "String" ? JSON.parse(contenz) : contenz
+    i = 0
+    delete_rows = []
+    con.each do |row|
+      flag = true
+      row.each do |element|
+        if (element.class.to_s == "Array" and !element.compact.empty?) or (element.class.to_s != "Array" and !element.nil?)
+            flag = false
+            break
+        end
+      end
+      delete_rows << i if flag
+      i = i + 1  
+    end
+    delete_rows.sort.reverse!.each do |j|
+      con.delete_at(j)
+    end
+    con
+  end
+  
   #PRIVATE
   private
 
@@ -50,7 +72,7 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_create_set
-    self.created_by = User.current.id
+    self.created_by = User.current.id if User.current.present?
     self.commit_message = "First commit"  if self.commit_message.blank?
     self.is_pending = false if self.is_pending.blank?
     self.file_content_type = "csv" if self.file_content_type.blank?
@@ -59,21 +81,9 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_save_set
-    self.updated_by = User.current.id
+    self.updated_by = User.current.id if User.current.present?
     if self.content.present? and self.genre != "readme" and self.genre != "license"
-      con = self.content.class.to_s == "String" ? JSON.parse(self.content) : self.content
-
-      # Remove all nil rows and columns
-      con.delete_if do |row|
-        row.compact.empty?
-      end
-      con = con.transpose
-      con.delete_if do |row|
-        row.compact.empty?
-      end
-      con = con.transpose
-      # Remove all nil rows and columns
-
+      con = Data::Filz.remove_nil_rows(self.content)
       new_header = Data::FilzColumn.get_headers(con)
       con[0] = new_header.split(",")
       self.content = con.to_json
