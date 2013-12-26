@@ -50,8 +50,7 @@ $(document).ready(function () {
 
 function handsontable_with_filter(selector, data, readonly) {
 
-    $(selector).handsontable({
-      data: data,
+    $(selector).handsontable({      
       startRows: 5,
       startCols: 5,
       minRows: 5,
@@ -77,10 +76,17 @@ function handsontable_with_filter(selector, data, readonly) {
             }
             return cellProperties;
           }
-        },      
+        }
       
       
     });
+
+    if (data.length > 0) {
+      var handsontable = $(selector).data('handsontable');
+      handsontable.loadData(data);
+    }
+
+
 
     function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
       Handsontable.TextCell.renderer.apply(this, arguments);
