@@ -48,127 +48,38 @@ $(document).ready(function () {
 });
 
 
-// show scroller
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 100) {
-        $("#scroll-topper").fadeIn();
-    } else {
-        $("#scroll-topper").fadeOut();
-    }
-});
-
 function handsontable_with_filter(selector, data, readonly) {
-
-    var columns = [];
-    
-    if (data.length > 0) {
-
-      $.each(data, function(index, value) {
-        
-      });
-      spare_row = 1;
-      //for (var i = data[1].length - 1; i >= 0; i--) { 
-        //var value = data[1][i];
-        //var type = "checkbox"
-        
-        //if (typeof(value) == "number") {
-          //type = 'numeric'
-        //}
-
-        //if (typeof(value) !== "object" || value) {
-
-          //columns.push([{type: type, data: data[0][i]}]);  
-        //}        
-        
-      //}
-      
-    }else {
-
-      var spare_row = 15;
-      
-      //for (var i = 10 - 1; i >= 0; i--) {
-        //columns.push([{type: 'text'}])
-      //};
-
-      data = createDummyData();
-
-
-    }
-
-    if (readonly) {
-     spare_row = 0; 
-    }
 
     $(selector).handsontable({
       data: data,
-      colHeaders: true,
+      startRows: 5,
+      startCols: 5,
+      minRows: 5,
+      minCols: 5,
       rowHeaders: true,
-      minSpareRows: 1,
-      minSpareCols: 1,
-      //type: 'numeric',
-      stretchH: 'all',      
+      colHeaders: true,
+      minSpareRows: 1,      
+      stretchH: 'all',
       readOnly: readonly,
+      fixedRowsTop: 2,
+      fixedColumnsLeft: 2,
+      autoWrapRow: true,
+      columnSorting: true,
       manualColumnResize: true,
       manualColumnMove: true,
-      persistentState: true,
-      columnSorting: true,      
-      fixedRowsTop: 1,
-      fixedColumnsLeft: 1,
-      overflow: scroll,
-      autoWrapRow: true,
       contextMenu: true,
+      autoWrapRow: true,      
       outsideClickDeselects: false,
       cells: function (row, col, prop) {
           if (row <= 0) {
             var cellProperties = {
-              //type: 'text',
               renderer: firstRowRenderer
             }
             return cellProperties;
           }
-        },
-
-      afterGetColHeader: function (col, TH) {
-
-          columns = $(selector).handsontable('getColHeader');
-          var instance = this;
-          var menu = buildMenu(columns[col].type);
-
-          var $button = buildButton();
-          $button.click(function (e) {
-
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            $('.changeTypeMenu').hide();
-
-            menu.show();
-
-            menu.position({
-               my: 'left top',
-               at: 'left bottom',
-               of: $button,
-               within: instance.rootElement
-            });
-
-            $(document).off('click.changeTypeMenu.hide');
-
-            $(document).one('click.changeTypeMenu.hide', function () {
-               menu.hide();
-            });
-
-
-          });
-
-          menu.on('click', 'li', function () {
-             setColumnType(col, $(this).data('colType'), instance);
-          });
-
-          TH.firstChild.appendChild($button[0]);
-          TH.appendChild(menu[0]);
-        }        
+        },      
       
-
+      
     });
 
     function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
@@ -177,43 +88,7 @@ function handsontable_with_filter(selector, data, readonly) {
       td.style.color = '#1B668B';
       td.style.background = '#f0f0f0';
     }
-    function buildMenu(activeCellType) {
-      var menu = $('<ul></ul>').addClass('changeTypeMenu');
-
-      $.each(['text', 'numeric', 'date', 'checkbox'], function(i, type) {
-        var item = $('<li></li>').data('colType', type).text(type);
-
-        if (activeCellType == type) {
-          item.addClass('active');
-        }
-
-        menu.append(item);
-
-      });
-
-      return menu;
-
-    }
-
-    function buildButton() {
-      return $('<button></button>').addClass('changeType').html('\u25BC');
-    }
-
-    function setColumnType(i, type, instance) {
-      columns = $(selector).handsontable('getColHeader');
-      columns[i].type = type;
-      instance.updateSettings({columns: columns});
-      instance.validateCells(function() {
-        instance.render();
-      });
-    }        
     
-
-  $("#addRow").click(function() {
-    columns.push({});
-    $("#grid").handsontable("render");
-    return false;
-  });
 
   $(selector+' table').addClass('table-hover table-condensed');
   $(selector+' table tbody tr:first').css('font-weight', 'bold').css("color", "#1B668B");  
@@ -238,27 +113,6 @@ function handsontable_with_filter(selector, data, readonly) {
   }
 
   //console.log(ConvertToCSV(data));
-
-  function createDummyData() {
-    var rows = []
-      , i
-      , j;
-  
-    for (i = 0; i < 8; i++) {
-      var row = [];
-      for (j = 0; j < 7; j++) {
-        if (i <= 0) {
-          row.push(null);
-        }else {
-          row.push([null]);
-        }
-        
-      }
-      rows.push(row);
-    }
-  
-    return rows;
-  }
 
 }
 
