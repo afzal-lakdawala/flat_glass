@@ -22,13 +22,7 @@ class ApplicationController < ActionController::Base
     if params[:user_id].present?
       @user = User.find(params[:user_id])
       if params[:account_id].present? 
-        puts "============="
-        puts "============="
         @account = Account.joins(:permissions).where(permissions: {role: "O", user_id: @user.id}).first
-        puts @account.inspect
-        puts "============="
-        puts "============="
-        
         @users_count = @account.permissions.count
       end
       if @account.present? and current_user.present?

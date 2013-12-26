@@ -10,7 +10,7 @@
       .panel-heading
         %b articles
         .pull-right
-          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New Article".html_safe, new_user_account_cms_articles_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
+          = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New".html_safe, new_user_account_cms_articles_path(@account.owner,@account.slug), class: "btn btn-success btn-xs"
       .panel-content{style: "padding: 10px;"}
         %table.table.table-condensed
           %tr
@@ -19,6 +19,9 @@
           - if @cms_articles.first.present?
             - @cms_articles.each do |cms_article|
               %tr
-                %td.col-sm-6= link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;#{cms_article.slug}".html_safe, user_account_cms_article_path(@account.owner,@account.slug, cms_article)
+                %td.col-sm-6
+                  = link_to "<i class='glyphicon glyphicon-list-alt'></i>&nbsp;&nbsp;#{cms_article.slug}".html_safe, user_account_cms_article_path(@account.owner,@account.slug, cms_article)
+                  - if !cms_article.is_published
+                    %span.f11.gray (Draft)
 
                 %td.f11.gray.col-sm-2= "#{time_ago_in_words(cms_article.updated_at)} ago"
