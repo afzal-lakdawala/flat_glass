@@ -34,12 +34,24 @@
           %td.f11.gray.col-sm-2= "#{time_ago_in_words(@license.updated_at)} ago"
     %br
     %div.editable{style: "border: 1px #CFCFCF solid; background: #F6F6F6; padding: 4px;"}
-      %h5 README.md
+      %h5 README.md      
       %hr
-      = @readme.content
+      .row  
+        .col-sm-12
+          #editor
+            = text_area(:entry, :body, value: "#{@readme.content}", hidden: 'true', id: "input", class: "wmd-input")
+          #preview.wmd-preview 
+      
   .col-sm-2
     %ul.nav.nav-pills.nav-stacked
       %li.active=link_to "Repository", user_account_path(@account.owner.username,@account.slug)
       - if @is_admin
         %li=link_to "Settings", edit_account_path(@account.owner.username,@account.slug)
         %li= link_to "Collaborators" , user_account_permissions_path(@account.owner.username, @account.slug)
+
+:javascript
+  $(document).ready(function() {    
+    $("#editor > #input").hide();
+    new WMD("input", "toolbar", { preview: "preview" });
+  });
+      

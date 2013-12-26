@@ -13,9 +13,11 @@
               .col-sm-6   
                 #editor
                   #toolbar.wmd-toolbar
-                  = f.text_area :description, id: "input", cols:"65", rows:"30",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
-              .col-sm-6{:style => "max-height: 420px;"}  
-                #preview.wmd-preview
+                  = f.text_area :description, id: "input", cols:"65", rows:"20",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
+              .col-sm-6
+                %br
+                %br
+                #preview.wmd-preview{:style => "height: 420px; overflow:auto"}  
           .form-group 
             - if !@cms_article.is_published
               = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
@@ -34,7 +36,7 @@
   });
   var scrolling = function(opt){
     if(opt=='textarea'){
-      $("#epiceditor-preview").scrollTop($("#source").scrollTop());
+      $("#preview").scrollTop($("#input").scrollTop());
     }else{
       //$("#source").scrollTop($("#epiceditor-preview").scrollTop());
     }
