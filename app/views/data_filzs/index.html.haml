@@ -8,7 +8,7 @@
   .col-sm-12
     .panel.panel-default
       .panel-heading
-        %b data
+        %b= "<i class='glyphicon glyphicon-folder-open'></i>&nbsp;&nbsp;data".html_safe
         .pull-right
           = link_to "<i class='glyphicon glyphicon-plus-sign'></i> New".html_safe, new_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"
           = link_to "<i class='glyphicon glyphicon-import'></i> Pull from APIs".html_safe, apis_user_account_data_filzs_path(@account.owner, @account.slug), class: "btn btn-success btn-xs"

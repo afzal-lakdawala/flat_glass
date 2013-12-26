@@ -13,6 +13,8 @@ gem 'gon'
 gem 'jbuilder'
 #gem 'meta_search'
 gem 'tinymce-rails'
+gem "fog"
+gem 'unf' #brother of fog
 #gem 'acts-as-taggable-on'
 
 # User Interface

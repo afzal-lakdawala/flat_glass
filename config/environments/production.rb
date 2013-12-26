@@ -69,6 +69,13 @@ Pykhub::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   BASE_URL = "app.pykih.com"
+  
+  GOOGLE_CLIENTID = ""
+  GOOGLE_SECRET = ""
+  GOOGLE_CALLBACK = "http://app.pykih.com/auth/google_oauth2/callback"
+  AWS_ACCESS_KEY_ID = "AKIAIF45K4Q4NWJLWE7A"
+  AWS_SECRET_ACCESS_KEY = "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"
+  AWS_S3_BUCKET = "pykhub-cms-images-prod"
 
   config.action_mailer.default_url_options = { :host => "app.pykih.com" }
   ActionMailer::Base.delivery_method = :smtp
