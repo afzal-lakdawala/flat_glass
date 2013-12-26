@@ -65,7 +65,8 @@ class DataFilzsController < ApplicationController
     if @data_filz.update_attributes(params[:data_filz])
       redirect_to user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), notice: t("u.s")
     else
-      gon.errors = @data_filz.errors
+      gon.errors = @data_filz.errors 
+      flash[:error] = t("c.f")
       render action: (@editor == "text" ? "text_form" : "csv_form"), :locals => {:flash => flash}
     end
   end

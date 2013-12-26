@@ -19,10 +19,11 @@
         = f.text_area :content, value: "", id: "content", hidden: true
         = f.hidden_field :account_id, value: @account.id
         .panel-heading{style: "background: #F2F2F2; height: 50px;"}
-          = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true, class: "col-sm-8"
-          .pull-right
-            %button.btn.btn-default.btn-xs#transpose_hands_grid Transpose
-            %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
+          .form-group
+            = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true, class: "col-sm-8"
+            .pull-right
+              %button.btn.btn-default.btn-xs#transpose_hands_grid Transpose
+              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}
         .panel-content{style: "padding: 10px;"}
           .form-group
             -if @data_filz.errors.present?
