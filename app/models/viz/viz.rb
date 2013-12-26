@@ -41,38 +41,6 @@ class Viz::Viz < ActiveRecord::Base
     JSON.parse(self.viz_chart.mapping.gsub("'", '"'))
   end
 
-  def generate_map
-    map_json = JSON.parse(self.map).invert
-    data = JSON.parse(self.data_filz.content)
-    headings = data.shift
-    headings = headings.collect{|h| h.split(":").first}    
-    json_data = [{"key" => "Chart","values" => []}]
-    data.each do |row|
-      h = {}
-      label = row[headings.index(map_json["Data"])]
-      value = row[headings.index(map_json["Value"])]
-      el = false
-      json_data[0]["values"].each_with_index do |set, i|
-        if set["label"] == label
-          el = i
-        end
-      end
-      unless el
-        h["label"] = label
-        h["value"] = value.to_i
-        json_data[0]["values"].push(h);
-      else
-        hash = json_data[0]["values"][el]
-        hash["value"] += value.to_i
-        json_data[0]["values"][el] = hash
-      end
-      if h != {}
-        json_data[0]["values"].push(h);
-      end
-    end
-    self.mapped_output = json_data
-  end
-
   #UPSERT
   #JOBS
   #PRIVATE
@@ -86,7 +54,6 @@ class Viz::Viz < ActiveRecord::Base
       end
     end
   end
-  
 
   def before_create_set
     self.created_by = User.current.id
@@ -94,11 +61,14 @@ class Viz::Viz < ActiveRecord::Base
   end
 
   def before_save_set
-    self.updated_by = User.current.id
-    if self.map_changed?
-      if self.map.present?
-        self.generate_map
-      end
+    self.updated_by = User.current.id 
+    if self.map.present?
+      self.mapped_output = self.viz_chart.mapper(self)
+      puts "====================="
+      puts "====================="
+      puts self.mapped_output
+      puts "====================="
+      puts "====================="
     end
     true
   end
