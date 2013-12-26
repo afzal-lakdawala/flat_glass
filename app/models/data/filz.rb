@@ -89,11 +89,6 @@ class Data::Filz < ActiveRecord::Base
       newa = [new_header.split(",")] + con
       con = newa
       self.content = con.to_json
-      puts "-==================="
-      puts "-==================="
-      puts con.to_json
-      puts "-==================="
-      puts "-==================="
     end
     true
   end
