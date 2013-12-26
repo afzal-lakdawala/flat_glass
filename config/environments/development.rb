@@ -42,6 +42,9 @@ Pykhub::Application.configure do
   GOOGLE_CLIENTID = "344754328576-1bahio1368enrnu6tinv5h5qt66tkhlf.apps.googleusercontent.com"
   GOOGLE_SECRET = "tbNSFofoQPLDp8Lzgqp04l1G"
   GOOGLE_CALLBACK = "http://localhost:3000/auth/google_oauth2/callback"
+  AWS_ACCESS_KEY_ID = "AKIAIF45K4Q4NWJLWE7A"
+  AWS_SECRET_ACCESS_KEY = "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"
+  AWS_S3_BUCKET = "pykhub-cms-images-dev"
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   ActionMailer::Base.delivery_method = :smtp
