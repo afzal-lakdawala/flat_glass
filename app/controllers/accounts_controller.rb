@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
   before_filter :authorize, only: [:edit, :update, :destroy]
 
   def show
-    sdsd
     @readme = @account.data_filzs.readme.first
     @license = @account.data_filzs.license.first
   end

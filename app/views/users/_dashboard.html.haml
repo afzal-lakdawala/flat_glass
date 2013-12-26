@@ -8,6 +8,11 @@
       %h1 Welcome to PykHub
       %p.lead dalfkna ldfna lfknad flkadnf ladknf aldkfn adlkf nadlfk andfl kadnf lakdnf adlkfna dlkfnad lkfnad lfknad lfkadn flkadn fladknf aldkfn alkfnadlkfnadlfkn adlkfnadl fknadl fknadlf ad
       = link_to "Create your first repository", new_accounts_path, class: "btn btn-success btn-lg"
+      - Viz::Chart.all.each do |viz|
+        .col-sm-2
+          = image_tag viz.img, class: "col-sm-12"
+          %br
+          .f12= viz.name
 - else  
   .row
     .col-sm-8
