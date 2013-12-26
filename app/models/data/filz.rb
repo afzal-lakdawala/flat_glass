@@ -23,6 +23,7 @@ class Data::Filz < ActiveRecord::Base
   #validates :file_content_type, length: {minimum: 2}, presence: true
   validates :content, length: {minimum: 5, message: "is too short (minimum is 5 rows)"}, allow_blank: true
   validate :is_name_unique?
+  validate :atleast_two_rows?
 
   #CALLBACKS
   before_save :before_save_set
@@ -35,9 +36,6 @@ class Data::Filz < ActiveRecord::Base
 
   #CUSTOM SCOPES
   #OTHER METHODS
-  #UPSERT
-  #JOBS
-  
   def self.remove_nil_rows(contenz)
     con = contenz.class.to_s == "String" ? JSON.parse(contenz) : contenz
     i = 0
@@ -59,6 +57,8 @@ class Data::Filz < ActiveRecord::Base
     con
   end
   
+  #UPSERT
+  #JOBS
   #PRIVATE
   private
 
@@ -69,6 +69,10 @@ class Data::Filz < ActiveRecord::Base
         errors.add(:file_file_name, "already taken")
       end
     end
+  end
+  
+  def atleast_two_rows? #version0.2_TODO
+    true 
   end
 
   def before_create_set
