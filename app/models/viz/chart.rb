@@ -4,7 +4,7 @@ class Viz::Chart < ActiveRecord::Base
   self.table_name = :viz_charts
   
   #ACCESSORS
-  attr_accessible :genre, :img, :mapping, :name
+  attr_accessible :genre, :img, :mapping, :name, :description
   
   #ASSOCIATIONS  
   #VALIDATIONS
@@ -35,7 +35,7 @@ class Viz::Chart < ActiveRecord::Base
   def self.mapper_1d(raw_data, headings, transformed_data, map_json)    
     raw_data.each do |row|
       h = {}
-      label = row[headings.index(map_json["Data"])]
+      label = row[headings.index(map_json["Dimension"])]
       value = row[headings.index(map_json["Size"])]
       el = false
       transformed_data[0]["values"].each_with_index do |set, i|
@@ -56,7 +56,7 @@ class Viz::Chart < ActiveRecord::Base
         transformed_data[0]["values"].push(h);
       end
     end
-    transformed_data
+    transformed_data.to_json
   end
   
   def self.mapper_weighted_tree

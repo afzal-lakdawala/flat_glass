@@ -64,11 +64,6 @@ class Viz::Viz < ActiveRecord::Base
     self.updated_by = User.current.id 
     if self.map.present?
       self.mapped_output = self.viz_chart.mapper(self)
-      puts "====================="
-      puts "====================="
-      puts self.mapped_output
-      puts "====================="
-      puts "====================="
     end
     true
   end
