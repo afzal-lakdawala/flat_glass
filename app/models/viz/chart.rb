@@ -15,11 +15,11 @@ class Viz::Chart < ActiveRecord::Base
   
   def mapper
     if self.genre == "1D"
-      Viz::Chart.1d_mapper
+      Viz::Chart.mapper_1d
     end
   end
   
-  def self.1d_mapper
+  def self.mapper_1d
     
   end
   
