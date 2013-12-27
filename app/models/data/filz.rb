@@ -38,23 +38,25 @@ class Data::Filz < ActiveRecord::Base
   #OTHER METHODS
   def self.remove_nil_rows(contenz)
     con = contenz.class.to_s == "String" ? JSON.parse(contenz) : contenz
-    i = 0
-    delete_rows = []
-    con.each do |row|
-      flag = true
-      row.each do |element|
-        if (element.class.to_s == "Array" and !element.compact.empty?) or (element.class.to_s != "Array" and !element.nil?)
-            flag = false
-            break
-        end
-      end
-      delete_rows << i if flag
-      i = i + 1  
-    end
-    delete_rows.sort.reverse!.each do |j|
-      con.delete_at(j)
-    end
+    con.delete_if{ |row| row.flatten.compact.empty? }
     con
+    # i = 0
+#     delete_rows = []
+#     con.each do |row|
+#       flag = true
+#       row.each do |element|
+#         if (element.class.to_s == "Array" and !element.compact.empty?) or (element.class.to_s != "Array" and !element.nil?)
+#             flag = false
+#             break
+#         end
+#       end
+#       delete_rows << i if flag
+#       i = i + 1  
+#     end
+#     delete_rows.sort.reverse!.each do |j|
+#       con.delete_at(j)
+#     end
+#     con
   end
   
   #UPSERT
