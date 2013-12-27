@@ -38,9 +38,8 @@
       %hr
       .row  
         .col-sm-12
-          #editor
-            = text_area(:entry, :body, value: "#{@readme.content}", hidden: 'true', id: "input", class: "wmd-input")
-          #preview.wmd-preview 
+          #editor= text_area(:entry, :body, value: "#{@readme.content}", hidden: 'true', id: "input", class: "wmd-input")
+          #preview.wmd-preview{style: "padding: 0px 10px;"}
       
   .col-sm-2
     %ul.nav.nav-pills.nav-stacked

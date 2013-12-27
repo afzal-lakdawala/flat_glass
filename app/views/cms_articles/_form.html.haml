@@ -17,7 +17,7 @@
               .col-sm-6
                 %br
                 %br
-                #preview.wmd-preview{:style => "height: 420px; overflow:auto"}  
+                #preview.wmd-preview{:style => "height: 420px; overflow:auto;background: #e7cb94;"}  
           .form-group 
             - if !@cms_article.is_published
               = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
