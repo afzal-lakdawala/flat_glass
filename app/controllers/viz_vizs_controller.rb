@@ -25,6 +25,7 @@ class VizVizsController < ApplicationController
     if @viz_viz.map.blank?
       redirect_to map_user_account_viz_viz_path(@account.owner, @account.slug, file_id: @viz_viz.slug)
     end
+    @mapped_output = JSON.parse(@viz_viz.mapped_output)
   end
 
   def create    

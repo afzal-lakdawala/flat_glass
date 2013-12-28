@@ -39,8 +39,13 @@ namespace :seed do
     
   end
   
-  task :new => :environment do |t, args|
-
+  #rake seed:update
+  task :update => :environment do |t, args|
+    Viz::Viz.destroy_all
+    Viz::Chart.where(genre: "1D").update_all(mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]")
+    Viz::Chart.all.each do |viz|
+      viz.update_attributes(description: viz.name + " " + viz.genre)
+    end
   end
   
 end

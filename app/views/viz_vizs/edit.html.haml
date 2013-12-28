@@ -14,33 +14,14 @@
         &nbsp;
         %b= @viz_viz.title
       .panel-content{style: "padding: 10px;"}
-        = form_for(@data_filz, url: update_user_account_data_filz_path(@account.owner, @account.slug, file_id: @viz_viz.slug), :html => { method: :put,  role: "form" }) do |f|
-          .form-group
-            - if @editor == "text"
-              = f.text_area :content, class: "form-control"
-            - elsif @editor == "csv"
-              -if @data_filz.errors.present?
-                - @data_filz.errors[:content].each do |c_error|
-                  %span.label.label-danger
-                    = c_error
-              %button#transpose_hands_grid Transpose
-              |               
-              %input#search_in_hands_grid{:placeholder => "Search", :type => "text"}         
-              #grid{style: "height: 250px;"}
-          .form-group
-            %label Commit Message
-            = f.text_field :commit_message, class: "form-control"
-          .form-group
-            = f.submit "Save", class: "btn btn-success", id: "submit"
-            = f.text_area :content, value: "", id: "content", hidden: true
-
-:javascript
-  
-  var content =  eval(#{@data_filz[:content]});
-  handsontable_with_filter("#grid", content, false);
-  $('#submit').click(function() {    
-    remove_null_rows("#grid");
-    remove_null_cols("#grid");
-    var rowList = $("#grid").handsontable("getData");
-    $('#content').val(JSON.stringify(rowList)); 
-  });
+        .col-sm-6
+          %h5 Transformed output
+          - if 1 == 1
+            - if @mapped_output.present?
+              %table.table.table-condensed.table-hover
+                - @mapped_output[0]["values"].each do |m|
+                  %tr
+                    %td= m["label"]
+                    %td= m["value"]
+        .col-sm-6
+          = "."

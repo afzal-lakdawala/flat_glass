@@ -11,13 +11,13 @@
           .form-group
             .row  
               .col-sm-6   
-                = f.text_area :description, value: "", class: "form-control", required: true, id: "source", placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
-              .col-sm-6{:style => "max-height: 420px;"}  
-                #epiceditor-preview{:style => "height: 414px; overflow:overlay; background-color:#e7cb94; border: 1px solid #CCCCCC; border-radius:5px;", :onscroll => "scrolling('div')"}
-                  %article{style: "margin-left:20px;"}
-                    .editable
-                      - if @cms_article.description.present?
-                        = simple_format(@cms_article.description.to_s.html_safe)
+                #editor
+                  #toolbar.wmd-toolbar
+                  = f.text_area :description, id: "input", cols:"65", rows:"20",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
+              .col-sm-6
+                %br
+                %br
+                #preview.wmd-preview{:style => "height: 420px; overflow:auto;background: #e7cb94;"}  
           .form-group 
             - if !@cms_article.is_published
               = f.submit 'Save as Draft', class: "btn btn-default", id: "submit"
@@ -25,13 +25,18 @@
             = f.submit "Publish", class: "btn btn-success", id: "submit"
 
 :javascript
-  $(document).ready(function() {
-    $('.editable').hallo({editable: false});
-    $("#source").val($(".editable").text().replace( /g | /  ,""));
+  $(document).ready(function() {    
+    $("#highlightCode").click(function(){
+      $.SyntaxHighlighter.init({
+      'lineNumbers': false,
+      'debug': true
+      });
+    });  
+    new WMD("input", "toolbar", { preview: "preview" });
   });
   var scrolling = function(opt){
     if(opt=='textarea'){
-      $("#epiceditor-preview").scrollTop($("#source").scrollTop());
+      $("#preview").scrollTop($("#input").scrollTop());
     }else{
       //$("#source").scrollTop($("#epiceditor-preview").scrollTop());
     }

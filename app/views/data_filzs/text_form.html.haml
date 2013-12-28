@@ -19,7 +19,33 @@
         .panel-heading{style: "background: #F2F2F2; height: 50px;"}
           = f.text_field :file_file_name, class: "form-control", placeholder: "File Name", autofocus: true
         .panel-content{style: "padding: 10px;"}  
-          .form-group= f.text_area :content, class: "form-control"
-          = f.hidden_field :account_id, value: @account.id
+          .form-group
+            .row  
+              .col-sm-6   
+                #editor
+                  #toolbar.wmd-toolbar
+                  = f.text_area :content, id: "input", cols:"65", rows:"20",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
+              .col-sm-6
+                %br
+                %br
+                #preview.wmd-preview{:style => "height: 420px; overflow:auto;background: #e7cb94; padding: 0px 10px;"}  
           .form-group= f.text_field :commit_message, class: "form-control", placeholder: "Commit Message"
           .form-group= f.submit "Save", class: "btn btn-success", id: "submit"
+
+:javascript
+  $(document).ready(function() {    
+    $("#highlightCode").click(function(){
+      $.SyntaxHighlighter.init({
+      'lineNumbers': false,
+      'debug': true
+      });
+    });  
+    new WMD("input", "toolbar", { preview: "preview" });
+  });
+  var scrolling = function(opt){
+    if(opt=='textarea'){
+      $("#preview").scrollTop($("#input").scrollTop());
+    }else{
+      //$("#source").scrollTop($("#epiceditor-preview").scrollTop());
+    }
+  }

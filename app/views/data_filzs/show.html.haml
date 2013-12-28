@@ -23,11 +23,23 @@
             = link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, delete_user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug),  confirm: 'Are you sure?', class: "btn btn-danger btn-xs"
       .panel-content{style: "padding: 10px;"}        
         - if @editor == "text"
-          = @data_filz.content
+          .row  
+            .col-sm-12
+              #editor
+                = text_area(:entry, :body, value: "#{@data_filz.content}", hidden: 'true', id: "input", class: "wmd-input")
+              #preview.wmd-preview 
         - elsif @editor == "csv"
           #grid{style: "height: 470px;"}
 
-- if @editor == "csv"
+
+- if @editor == "csv"  
   :javascript
     var content =   eval(#{@data_filz.content});
     handsontable_with_filter("#grid", content, true);
+-else
+  :javascript
+    $(document).ready(function() {    
+      $("#editor > #input").hide();
+      new WMD("input", "toolbar", { preview: "preview" });
+    });
+        
