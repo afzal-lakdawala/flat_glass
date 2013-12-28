@@ -1,8 +1,8 @@
 class CmsImagesController < ApplicationController
   
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_filter :authenticate_user!, except: [:show, :index, :upload]
   before_filter :find_objects
-  before_filter :authorize, except: [:index, :show]
+  before_filter :authorize, except: [:index, :show, :upload]
 
   def index
     @cms_images = @account.cms_images
@@ -19,11 +19,32 @@ class CmsImagesController < ApplicationController
   end
 
   def create
-    @cms_image = Cms::Image.new(params[:cms_image])    
-    if @cms_image.save
-      redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")
+
+    if params[:cms_image]
+      @cms_image = Cms::Image.new(params[:cms_image])    
     else
-      render action: "new"
+      a = JSON.parse(params["file"].to_json)
+      @cms_image = Cms::Image.new
+      @cms_image.account_id = @account.id
+      @cms_image.title = a["original_filename"]
+      @cms_image.image_file = params[:file]
+    end
+    if @cms_image.save
+      respond_to do |format|
+        if params[:cms_image]
+          format.html{redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")}
+        else          
+          format.json { render json: {filename: @cms_image.image_file_url, error: ""}}
+        end   
+      end
+    else
+      respond_to do |format|
+        if params[:cms_image]
+          format.html{render action: "new", notice: t("c.s")}
+        else          
+          format.json { render json: {error: @cms_image.errors}}
+        end   
+      end        
     end
   end
 
@@ -53,5 +74,5 @@ class CmsImagesController < ApplicationController
       redirect_to root_url, error: "Permission denied."
     end
   end
-  
+
 end

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   include ApplicationHelper
   #SECURITY
-  protect_from_forgery
+  #protect_from_forgery
   
   #GEMS  
   #CALLBACKS
