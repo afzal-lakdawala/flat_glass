@@ -1,8 +1,8 @@
 class CmsImagesController < ApplicationController
   
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_filter :authenticate_user!, except: [:show, :index, :upload]
   before_filter :find_objects
-  before_filter :authorize, except: [:index, :show]
+  before_filter :authorize, except: [:index, :show, :upload]
 
   def index
     @cms_images = @account.cms_images
@@ -19,12 +19,29 @@ class CmsImagesController < ApplicationController
   end
 
   def create
-    @cms_image = Cms::Image.new(params[:cms_image])    
-    if @cms_image.save
-      redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")
-    else
-      render action: "new"
+    puts "========================="
+    puts params["file"].inspect
+    puts "========================="
+    puts params["file"].get_instance_variable(:@filename, params[:file])
+    puts "========================="
+    puts "========================="
+
+#:slug, :image_file, :title,  :url
+  render text: params
+  @cms_image = Cms::Image.new
+  @cms_image.account_id = params[:account_id]
+  @cms_image.image_file = params[:file]
+#  @cms_image.title = params[:file][:filename]
+
+    if params[:cms_image]
+      @cms_image = Cms::Image.new(params[:cms_image])    
+      if @cms_image.save
+        redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")
+      else
+        render action: "new"
+      end
     end
+
   end
 
   def update
@@ -53,5 +70,5 @@ class CmsImagesController < ApplicationController
       redirect_to root_url, error: "Permission denied."
     end
   end
-  
+
 end

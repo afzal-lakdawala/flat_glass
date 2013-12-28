@@ -32,6 +32,19 @@
       'debug': true
       });
     });  
+
+    $('#input').inlineattach({
+      uploadUrl: '#{create_user_account_cms_images_path()}', 
+      urlText: '![file]({filename})',
+      progressText: '![Uploading file...]()',
+      allowedTypes: [
+        'image/jpeg',
+        'image/png',
+        'image/jpg',
+        'image/gif'
+      ]      
+    });    
+
     new WMD("input", "toolbar", { preview: "preview" });
   });
   var scrolling = function(opt){
