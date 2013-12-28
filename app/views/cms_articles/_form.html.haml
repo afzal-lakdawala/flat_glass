@@ -26,6 +26,7 @@
 
 :javascript
   $(document).ready(function() {    
+    window.file_name = "";
     $("#highlightCode").click(function(){
       $.SyntaxHighlighter.init({
       'lineNumbers': false,
@@ -33,16 +34,35 @@
       });
     });  
 
-    $('#input').inlineattach({
+    $('textarea').inlineattach({
+      uploadFieldName: 'file',
+      downloadFieldName: 'filename',      
+      urlText: "![file]({filename})",
+
       uploadUrl: '#{create_user_account_cms_images_path()}', 
-      urlText: '![file]({filename})',
-      progressText: '![Uploading file...]()',
       allowedTypes: [
         'image/jpeg',
         'image/png',
-        'image/jpg',
-        'image/gif'
-      ]      
+        'image/jpg'
+      ],
+
+      onUploadedFile: function(json) {
+
+        error = json.error;
+        that = this;
+        $.each(error,function(index,msg) {        
+          console.log(error,index,msg)
+          alert(msg);
+          this.urlText = " ";
+          this.progressText = ' '
+        });
+        
+      },     
+
+      customUploadHandler: function(file) {return true; },
+      errorText: "Error uploading file",
+      progressText: '![Uploading file...]()'
+
     });    
 
     new WMD("input", "toolbar", { preview: "preview" });
@@ -51,6 +71,6 @@
     if(opt=='textarea'){
       $("#preview").scrollTop($("#input").scrollTop());
     }else{
-      //$("#source").scrollTop($("#epiceditor-preview").scrollTop());
+      
     }
   }

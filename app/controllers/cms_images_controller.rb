@@ -19,29 +19,33 @@ class CmsImagesController < ApplicationController
   end
 
   def create
-    puts "========================="
-    puts params["file"].inspect
-    puts "========================="
-    puts params["file"].get_instance_variable(:@filename, params[:file])
-    puts "========================="
-    puts "========================="
-
-#:slug, :image_file, :title,  :url
-  render text: params
-  @cms_image = Cms::Image.new
-  @cms_image.account_id = params[:account_id]
-  @cms_image.image_file = params[:file]
-#  @cms_image.title = params[:file][:filename]
 
     if params[:cms_image]
       @cms_image = Cms::Image.new(params[:cms_image])    
-      if @cms_image.save
-        redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")
-      else
-        render action: "new"
-      end
+    else
+      a = JSON.parse(params["file"].to_json)
+      @cms_image = Cms::Image.new
+      @cms_image.account_id = @account.id
+      @cms_image.title = a["original_filename"]
+      @cms_image.image_file = params[:file]
     end
-
+    if @cms_image.save
+      respond_to do |format|
+        if params[:cms_image]
+          format.html{redirect_to user_account_cms_images_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("c.s")}
+        else          
+          format.json { render json: {filename: @cms_image.image_file_url, error: ""}}
+        end   
+      end
+    else
+      respond_to do |format|
+        if params[:cms_image]
+          format.html{render action: "new", notice: t("c.s")}
+        else          
+          format.json { render json: {error: @cms_image.errors}}
+        end   
+      end        
+    end
   end
 
   def update

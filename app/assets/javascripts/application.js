@@ -18,5 +18,4 @@
 //= require vendor/lib/showdown
 //= require vendor/lib/wmd
 //= require vendor/lib/functions
-//= require vendor/lib/inline-attach.min
 //= require vendor/lib/jquery.inline-attach.min
