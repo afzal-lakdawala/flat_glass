@@ -52,12 +52,10 @@
 
       onUploadedFile: function(json) {
         error = json.error;
-        that = this;
         $.each(error,function(index,msg) {        
 
           var err_msg = "";
           var img_url = msg[0].split("-->")[1];
-          console.log(img_url)
 
           if (confirm(msg)) {
             err_msg = $("textarea").val().replace('![Uploading file...]()', "![file]("+img_url+")");

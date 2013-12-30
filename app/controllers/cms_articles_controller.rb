@@ -21,6 +21,7 @@ class CmsArticlesController < ApplicationController
   def create
     @cms_article = Cms::Article.new(params[:cms_article])
     @cms_article.is_published = false
+    gon.errors = @cms_article.errors
     if params[:commit] == "Publish"
       @cms_article.is_published = params[:commit] == "Publish" ? true : false
     end
@@ -34,6 +35,7 @@ class CmsArticlesController < ApplicationController
 
   def update
     @cms_article.is_published = false
+    gon.errors = @cms_article.errors
     if params[:commit] == "Publish"
       @cms_article.is_published = true
     end
