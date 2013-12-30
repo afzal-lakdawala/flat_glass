@@ -26,7 +26,11 @@
 
 :javascript
   $(document).ready(function() {    
-    window.file_name = "";
+
+    $.ajaxSetup({ 
+      'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")} 
+    });
+
     $("#highlightCode").click(function(){
       $.SyntaxHighlighter.init({
       'lineNumbers': false,
@@ -39,7 +43,7 @@
       downloadFieldName: 'filename',      
       urlText: "![file]({filename})",
 
-      uploadUrl: '#{create_user_account_cms_images_path()}', 
+      uploadUrl: '#{create_user_account_cms_images_path()}.json', 
       allowedTypes: [
         'image/jpeg',
         'image/png',
@@ -47,17 +51,26 @@
       ],
 
       onUploadedFile: function(json) {
-
         error = json.error;
         that = this;
         $.each(error,function(index,msg) {        
-          console.log(error,index,msg)
-          alert(msg);
-          this.urlText = " ";
-          this.progressText = ' '
+
+          var err_msg = "";
+          var img_url = msg[0].split("-->")[1];
+          console.log(img_url)
+
+          if (confirm(msg)) {
+            err_msg = $("textarea").val().replace('![Uploading file...]()', "![file]("+img_url+")");
+          }else {
+            err_msg = $("textarea").val().replace('![Uploading file...]()', '');
+          }
+          $("textarea").val(err_msg);
+          
         });
         
-      },     
+      },
+      customErrorHandler: function() {return true; },
+     
 
       customUploadHandler: function(file) {return true; },
       errorText: "Error uploading file",

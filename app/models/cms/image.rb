@@ -37,7 +37,7 @@ class Cms::Image < ActiveRecord::Base
     g = self.account.cms_images.where(title: self.title).first
     if g.present?
       if g.id != self.id or self.id.blank?
-        errors.add(:title, "already taken")
+        errors.add(:title, "already taken. --> #{g.image_file_url}" )
       end
     end
   end
