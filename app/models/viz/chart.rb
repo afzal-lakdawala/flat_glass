@@ -17,10 +17,9 @@ class Viz::Chart < ActiveRecord::Base
     raw_data = JSON.parse(viz.data_filz.content)
     headings = raw_data.shift
     headings = headings.collect{|h| h.split(":").first}
-    transformed_data = [{"key" => "Chart","values" => []}] #json_data
     map_json = JSON.parse(viz.map).invert
     if self.genre == "1D"
-      Viz::Chart.mapper_1d(raw_data, headings, transformed_data, map_json)
+      Viz::Chart.mapper_1d(raw_data, headings, map_json)
     elsif self.genre == "Unweighted Tree"
       Viz::Chart.mapper_unweighted_tree(viz)
     elsif self.genre == "Weighted Tree"
@@ -32,30 +31,21 @@ class Viz::Chart < ActiveRecord::Base
     end
   end
   
-  def self.mapper_1d(raw_data, headings, transformed_data, map_json)    
+  def self.mapper_1d(raw_data, headings, map_json)    
+    transformed_data = [{"key" => "Chart","values" => []}] #json_data
+    h = {}
+    out = []
     raw_data.each do |row|
-      h = {}
       label = row[headings.index(map_json["Dimension"])]
       value = row[headings.index(map_json["Size"])]
-      el = false
-      transformed_data[0]["values"].each_with_index do |set, i|
-        if set["label"] == label
-          el = i
-        end
-      end
-      unless el
-        h["label"] = label
-        h["value"] = value.to_i
-        transformed_data[0]["values"].push(h);
-      else
-        hash = transformed_data[0]["values"][el]
-        hash["value"] += value.to_i
-        transformed_data[0]["values"][el] = hash
-      end
-      if h != {}
-        transformed_data[0]["values"].push(h);
-      end
+      h[label] = h[label].present? ? (h[label].to_f + value.to_f) : value.to_f
     end
+    if h != {}
+      h.each do |key, val|
+        out << [key, val]
+      end
+      transformed_data[0]["values"].push(out)
+    end  
     transformed_data.to_json
   end
   

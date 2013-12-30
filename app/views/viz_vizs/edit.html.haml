@@ -5,7 +5,7 @@
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
     %li= link_to "visualizations", user_account_viz_vizs_path(@account.owner, @account.slug)
     %li= link_to @viz_viz.title, user_account_viz_viz_path(@account.owner, @account.slug, file_id: @viz_viz.slug)
-    %li.active Map
+    %li.active Edit
 .row
   .col-sm-12
     .panel.panel-default
@@ -16,12 +16,11 @@
       .panel-content{style: "padding: 10px;"}
         .col-sm-6
           %h5 Transformed output
-          - if 1 == 1
-            - if @mapped_output.present?
-              %table.table.table-condensed.table-hover
-                - @mapped_output[0]["values"].each do |m|
-                  %tr
-                    %td= m["label"]
-                    %td= m["value"]
+          - if @mapped_output.present?
+            %table.table.table-condensed.table-hover
+              - @mapped_output[0]["values"][0].each do |key, set|
+                %tr
+                  %td= key
+                  %td= set
         .col-sm-6
           = "."

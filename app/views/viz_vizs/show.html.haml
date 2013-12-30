@@ -4,29 +4,22 @@
     %li= link_to @account.owner.username, user_path(@account.owner)
     %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
     %li= link_to "visualizations", user_account_viz_vizs_path(@account.owner, @account.slug)
-    %li.active= @viz_viz.title
-
-%p#notice= notice
-
-%p
-  %b Title:
-  = @viz_viz.title
-%p
-  %b Data filz:
-  = @viz_viz.data_filz_id
-%p
-  %b Viz chart:
-  = @viz_viz.viz_chart_id
-%p
-  %b Map:
-  = @viz_viz.map
-%p
-  %b Mapped output:
-  = @viz_viz.mapped_output
-%p
-  %b Settings:
-  = @viz_viz.settings
-
-= link_to 'Edit', edit_viz_viz_path(@viz_viz)
-\|
-= link_to 'Back', viz_vizs_path
+    %li=  @viz_viz.title
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading
+        %i.glyphicon.glyphicon-list-alt
+        &nbsp;
+        %b= @viz_viz.title
+      .panel-content{style: "padding: 10px;"}
+        .col-sm-6
+          %h5 Transformed output
+          - if @mapped_output.present?
+            %table.table.table-condensed.table-hover
+              - @mapped_output[0]["values"][0].each do |key, set|
+                %tr
+                  %td= key
+                  %td= set
+        .col-sm-6
+          = "."
