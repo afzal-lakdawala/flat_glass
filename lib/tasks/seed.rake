@@ -14,15 +14,20 @@ namespace :seed do
     puts "Seeding Charts Reference Table"
     Viz::Chart.destroy_all
     #
-    Viz::Chart.create(name: "Pie", genre: "1D", mapping: "[[\"Data\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/pie.png")
-    Viz::Chart.create(name: "Donut", genre: "1D", mapping: "[[\"Data\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/donut.png")
-    Viz::Chart.create(name: "Bubble", genre: "1D", mapping: "[[\"Data\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/bubble.png")
+    Viz::Chart.create(name: "Pie", genre: "1D", mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/pie.png")
+    Viz::Chart.create(name: "Donut", genre: "1D", mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/donut.png")
+    Viz::Chart.create(name: "Bubble", genre: "1D", mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"],[\"Color\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/bubble.png")
     #
     Viz::Chart.create(name: "Line", genre: "2D Charts", mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"],[\"Color\", \"string\"],[\"Tooltip\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/line.png")
     Viz::Chart.create(name: "Column", genre: "2D Charts", mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"],[\"Color\", \"string\"],[\"Tooltip\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/bar.png")
     Viz::Chart.create(name: "Area", genre: "2D Charts", mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"],[\"Color\", \"string\"],[\"Tooltip\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
     Viz::Chart.create(name: "Scatter", genre: "2D Charts", mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"],[\"Color\", \"string\"],[\"Tooltip\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
     Viz::Chart.create(name: "Circle Comparison", genre: "2D Charts", mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"],[\"Color\", \"string\"],[\"Tooltip\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    
+    #ad new 2d group, 2d stacked, 
+    
+    #2d grouped adn stacked
+    
     #
     Viz::Chart.create(name: "Packed Circle", genre: "Weighted Tree", mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/packed_circle.png")
     Viz::Chart.create(name: "Tree Map", genre: "Weighted Tree", mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/tree_rect.png")

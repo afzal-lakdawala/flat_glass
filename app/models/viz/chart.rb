@@ -27,7 +27,7 @@ class Viz::Chart < ActiveRecord::Base
     elsif self.genre == "Relationship Charts"
       Viz::Chart.mapper_relations(viz)
     elsif self.genre == "2D Charts"
-      Viz::Chart.mapper_2d(viz)
+      Viz::Chart.mapper_2d(raw_data, headings, map_json)
     end
   end
   
@@ -58,7 +58,8 @@ class Viz::Chart < ActiveRecord::Base
   def self.mapper_relations
   end
   
-  def self.mapper_2d
+  def self.mapper_2d(raw_data, headings, map_json)
+    ### x, y, size
   end   
   
   #UPSERT
