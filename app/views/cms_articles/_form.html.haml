@@ -6,7 +6,7 @@
     .panel.panel-default
       = form_for(@cms_article, url: url, html: {role: "form"}) do |f|
         .panel-heading{style: "background: #F2F2F2;"}
-          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true 
+          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true, id: "cms-article_title"
         .panel-content{style: "padding: 10px;"}
           .form-group
             .row  
