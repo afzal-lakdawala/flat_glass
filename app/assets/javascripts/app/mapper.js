@@ -54,15 +54,13 @@ var PieMapper = function(options){
         var that = this;
 
         $("#user-variables div").draggable({
-            revert: function(d){
-                if(!d) return true;
-                var param = $(d).attr("id").split("-")[0];
-                var local_param = $(this).attr("data-colname");
-                if(that.map[local_param] === undefined) return true;
-                if($(d).attr("data-full") === param) return true;
-            },
+            revert: true,
             snap: ".takes-drop",
-            snapMode: "inner"
+            snapMode: "inner",
+            start: function(evt, ui){
+                startPos = ui.helper.position();
+            }            
+
         });
 
         $(".takes-drop").each(function(e, i){
@@ -79,16 +77,30 @@ var PieMapper = function(options){
                 activeClass: "active-drop",
                 hoverClass: "hover-drop",
                 tolerance: "fit",
+
                 drop: function(e, u){
+                    
                     if ($(this).hasClass("dropped")) {
-                        return false;
+                        return false;                    
                     }
+
+                    u.draggable.draggable('option', 'revert', function(){return false});
 
                     $( this ).addClass( "dropped" )
                     var param = $(this).attr("map_identifier");                    
                     var local_param = $(u.draggable).attr("data-colname");
                     if(that.map[local_param] === undefined) that.map[local_param] = param;
                     if(that.map[local_param] === undefined) $(this).attr("data-full", param)
+                },
+                out: function(event, u){
+                    u.position.top = startPos.top;
+                    u.position.left = startPos.left;                 
+                    if ($(this).hasClass("dropped")) {
+                        $(this).removeClass("dropped")
+                    }
+
+                    
+
                 }
             });
         });
