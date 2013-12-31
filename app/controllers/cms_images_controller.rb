@@ -20,7 +20,8 @@ class CmsImagesController < ApplicationController
 
   def create
 
-    if params[:cms_image]
+
+    if params[:cms_image]      
       @cms_image = Cms::Image.new(params[:cms_image])    
     else
       a = JSON.parse(params["file"].to_json)
@@ -29,6 +30,7 @@ class CmsImagesController < ApplicationController
       @cms_image.title = a["original_filename"]
       @cms_image.image_file = params[:file]
     end
+    gon.errors = @cms_image.errors     
     if @cms_image.save
       respond_to do |format|
         if params[:cms_image]
@@ -52,6 +54,7 @@ class CmsImagesController < ApplicationController
     if @cms_image.update_attributes(params[:cms_image])
       redirect_to user_account_cms_article_path(@account.owner, @account.slug, file_id: @cms_image.slug), notice: t("u.s")
     else
+      gon.errors = @cms_image.errors
       render action: "edit"
     end
   end

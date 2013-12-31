@@ -7,10 +7,10 @@
     .panel.panel-default
       = form_for(@cms_image, url: url, html: {multipart: true, role: "form"}) do |f|
         .panel-heading{style: "background: #F2F2F2;"}
-          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true 
+          .form-group= f.text_field :title, class: "form-control", placeholder: "File Name", autofocus: true, id: "cms_title"
           = f.hidden_field :account_id, value: @account.id
         .panel-content{style: "padding: 10px;"}
           .form-group
-            = f.file_field :image_file, class: "form-control", required: true
+            = f.file_field :image_file, class: "form-control", required: true, id: "cms_image_file"
           .form-group 
             = f.submit "Upload", class: "btn btn-success", id: "submit"
