@@ -18,6 +18,7 @@
       = form_for(@data_filz, url: url, :html => { role: "form" }) do |f|
         = f.text_area :content, value: "", id: "content", hidden: true
         = f.hidden_field :account_id, value: @account.id
+        = f.hidden_field :category, value: "data"
         .panel-heading{style: "background: #F2F2F2; height: 55px;"}
           = f.text_field :file_file_name, class: "col-sm-8 form-control", placeholder: "File Name", autofocus: true, id: "data_file_file_name", style: "width: 70%"
           .pull-right
@@ -34,8 +35,6 @@
             = f.text_field :commit_message, class: "form-control", placeholder: "Commit Message"
           .form-group
             = f.submit "Save", class: "btn btn-success", id: "submit"
-
-
 
 :javascript
   var content =  eval(#{@data_filz[:content]});

@@ -17,7 +17,7 @@ class Cms::Article < ActiveRecord::Base
   
   #VALIDATIONS
   validate :is_name_unique?
-  validates :title, presence: true, length: {minimum: 1}
+  validates :title, presence: true
   
   #CALLBACKS
   before_create :before_create_set
