@@ -47,10 +47,10 @@ class Viz::Chart < ActiveRecord::Base
     h = {}
     out = []
     raw_data.each do |row|
-      if self.genre == "1D"
+      if self.genre == CHART_1D
         label = row[headings.index(map_json["Dimension"])]
         value = row[headings.index(map_json["Size"])]
-      elsif self.genre == "2D Charts"
+      elsif self.genre == CHART_2D
         label = row[headings.index(map_json["X"])]
         value = row[headings.index(map_json["Y"])]
       end
@@ -76,6 +76,7 @@ class Viz::Chart < ActiveRecord::Base
   
   def self.mapper_weighted_2d(raw_data, headings, map_json)
     ### x, y, size
+    ### the logic is to SUM Y and SUM Size Group By X
   end   
   
   #UPSERT

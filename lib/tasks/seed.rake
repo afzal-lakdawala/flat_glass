@@ -18,13 +18,13 @@ namespace :seed do
     Viz::Chart.create(name: "Donut", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/donut.png")
     Viz::Chart.create(name: "Bubble", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/bubble.png")
     #
-    Viz::Chart.create(name: "Line", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/line.png")
-    Viz::Chart.create(name: "Column", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/bar.png")
-    Viz::Chart.create(name: "Area", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
-    Viz::Chart.create(name: "Bar", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
+    Viz::Chart.create(name: "Line", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/line.png")
+    Viz::Chart.create(name: "Column", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/bar.png")
+    Viz::Chart.create(name: "Area", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
+    Viz::Chart.create(name: "Bar", Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
     #
-    Viz::Chart.create(name: "Scatter", Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
-    Viz::Chart.create(name: "Circle Comparison", Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"number\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    Viz::Chart.create(name: "Scatter", Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
+    Viz::Chart.create(name: "Circle Comparison", Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
     #ad new 2d group, 2d stacked, 
     #2d grouped adn stacked
     #
