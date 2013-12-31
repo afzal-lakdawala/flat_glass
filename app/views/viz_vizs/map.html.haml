@@ -26,7 +26,7 @@
   -dbmap = @viz_viz.map
 -else
   -dbmap = "'NA'"
-= javascript_include_tag("/mapper")
+
 :javascript
   var pm = new PieMapper({
     DATA: [#{@viz_viz.headers}],
