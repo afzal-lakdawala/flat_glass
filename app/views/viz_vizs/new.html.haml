@@ -10,7 +10,7 @@
     .panel.panel-default
       = form_for(@viz_viz, url: create_user_account_viz_vizs_path(@account.owner, @account.slug), :html => { method: :post,  role: "form" }) do |f|
         .panel-heading{style: "background: #F2F2F2;"}
-          .form-group= f.text_field :title, class: "form-control", placeholder: "Title", autofocus: true 
+          .form-group= f.text_field :title, class: "form-control", placeholder: "Title", autofocus: true, id: "viz-data_title" 
         .panel-content{style: "padding: 10px;"}
           .form-group
             %label Data Set
