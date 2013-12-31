@@ -13,6 +13,8 @@
               .col-sm-6   
                 #editor
                   #toolbar.wmd-toolbar
+                  %a.btn.btn-info.pull-right{"data-toggle" => "modal", "data-target"=>"#image-selector"}              
+                    Select Image
                   = f.text_area :description, id: "input", cols:"65", rows:"20",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
               .col-sm-6
                 %br
@@ -24,12 +26,44 @@
             = f.hidden_field :account_id, value: @account.id
             = f.submit "Publish", class: "btn btn-success", id: "submit"
 
+#image-selector.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        - ctr = 1
+        %table.table.table-bordred.table-hovered        
+          - @account.cms_images.each do |cms_image|            
+            - if ctr >= 5
+              - ctr = 1
+
+            - if ctr == 1            
+              %tr
+
+            %td
+              %a{class: "selected-image", src: "#{cms_image.image_file_url}"}  
+                = image_tag cms_image.image_file_url, size: "75x75"       
+
+            -ctr = ctr + 1  
+
+
+
 :javascript
   $(document).ready(function() {    
 
     $.ajaxSetup({ 
       'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")} 
     });
+
+    $(".selected-image").click(function(event) {
+
+      event.preventDefault();
+
+      var img_url = $(this).attr("src");
+      var input = $('textarea');
+      input.val(input.val() + " ![file]("+ img_url + ')');
+      return false;
+    })
+
 
     $("#highlightCode").click(function(){
       $.SyntaxHighlighter.init({
