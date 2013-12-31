@@ -66,10 +66,10 @@ var PieMapper = function(options){
         });
 
         $(".takes-drop").each(function(e, i){
-            console.log(e,i)
+            
             var droptype = $(this).attr("data-droptype");            
 
-            var accept_valid = ".ui-draggable ";
+            var accept_valid = ".ui-draggable";
             if (droptype == "number") {
                 accept_valid = "div[data-droptype='" + droptype + "']";
             }
@@ -80,6 +80,11 @@ var PieMapper = function(options){
                 hoverClass: "hover-drop",
                 tolerance: "fit",
                 drop: function(e, u){
+                    if ($(this).hasClass("dropped")) {
+                        return false;
+                    }
+
+                    $( this ).addClass( "dropped" )
                     var param = $(this).attr("map_identifier");                    
                     var local_param = $(u.draggable).attr("data-colname");
                     if(that.map[local_param] === undefined) that.map[local_param] = param;
