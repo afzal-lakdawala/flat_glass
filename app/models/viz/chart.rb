@@ -3,6 +3,15 @@ class Viz::Chart < ActiveRecord::Base
   #GEMS USED
   self.table_name = :viz_charts
   
+  #CONSTANTS
+  CHART_1D = "1D"
+  CHART_2D = "2D Charts"
+  CHART_W2D = "Weighted 2D Charts"
+  CHART_WT = "Weighted Tree"
+  CHART_T = "Tree"
+  CHART_RELATION = "Relationship Charts"
+  CHART_MAP = "Map"
+  
   #ACCESSORS
   attr_accessible :genre, :img, :mapping, :name, :description
   
@@ -18,17 +27,17 @@ class Viz::Chart < ActiveRecord::Base
     headings = raw_data.shift
     headings = headings.collect{|h| h.split(":").first}
     map_json = JSON.parse(viz.map).invert
-    if self.genre == "1D"
+    if self.genre == CHART_1D
       Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
-    elsif self.genre == "Unweighted Tree"
+    elsif self.genre == CHART_WT
       Viz::Chart.mapper_unweighted_tree(viz)
-    elsif self.genre == "Weighted Tree"
+    elsif self.genre == CHART_T
       Viz::Chart.mapper_weighted_tree(viz)
-    elsif self.genre == "Relationship Charts"
+    elsif self.genre == CHART_RELATION
       Viz::Chart.mapper_relations(viz)
-    elsif self.genre == "2D Charts"
+    elsif self.genre == CHART_2D
       Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
-    elsif self.genre == "Weighted 2D Charts"
+    elsif self.genre == CHART_W2D
       Viz::Chart.mapper_weighted_2d(raw_data, headings, map_json)
     end
   end
