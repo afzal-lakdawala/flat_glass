@@ -18,25 +18,25 @@
             = f.select :data_filz_id, options_for_select(@data_filzs.map{|z| [z.file_file_name, z.id]})
           .form-group
             %label Chart
+            .row
+              .col-sm-3
+                %ul#viz-types.nav.nav-pills.nav-stacked
+                  - @viz_types.each do |viz_type|
+                    %li
+                      %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
+
+              .col-sm-7
+                - @vizs.each do |viz|
+                  .row.viz{:class => viz.genre.downcase.gsub(" ", "_"), "data-id" => viz.id}
+                    .col-sm-3
+                      %img{:src => viz.img, :class => "viz_image"}
+                    .col-sm-5
+                      %h4= viz.name
+                      %p= viz.description
+
             %br
             = f.hidden_field :viz_chart_id
           .form-group
             = f.hidden_field :account_id, value: @account.id
           .form-group
             = f.submit "Create", class: "btn btn-success", id: "submit"
-
-.row
-  .col-sm-3
-    %ul#viz-types.nav.nav-pills.nav-stacked
-      - @viz_types.each do |viz_type|
-        %li
-          %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
-
-  .col-sm-7
-    - @vizs.each do |viz|
-      .row.viz{:class => viz.genre.downcase.gsub(" ", "_"), "data-id" => viz.id}
-        .col-sm-2
-          %img{:src => viz.img, :class => "viz_image"}
-        .col-sm-5
-          %h4= viz.name
-          %p= viz.description
