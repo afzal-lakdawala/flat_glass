@@ -78,12 +78,12 @@ namespace :seed do
     
     #2d grouped adn stacked
     #
-    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/packed_circle.png")
-    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/tree_rect.png")
-    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/sunburst.png")
+    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]", img: "/charts_images/packed_circle.png")
+    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]", img: "/charts_images/tree_rect.png")
+    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]", img: "/charts_images/sunburst.png")
     #
-    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/circular_dendogram.png")
-    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/dendogram.png")
+    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]", img: "/charts_images/circular_dendogram.png")
+    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]", img: "/charts_images/dendogram.png")
     #
     Viz::Chart.create(name: "Chord", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/chord.png")
     Viz::Chart.create(name: "Sankey", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/sankey.png")
