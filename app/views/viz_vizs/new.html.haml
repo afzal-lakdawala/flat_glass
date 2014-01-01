@@ -27,14 +27,14 @@
 
 .row
   .col-sm-3
-    %ul.nav.nav-pills.nav-stacked
+    %ul#viz-types.nav.nav-pills.nav-stacked
       - @viz_types.each do |viz_type|
         %li
-          %a{:href => "#"}= viz_type
+          %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
 
   .col-sm-9
     - @vizs.each do |viz|
-      .row.viz{:class => viz.genre}
+      .row.viz{:class => viz.genre.downcase.gsub(" ", "_")}
         .col-sm-2
           %img{:src => viz.img, :class => "viz_image"}
         .col-sm-7
