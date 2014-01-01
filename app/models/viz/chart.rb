@@ -28,7 +28,7 @@ class Viz::Chart < ActiveRecord::Base
     headings = headings.collect{|h| h.split(":").first}
     map_json = JSON.parse(viz.map).invert
     if self.genre == CHART_1D
-      Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
+      Viz::Chart.mapper_1d_or_2d(genre, raw_data, headings, map_json)
     elsif self.genre == CHART_WT
       Viz::Chart.mapper_unweighted_tree(viz)
     elsif self.genre == CHART_T
@@ -36,7 +36,7 @@ class Viz::Chart < ActiveRecord::Base
     elsif self.genre == CHART_RELATION
       Viz::Chart.mapper_relations(viz)
     elsif self.genre == CHART_2D
-      Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
+      Viz::Chart.mapper_1d_or_2d(genre, raw_data, headings, map_json)
     elsif self.genre == CHART_W2D
       Viz::Chart.mapper_weighted_2d(raw_data, headings, map_json)
     end
