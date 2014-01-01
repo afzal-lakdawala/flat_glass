@@ -6,4 +6,9 @@ img.viz_image{
 .viz{
     border-bottom: 1px solid #eee;
     padding: 10px;
+    cursor: pointer;
+}
+
+.viz.active{
+    box-shadow: 0 0 20px #eee inset;
 }

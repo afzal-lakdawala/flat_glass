@@ -19,7 +19,7 @@
           .form-group
             %label Chart
             %br
-            = f.select :viz_chart_id, options_for_select(@viz_charts.map{|z| [z.name, z.id]})
+            = f.hidden_field :viz_chart_id
           .form-group
             = f.hidden_field :account_id, value: @account.id
           .form-group
@@ -32,11 +32,11 @@
         %li
           %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
 
-  .col-sm-9
+  .col-sm-7
     - @vizs.each do |viz|
-      .row.viz{:class => viz.genre.downcase.gsub(" ", "_")}
+      .row.viz{:class => viz.genre.downcase.gsub(" ", "_"), "data-id" => viz.id}
         .col-sm-2
           %img{:src => viz.img, :class => "viz_image"}
-        .col-sm-7
+        .col-sm-5
           %h4= viz.name
           %p= viz.description

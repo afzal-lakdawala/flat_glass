@@ -18,4 +18,16 @@ $(function(){
         });
     });
 
+
+    // Events for visualization
+    $(".viz").each(function() {
+        var $this = $(this);
+        $this.on("click", function() {
+            var $this = $(this);
+            $(".viz").removeClass("active");
+            $this.addClass("active");
+            $("#viz_viz_viz_chart_id").val($this.attr("data-id"));
+        });
+    });
+
 });
