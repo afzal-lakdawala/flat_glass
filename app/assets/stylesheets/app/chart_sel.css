@@ -1,0 +1,9 @@
+img.viz_image{
+    width: 130px;
+    float: left;
+}
+
+.viz{
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
