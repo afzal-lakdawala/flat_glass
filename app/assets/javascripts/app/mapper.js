@@ -1,4 +1,4 @@
-var PieMapper = function(options){
+var Mapper = function(options){
     this.init = function(d){
         if(options.MAP=="NA"){
             this.map = {};
@@ -23,7 +23,8 @@ var PieMapper = function(options){
     // Final Mapping Data
     this.mappingData = function(){
         // TODO: Add some validations here to check if the mapping truly is complete
-        if(Object.keys(this.map).length !== 4){
+        console.log(Object.keys(this.map).length > 1, Object.keys(this.map).length)
+        if(!Object.keys(this.map).length >= 2){
             alert("Mapping incomplete!");
             return false;
         }

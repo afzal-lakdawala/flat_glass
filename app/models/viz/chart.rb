@@ -27,6 +27,7 @@ class Viz::Chart < ActiveRecord::Base
     headings = raw_data.shift
     headings = headings.collect{|h| h.split(":").first}
     map_json = JSON.parse(viz.map).invert
+
     if self.genre == CHART_1D
       Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
     elsif self.genre == CHART_WT
@@ -75,8 +76,31 @@ class Viz::Chart < ActiveRecord::Base
   end
   
   def self.mapper_weighted_2d(raw_data, headings, map_json)
-    ### x, y, size
-    ### the logic is to SUM Y and SUM Size Group By X
+
+    transformed_data = [{"key" => "Chart","values" => []}] #json_data
+    h = {}
+    out = []
+    raw_data.each do |row|
+      label = row[headings.index(map_json["X"])]
+      value = row[headings.index(map_json["Y"])]
+      size  = row[headings.index(map_json["Size"])]
+
+      if h[label].present?
+        h[label] = {"y" => h[label]["y"].to_f + value.to_f,  
+                    "size" => h[label]["size"].to_f + size.to_f }
+      else        
+        h[label] = {"y" => value.to_f, "size" => size.to_f}
+      end
+    end
+
+    if h != {}
+      h.each do |key, val, size|
+        out << [key, val, size]
+      end
+      transformed_data[0]["values"].push(out)
+    end  
+    
+    transformed_data.to_json    
   end   
   
   #UPSERT
