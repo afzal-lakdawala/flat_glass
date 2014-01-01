@@ -15,6 +15,9 @@ $(function(){
         a.on("click", function() {
             $(".viz").hide();
             $(".viz." + $(this).attr("data-viz")).show();
+
+            $("#viz-types li").removeClass("active");
+            $(this).parent().addClass("active");
         });
     });
 

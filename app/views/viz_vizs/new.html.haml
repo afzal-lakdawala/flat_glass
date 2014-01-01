@@ -25,7 +25,7 @@
                     %li
                       %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
 
-              .col-sm-7
+              .col-sm-8
                 - @vizs.each do |viz|
                   .row.viz{:class => viz.genre.downcase.gsub(" ", "_"), "data-id" => viz.id}
                     .col-sm-3

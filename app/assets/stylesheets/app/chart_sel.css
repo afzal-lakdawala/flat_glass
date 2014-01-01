@@ -10,5 +10,5 @@ img.viz_image{
 }
 
 .viz.active{
-    box-shadow: 0 0 20px #eee inset;
+    box-shadow: 0 0 30px #eee inset;
 }
