@@ -14,35 +14,37 @@ namespace :seed do
     puts "Seeding Charts Reference Table"
     Viz::Chart.destroy_all
     #
-    Viz::Chart.create(name: "Pie", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/pie.png")
-    Viz::Chart.create(name: "Donut", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/donut.png")
-    Viz::Chart.create(name: "Bubble", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/bubble.png")
+    #/charts_images/
+    
+    Viz::Chart.create(name: "Pie", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/pie.png")
+    Viz::Chart.create(name: "Donut", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/donut.png")
+    Viz::Chart.create(name: "Bubble", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/bubble.png")
     #
-    Viz::Chart.create(name: "Line", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/line.png")
-    Viz::Chart.create(name: "Column", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/bar.png")
-    Viz::Chart.create(name: "Area", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
-    Viz::Chart.create(name: "Bar", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
+    Viz::Chart.create(name: "Line", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/line.png")
+    Viz::Chart.create(name: "Column", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/bar.png")
+    Viz::Chart.create(name: "Area", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/area.png")
+    Viz::Chart.create(name: "Bar", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/area.png")
     #
-    Viz::Chart.create(name: "Scatter", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
-    Viz::Chart.create(name: "Circle Comparison", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    Viz::Chart.create(name: "Scatter", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "/charts_images/scatter.png")
+    Viz::Chart.create(name: "Circle Comparison", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "/charts_images/circle_comparison.png")
     #ad new 2d group, 2d stacked, 
     
-    Viz::Chart.create(name: "Grouped Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
-    Viz::Chart.create(name: "Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Stack\", \"string\"]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
-    Viz::Chart.create(name: "Grouped Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"],[\"Stack\", \"string\"]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    Viz::Chart.create(name: "Grouped Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"]]", img: "/charts_images/scatter.png")
+    Viz::Chart.create(name: "Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Stack\", \"string\"]", img: "/charts_images/circle_comparison.png")
+    Viz::Chart.create(name: "Grouped Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"],[\"Stack\", \"string\"]", img: "/charts_images/circle_comparison.png")
     
     
     #2d grouped adn stacked
     #
-    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/packed_circle.png")
-    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/tree_rect.png")
-    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/sunburst.png")
+    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/packed_circle.png")
+    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/tree_rect.png")
+    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/sunburst.png")
     #
-    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/unweighted_tree/circular_dendogram.png")
-    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/unweighted_tree/dendogram.png")
+    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/circular_dendogram.png")
+    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/dendogram.png")
     #
-    Viz::Chart.create(name: "Chord", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/relations/chord.png")
-    Viz::Chart.create(name: "Sankey", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/relations/sankey.png")
+    Viz::Chart.create(name: "Chord", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/chord.png")
+    Viz::Chart.create(name: "Sankey", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/sankey.png")
     #
     Viz::Chart.create(name: "India States", genre:Viz::Chart::CHART_MAP, img: "")
     Viz::Chart.create(name: "India Districts", genre:Viz::Chart::CHART_MAP, img: "")
@@ -56,35 +58,35 @@ namespace :seed do
     puts "Seeding Charts Reference Table"
     Viz::Chart.destroy_all
     #
-    Viz::Chart.create(name: "Pie", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/pie.png")
-    Viz::Chart.create(name: "Donut", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/donut.png")
-    Viz::Chart.create(name: "Bubble", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/1d/bubble.png")
+    Viz::Chart.create(name: "Pie", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/pie.png")
+    Viz::Chart.create(name: "Donut", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/donut.png")
+    Viz::Chart.create(name: "Bubble", genre: Viz::Chart::CHART_1D, mapping: "[[\"Dimension\", \"string\"],[\"Size\", \"number\"]]", img: "/charts_images/bubble.png")
     #
-    Viz::Chart.create(name: "Line", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/line.png")
-    Viz::Chart.create(name: "Column", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/bar.png")
-    Viz::Chart.create(name: "Area", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
-    Viz::Chart.create(name: "Bar", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/area.png")
+    Viz::Chart.create(name: "Line", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/line.png")
+    Viz::Chart.create(name: "Column", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/bar.png")
+    Viz::Chart.create(name: "Area", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/area.png")
+    Viz::Chart.create(name: "Bar", genre:Viz::Chart::CHART_2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"]]", img: "/charts_images/area.png")
     #
-    Viz::Chart.create(name: "Scatter", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
-    Viz::Chart.create(name: "Circle Comparison", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    Viz::Chart.create(name: "Scatter", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "/charts_images/scatter.png")
+    Viz::Chart.create(name: "Circle Comparison", genre:Viz::Chart::CHART_W2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Size\", \"number\"]]", img: "/charts_images/circle_comparison.png")
     #ad new 2d group, 2d stacked, 
     
-    Viz::Chart.create(name: "Grouped Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/scatter.png")
-    Viz::Chart.create(name: "Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Stack\", \"string\"]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
-    Viz::Chart.create(name: "Grouped Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"],[\"Stack\", \"string\"]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/2d/circle_comparison.png")
+    Viz::Chart.create(name: "Grouped Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"]]", img: "/charts_images/scatter.png")
+    Viz::Chart.create(name: "Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Stack\", \"string\"]", img: "/charts_images/circle_comparison.png")
+    Viz::Chart.create(name: "Grouped Stacked Column", genre:Viz::Chart::CHART_GS2D, mapping: "[[\"X\", \"string\"],[\"Y\", \"number\"],[\"Group\", \"string\"],[\"Stack\", \"string\"]", img: "/charts_images/circle_comparison.png")
     
     
     #2d grouped adn stacked
     #
-    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/packed_circle.png")
-    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/tree_rect.png")
-    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/weighted_tree/sunburst.png")
+    Viz::Chart.create(name: "Packed Circle", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/packed_circle.png")
+    Viz::Chart.create(name: "Tree Map", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/tree_rect.png")
+    Viz::Chart.create(name: "Sunburst", genre:Viz::Chart::CHART_WT, mapping: "[[\"Hierarchy\", \"string\"],[\"Size\", \"number\"],[\"Tooltip\", \"string\"]]]", img: "/charts_images/sunburst.png")
     #
-    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/unweighted_tree/circular_dendogram.png")
-    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/unweighted_tree/dendogram.png")
+    Viz::Chart.create(name: "Circular Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/circular_dendogram.png")
+    Viz::Chart.create(name: "Dendogram", genre:Viz::Chart::CHART_T, mapping: "[[\"Hierarchy\", \"string\"],\"Tooltip\", \"string\"]]]", img: "/charts_images/dendogram.png")
     #
-    Viz::Chart.create(name: "Chord", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/relations/chord.png")
-    Viz::Chart.create(name: "Sankey", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "https://s3-ap-southeast-1.amazonaws.com/pykhub/chart_types/relations/sankey.png")
+    Viz::Chart.create(name: "Chord", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/chord.png")
+    Viz::Chart.create(name: "Sankey", genre:Viz::Chart::CHART_RELATION, mapping: "[[\"Dimensions\", \"string\"],[\"Link Value\", \"number\"]]", img: "/charts_images/sankey.png")
     #
     Viz::Chart.create(name: "India States", genre:Viz::Chart::CHART_MAP, img: "")
     Viz::Chart.create(name: "India Districts", genre:Viz::Chart::CHART_MAP, img: "")

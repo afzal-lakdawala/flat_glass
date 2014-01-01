@@ -41,6 +41,8 @@ class Viz::Chart < ActiveRecord::Base
       Viz::Chart.mapper_1d_or_2d(genre, raw_data, headings, map_json)
     elsif self.genre == CHART_W2D
       Viz::Chart.mapper_weighted_2d(raw_data, headings, map_json)
+    elsif self.genre == CHART_GS2D
+      Viz::Chart.mapper_groupedstacked_2d(raw_data, headings, map_json)
     end
   end
   
@@ -76,8 +78,35 @@ class Viz::Chart < ActiveRecord::Base
   def self.mapper_relations
   end
   
+  def self.incomplete(raw_data, headings, map_json)
+    transformed_data = [{"key" => "Chart","values" => []}] #json_data
+    h = {}
+    out = []
+    raw_data.each do |row|
+      label = row[headings.index(map_json["X"])]
+      value = row[headings.index(map_json["Y"])]
+      group  = row[headings.index(map_json["Group"])]
+      stack  = row[headings.index(map_json["Stack"])]
+      unique_label = label
+      unique_label = "#{unique_label}_" + group if group.present?
+      unique_label = "#{unique_label}_" + stack if stack.present?
+      if h[unique_label].present?
+        h[unique_label] = {"x" => h[unique_label]["x"], "y" => h[unique_label]["y"].to_f + value.to_f, "group" => h[unique_label]["group"], "stack" => h[unique_label]["stack"]}
+      else        
+        h[unique_label] = {"x" => h[unique_label]["x"], "y" => h[unique_label]["y"].to_f + value.to_f, "group" => h[unique_label]["group"], "stack" => h[unique_label]["stack"]}
+        #{"y" => value.to_f, "size" => size.to_f}
+      end
+    end
+    if h != {}
+      h.each do |key, val, size|
+        out << [key, val, size]
+      end
+      transformed_data[0]["values"].push(out)
+    end  
+    transformed_data.to_json    
+  end
+  
   def self.mapper_weighted_2d(raw_data, headings, map_json)
-
     transformed_data = [{"key" => "Chart","values" => []}] #json_data
     h = {}
     out = []
@@ -85,22 +114,18 @@ class Viz::Chart < ActiveRecord::Base
       label = row[headings.index(map_json["X"])]
       value = row[headings.index(map_json["Y"])]
       size  = row[headings.index(map_json["Size"])]
-
       if h[label].present?
-        h[label] = {"y" => h[label]["y"].to_f + value.to_f,  
-                    "size" => h[label]["size"].to_f + size.to_f }
+        h[label] = {"y" => h[label]["y"].to_f + value.to_f, "size" => h[label]["size"].to_f + size.to_f }
       else        
         h[label] = {"y" => value.to_f, "size" => size.to_f}
       end
     end
-
     if h != {}
       h.each do |key, val, size|
         out << [key, val, size]
       end
       transformed_data[0]["values"].push(out)
     end  
-    
     transformed_data.to_json    
   end   
   
