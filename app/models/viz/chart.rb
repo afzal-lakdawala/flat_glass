@@ -5,11 +5,12 @@ class Viz::Chart < ActiveRecord::Base
   
   #CONSTANTS
   CHART_1D = "1D"
-  CHART_2D = "2D Charts"
-  CHART_W2D = "Weighted 2D Charts"
+  CHART_2D = "2D"
+  CHART_W2D = "Weighted 2D"
+  CHART_GS2D = "Grouped Stacked 2D"
   CHART_WT = "Weighted Tree"
   CHART_T = "Tree"
-  CHART_RELATION = "Relationship Charts"
+  CHART_RELATION = "Relationship"
   CHART_MAP = "Map"
   
   #ACCESSORS
