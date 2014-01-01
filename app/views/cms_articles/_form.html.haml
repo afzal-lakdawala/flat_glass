@@ -13,9 +13,11 @@
               .col-sm-6   
                 #editor
                   #toolbar.wmd-toolbar
-                  %a.btn.btn-info.pull-right{"data-toggle" => "modal", "data-target"=>"#image-selector"}              
-                    Select Image
                   = f.text_area :description, id: "input", cols:"65", rows:"20",class: "form-control wmd-input", required: true,placeholder: "Write here", :onscroll => "scrolling('textarea')", :onkeyup => "scrolling('textarea')"
+                  %div{style: "background: #F9F9F9; height: 30px; color: #A7A7A7; font-size: 0.9em; padding-top: 3px;"}
+                    Attach new images by dragging & dropping. Attach existing images by 
+                    %a{"data-toggle" => "modal", "data-target"=>"#image-selector"}              
+                      selecting them
               .col-sm-6
                 %br
                 %br

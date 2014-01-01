@@ -29,7 +29,7 @@ class Viz::Chart < ActiveRecord::Base
     map_json = JSON.parse(viz.map).invert
 
     if self.genre == CHART_1D
-      Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
+      Viz::Chart.mapper_1d_or_2d(genre, raw_data, headings, map_json)
     elsif self.genre == CHART_WT
       Viz::Chart.mapper_unweighted_tree(viz)
     elsif self.genre == CHART_T
@@ -37,21 +37,21 @@ class Viz::Chart < ActiveRecord::Base
     elsif self.genre == CHART_RELATION
       Viz::Chart.mapper_relations(viz)
     elsif self.genre == CHART_2D
-      Viz::Chart.mapper_1d_or_2d(raw_data, headings, map_json)
+      Viz::Chart.mapper_1d_or_2d(genre, raw_data, headings, map_json)
     elsif self.genre == CHART_W2D
       Viz::Chart.mapper_weighted_2d(raw_data, headings, map_json)
     end
   end
   
-  def self.mapper_1d_or_2d(raw_data, headings, map_json)    
+  def self.mapper_1d_or_2d(genre, raw_data, headings, map_json)    
     transformed_data = [{"key" => "Chart","values" => []}] #json_data
     h = {}
     out = []
     raw_data.each do |row|
-      if self.genre == CHART_1D
+      if genre == CHART_1D
         label = row[headings.index(map_json["Dimension"])]
         value = row[headings.index(map_json["Size"])]
-      elsif self.genre == CHART_2D
+      elsif genre == CHART_2D
         label = row[headings.index(map_json["X"])]
         value = row[headings.index(map_json["Y"])]
       end
