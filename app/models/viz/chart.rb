@@ -12,6 +12,9 @@ class Viz::Chart < ActiveRecord::Base
   CHART_T = "Tree"
   CHART_RELATION = "Relationship"
   CHART_MAP = "Map"
+  MAP_MANDATORY = "M"
+  MAP_OPTIONAL = "O"
+
   
   #ACCESSORS
   attr_accessible :genre, :img, :mapping, :name, :description

@@ -1,7 +1,7 @@
 $(function(){
 
     var lis = $("#viz-types li");
-    $(lis[0]).addClass("active"); // Select the first option
+    $(lis[0]).addClass("active"); // Select the first option    
 
     // Render only first option
     $(".viz").hide();
