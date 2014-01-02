@@ -17,7 +17,7 @@ class VizVizsController < ApplicationController
     end
   end
 
-  def new
+  def new   
     @viz_viz = Viz::Viz.new
     @vizs = Viz::Chart.all
     @viz_types = @vizs.collect{ |viz| viz.genre }

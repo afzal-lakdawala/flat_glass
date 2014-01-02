@@ -42,6 +42,7 @@ class Viz::Chart < ActiveRecord::Base
     end
   end
   
+  #SUM (Y) and SUM (SIZE) GROUP BY (GROUP, STACK, LABEL)
   def self.mapper_1d_or_2d(genre, raw_data, headings, map_json)    
     transformed_data = [{"key" => "Chart","values" => []}] #json_data
     h = {}

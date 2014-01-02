@@ -44,6 +44,12 @@ class DataFilzsController < ApplicationController
     render action: (@editor == "text" ? "text_form" : "csv_form")
   end
   
+  def confirm_datatype
+  end
+  
+  def set_datatype
+  end
+  
   def create
     @data_filz = Data::Filz.new(params[:data_filz])
     if @data_filz.save

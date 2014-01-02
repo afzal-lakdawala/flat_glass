@@ -46,13 +46,24 @@ class Data::FilzColumn < ActiveRecord::Base
     end
     return headers.join(",")
   end
-  
+
   #UPSERT
   #JOBS
   #PRIVATE
   private
 
   def self.tell_datatype(v)
+
+    # Date Conjectures
+    # Is a non decimal integer
+    if v.to_s.match(/^[\d]+(\.[\d]+){0,1}$/).nil? == false && v.to_f % 1 == 0
+      return "date-month?" if (1..12).include? v.to_i          # Month
+      return "time-hour?" if (0..23).include? v.to_i           # Hour
+      return "date-day?" if (1..31).include? v.to_i            # Day
+      return "time-minute-second?" if (0..59).include? v.to_i  # Minute/Second, they have the same range
+      return "date-year?" if (1000..2020).include? v.to_i      # Year
+    end
+
     iso = ["IN_AP", "IN_AR", "IN_AS", "IN_BR", "IN_CG", "IN_GA", "IN_GJ", "IN_HP", "IN_HR", "IN_JH", "IN_JK", "IN_KA", "IN_KL", "IN_MH", "IN_ML", "IN_MN", "IN_MP", "IN_MZ", "IN_NL", "IN_OR", "IN_PB", "IN_RJ", "IN_SK", "IN_TN", "IN_TR", "IN_UP", "IN_UT", "IN_WB"] # TODO Load ISO Data from some place sane!
     return "number" unless v.to_s.match(/^[\d]+(\.[\d]+){0,1}$/) == nil
     return "iso"    if iso.include? v.to_s
