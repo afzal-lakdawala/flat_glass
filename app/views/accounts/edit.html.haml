@@ -19,7 +19,7 @@
 
       .form-group
         %label Description
-        = f.text_area :description, class: "form-control text_area_animate", "expand-height" => "50", rows: "1", style: "width: 700px;"
+        = f.text_area :description, class: "form-control text_area_animate", "expand-height" => "300", "collapse-height" => "100", rows: "1", style: "width: 700px;height:100px"  
 
       .form-group
         = f.submit (@account.id.blank? ? "Add" : "Update"), class: "btn btn-success"

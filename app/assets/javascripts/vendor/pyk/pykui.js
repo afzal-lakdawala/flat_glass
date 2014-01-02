@@ -23,16 +23,18 @@ $(document).ready(function () {
 
         var val_length = $(this).val().length;
         var row = $(this).attr("row"); // 1 row = 16px
-        var size = $(this).attr("expand-height");
+        var size = $(this).attr("collapse-height");
 
         if (val_length <= 0) {
 
             $(this).animate({
-                "height": "30px"
+                "height": size
             }, "fast");
         }
 
     });
+
+    $(".text_area_animate").trigger("focusout");
 
     //form hint
 
