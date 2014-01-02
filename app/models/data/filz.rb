@@ -38,9 +38,15 @@ class Data::Filz < ActiveRecord::Base
   #OTHER METHODS
   def self.remove_nil_rows(contenz)
     con = contenz.class.to_s == "String" ? JSON.parse(contenz) : contenz
+
     con.delete_if{ |row| row.flatten.compact.empty? }
-    con
-    # i = 0
+    con.transpose
+    con.delete_if{ |row| row.flatten.compact.empty? }
+    con.transpose
+
+    return con
+
+#     i = 0
 #     delete_rows = []
 #     con.each do |row|
 #       flag = true
@@ -51,14 +57,14 @@ class Data::Filz < ActiveRecord::Base
 #         end
 #       end
 #       delete_rows << i if flag
-#       i = i + 1  
+#       i = i + 1
 #     end
 #     delete_rows.sort.reverse!.each do |j|
 #       con.delete_at(j)
 #     end
 #     con
   end
-  
+
   #UPSERT
   #JOBS
   #PRIVATE
@@ -66,13 +72,13 @@ class Data::Filz < ActiveRecord::Base
 
   def is_name_unique?
     g = self.account.data_filzs.where(file_file_name: self.file_file_name, category: self.category).first
-    if g.present? 
+    if g.present?
       if g.id != self.id or self.id.blank?
         errors.add(:file_file_name, "already taken")
       end
     end
   end
-  
+
   def is_content_valid?
     self.updated_by = User.current.id if User.current.present?
     if self.content.present? and self.genre != "readme" and self.genre != "license"
@@ -85,14 +91,14 @@ class Data::Filz < ActiveRecord::Base
         newa = []
         newa = [new_header.split(",")] + con
         con = newa
-        self.content = con.to_json        
+        self.content = con.to_json
       end
     end
     true
   end
 
   def atleast_two_rows? #version0.2_TODO
-    true 
+    true
   end
 
   def before_create_set
