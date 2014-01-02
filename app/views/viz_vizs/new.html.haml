@@ -17,7 +17,9 @@
             %br
             = f.select :data_filz_id, options_for_select(@data_filzs.map{|z| [z.file_file_name, z.id]})
           .form-group
-            %label Chart
+            %label
+              Chart
+              %small (click to select)
             .row
               .col-sm-3
                 %ul#viz-types.nav.nav-pills.nav-stacked
@@ -30,9 +32,11 @@
                 - if !@vizs.nil?
                   - @vizs.each do |viz|
                     .row.viz{class: "#{viz.genre.downcase.gsub(' ', '_')} viz-genre" , "data-id" => viz.id}
+                      .col-sm-1
+                        %span{:class => "glyphicon glyphicon-ok"}
                       .col-sm-3
                         %img{:src => viz.img, :class => "viz_image"}
-                      .col-sm-5
+                      .col-sm-4
                         %h4= viz.name
                         %p= viz.description
 
