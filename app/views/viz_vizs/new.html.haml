@@ -21,18 +21,20 @@
             .row
               .col-sm-3
                 %ul#viz-types.nav.nav-pills.nav-stacked
-                  - @viz_types.each do |viz_type|
-                    %li
-                      %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
+                  - if !@viz_types.nil?
+                    - @viz_types.each do |viz_type|
+                      %li
+                        %a{:href => "javascript:void()", "data-viz" => viz_type.downcase.gsub(" ", "_")}= viz_type
 
               .col-sm-8
-                - @vizs.each do |viz|
-                  .row.viz{:class => viz.genre.downcase.gsub(" ", "_"), "data-id" => viz.id}
-                    .col-sm-3
-                      %img{:src => viz.img, :class => "viz_image"}
-                    .col-sm-5
-                      %h4= viz.name
-                      %p= viz.description
+                - if !@vizs.nil?
+                  - @vizs.each do |viz|
+                    .row.viz{class: "#{viz.genre.downcase.gsub(' ', '_')} viz-genre" , "data-id" => viz.id}
+                      .col-sm-3
+                        %img{:src => viz.img, :class => "viz_image"}
+                      .col-sm-5
+                        %h4= viz.name
+                        %p= viz.description
 
             %br
             = f.hidden_field :viz_chart_id
@@ -40,3 +42,15 @@
             = f.hidden_field :account_id, value: @account.id
           .form-group
             = f.submit "Create", class: "btn btn-success", id: "submit"
+
+:javascript
+
+  $(document).ready(function() {
+    $("#submit").click(function() {
+
+      if (!$(".viz-genre").hasClass("active")) {
+        alert("Please Select Chart")
+        return false;
+      }
+    })
+  });

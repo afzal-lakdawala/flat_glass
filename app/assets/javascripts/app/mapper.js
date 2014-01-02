@@ -23,11 +23,17 @@ var Mapper = function(options){
     // Final Mapping Data
     this.mappingData = function(){
         // TODO: Add some validations here to check if the mapping truly is complete
-        console.log(Object.keys(this.map).length > 1, Object.keys(this.map).length)
-        if(!Object.keys(this.map).length >= 2){
-            alert("Mapping incomplete!");
+        
+        var mandatory_field = ""
+        $("[data-map-type=M]").each(function(){
+            mandatory_field = $(this).parent().find("h5").text();
+            alert(mandatory_field + " Cannot be empty");            
+        });
+
+        if (mandatory_field.length > 0) {
             return false;
         }
+        
         window.open(options.URL + "?data=" + JSON.stringify(this.map), "_self");
         // This is what needs to be posted
     }

@@ -19,7 +19,6 @@ class VizVizsController < ApplicationController
 
   def new   
     @viz_viz = Viz::Viz.new
-
     @vizs = Viz::Chart.all
     @viz_types = @vizs.collect{ |viz| viz.genre }
     @viz_types.uniq!
@@ -33,6 +32,7 @@ class VizVizsController < ApplicationController
   end
 
   def create
+
     @viz_viz = Viz::Viz.new(params[:viz_viz])
     if @viz_viz.save
       flash[:notice] = t("c.s")
