@@ -45,6 +45,11 @@ class DataFilzsController < ApplicationController
   end
   
   def confirm_datatype
+    header = JSON.parse(@data_filz.content).first
+    @headers = []
+    header.each do |h|
+      @headers << h.split(":")
+    end
   end
   
   def set_datatype
