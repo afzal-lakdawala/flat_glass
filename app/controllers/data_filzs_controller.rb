@@ -53,6 +53,14 @@ class DataFilzsController < ApplicationController
   end
   
   def set_datatype
+    #:headers
+    
+    #col:data1, col
+    #p = JSON.parse(data_filz.content)
+    #p.shift
+    #p
+    #
+    #if @data_filz.update_attributes(params[:data_filz])
   end
   
   def create

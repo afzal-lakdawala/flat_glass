@@ -11,6 +11,8 @@ class Data::Filz < ActiveRecord::Base
 
   #ACCESSORS
   attr_accessible :account_id, :content, :created_by, :error_log, :genre, :is_pending, :updated_by, :file_content_type, :file_file_name, :file_file_size, :category, :commit_message
+  
+  attr_accessor :headers
 
   #ASSOCIATIONS
   belongs_to :creator, class_name: "User", foreign_key: "created_by"

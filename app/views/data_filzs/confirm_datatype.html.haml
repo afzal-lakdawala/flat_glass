@@ -1,0 +1,8 @@
+%table.table
+  %tr
+    %th Column Header
+    %th Datatype
+  - @headers.each do |h|
+    %tr
+      %td= h[0]
+      %td= h[1]
