@@ -21,7 +21,7 @@ class Data::Filz < ActiveRecord::Base
   #VALIDATIONS
   validates :file_file_name, length: {minimum: 5}, presence: true
   #validates :file_content_type, length: {minimum: 2}, presence: true
-  validates :content, length: {minimum: 5, message: "is too short (minimum is 5 rows)"}, allow_blank: true
+  validate :is_content_valid?
   validate :is_name_unique?
   validate :atleast_two_rows?
 
@@ -73,6 +73,24 @@ class Data::Filz < ActiveRecord::Base
     end
   end
   
+  def is_content_valid?
+    self.updated_by = User.current.id if User.current.present?
+    if self.content.present? and self.genre != "readme" and self.genre != "license"
+      con = Data::Filz.remove_nil_rows(self.content)
+
+      if con.count < 2
+        errors.add(:content, "Insert minimum Two rows")
+      else
+        new_header = Data::FilzColumn.get_headers(con)
+        newa = []
+        newa = [new_header.split(",")] + con
+        con = newa
+        self.content = con.to_json        
+      end
+    end
+    true
+  end
+
   def atleast_two_rows? #version0.2_TODO
     true 
   end
@@ -87,16 +105,6 @@ class Data::Filz < ActiveRecord::Base
   end
 
   def before_save_set
-    self.updated_by = User.current.id if User.current.present?
-    if self.content.present? and self.genre != "readme" and self.genre != "license"
-      con = Data::Filz.remove_nil_rows(self.content)
-      new_header = Data::FilzColumn.get_headers(con)
-      newa = []
-      newa = [new_header.split(",")] + con
-      con = newa
-      self.content = con.to_json
-    end
-    true
   end
 
   def after_save_set
