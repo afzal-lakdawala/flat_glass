@@ -37,14 +37,17 @@ $(document).ready(function () {
     $(".text_area_animate").trigger("focusout");
 
     //form hint
-
     $(".form-control").focus(function () {
         var text_hint = $(this).attr("hint");
-        if (text_hint.length > 0) {
-            var text_id = $(this).attr("id");
-            var text_hint = $(this).attr("hint");
-            $("#" + text_id).after("<span class='input-error-hint'>" + text_hint + "</span>");
-            $(".input-error-hint").css("font-size", "11px").css("color", "grey");
+
+        if (text_hint) {
+
+            if (text_hint.length > 0) {
+                var text_id = $(this).attr("id");
+                var text_hint = $(this).attr("hint");
+                $("#" + text_id).after("<span class='input-error-hint'>" + text_hint + "</span>");
+                $(".input-error-hint").css("font-size", "11px").css("color", "grey");
+            }
         }
     });
 
