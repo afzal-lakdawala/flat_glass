@@ -46,7 +46,7 @@ Pykhub::Application.routes.draw do
   get "/:user_id/:account_id/data/:file_id/raw", to: "data_filzs#raw", as: "raw_user_account_data_filz"
   get "/:user_id/:account_id/data/:file_id", to: "data_filzs#show", as: "user_account_data_filz"
   get "/:user_id/:account_id/data/:file_id/confirm_datatype", to: "data_filzs#confirm_datatype", as: "confirm_datatype_user_account_data_filz"
-  put "/:user_id/:account_id/data/:file_id/set_datatype", to: "data_filzs#set_datatype", as: "set_datatype_user_account_data_filz"
+  post "/:user_id/:account_id/data/:file_id/set_datatype", to: "data_filzs#set_datatype", as: "set_datatype_user_account_data_filz"
   
   #articles
   get "/:user_id/:account_id/articles", to: "cms_articles#index", as: "user_account_cms_articles"

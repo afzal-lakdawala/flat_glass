@@ -1,8 +1,21 @@
-%table.table
-  %tr
-    %th Column Header
-    %th Datatype
-  - @headers.each do |h|
+- data_types = [["String", "string"], ["Date", "date"], ["Number", "number"]]
+= form_tag (set_datatype_user_account_data_filz_path) do 
+  %table.table.table-bordered
     %tr
-      %td= h[0]
-      %td= h[1]
+      %th Column Header
+      %th Current Datatype
+      %th Datatype
+    - @headers.each do |h|
+      %tr
+        %td
+          = text_field_tag "headers[]",  h[0], readonly: true
+        %td
+          = h[1]
+        %td
+          = select_tag("data_types[]", options_for_select(data_types, h[1]) )
+
+  %hr
+    %h3
+      = submit_tag "save", class: "btn btn-primary" 
+
+

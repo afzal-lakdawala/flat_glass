@@ -53,14 +53,30 @@ class DataFilzsController < ApplicationController
   end
   
   def set_datatype
-    #:headers
+
+    headers = params[:headers]
+    data_types = params[:data_types]
+    new_headers_with_types = []
+    data_new_headers_with_types = []
     
-    #col:data1, col
-    #p = JSON.parse(data_filz.content)
-    #p.shift
-    #p
-    #
-    #if @data_filz.update_attributes(params[:data_filz])
+    headers.each_with_index do |value,i|
+      new_headers_with_types << "#{value}:#{data_types[i]}"
+    end
+
+    old_headers_with_types = JSON.parse(@data_filz.content)
+
+    old_headers_with_types.each_with_index do |value,i|
+      if  i > 0
+        data_new_headers_with_types << value
+      else
+        data_new_headers_with_types << new_headers_with_types 
+      end
+    end    
+
+    if @data_filz.update_attributes(content: data_new_headers_with_types)
+      flash[:notice] = t("c.f")
+      redirect_to user_account_data_filz_path(@account.owner, @account.slug, file_id: @data_filz.slug), :locals => {:flash => flash}
+    end
   end
   
   def create
