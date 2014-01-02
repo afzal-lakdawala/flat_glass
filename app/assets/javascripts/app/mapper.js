@@ -25,9 +25,17 @@ var Mapper = function(options){
         // TODO: Add some validations here to check if the mapping truly is complete
         
         var mandatory_field = ""
+        $(".mand-error").remove();
         $("[data-map-type=M]").each(function(){
-            mandatory_field = $(this).parent().find("h5").text();
-            alert(mandatory_field + " Cannot be empty");            
+
+            if (!$(this).hasClass("dropped")) {
+
+                mandatory_field = $(this).parent().find("h5").text();
+                $(this).append("<span class='label label-danger mand-error'>"
+                                +mandatory_field+" required!</span>");
+
+            }
+
         });
 
         if (mandatory_field.length > 0) {
