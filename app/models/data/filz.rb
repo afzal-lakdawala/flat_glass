@@ -40,9 +40,9 @@ class Data::Filz < ActiveRecord::Base
     con = contenz.class.to_s == "String" ? JSON.parse(contenz) : contenz
 
     con.delete_if{ |row| row.flatten.compact.empty? }
-    con.transpose
+    con = con.transpose
     con.delete_if{ |row| row.flatten.compact.empty? }
-    con.transpose
+    con = con.transpose
 
     return con
 
