@@ -53,9 +53,13 @@ class Viz::Chart < ActiveRecord::Base
       stack = map_json["Stack"].present? ? row[headings.index(map_json["Stack"])]     : "_"
       size  = map_json["Size"].present?  ? row[headings.index(map_json["Size"])].to_f : 0.0
       y     = map_json["Y"].present?     ? row[headings.index(map_json["Y"])].to_f    : 0.0
-      unique_label = "#{label}#{group}#{stack}"
+      unique_label = "#{label}#{group}#{stack}" #create a unique label of all dimensions which will act as KEY
       if h[unique_label].present?
-        h[unique_label] = {"label" => label, "group" => group, "stack" => stack, "y" => h[unique_label]["y"].to_f + y.to_f, "size" => h[unique_label]["size"].to_f + size.to_f }
+        h[unique_label] = {"label" => label, 
+                            "group" => group, 
+                            "stack" => stack, 
+                            "y" => h[unique_label]["y"].to_f + y.to_f, 
+                            "size" => h[unique_label]["size"].to_f + size.to_f }
       else
         h[unique_label] = {"label" => label, "group" => group, "stack" => stack, "y" => y.to_f, "size" => size.to_f}
       end

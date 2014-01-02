@@ -1,3 +1,4 @@
+<<<<<<< Local Changes
 = content_for :breadcrumb do
   %ol.breadcrumb
     %li= link_to "Home", root_url
@@ -31,7 +32,7 @@
 :javascript
   var pm = new Mapper({
     DATA: [#{@viz_viz.headers}],
-    MAP: #{dbmap},
+    MAP: #{dbmap},  
     URL: "/#{@account.owner.slug}/#{@account.slug}/visualizations/#{@viz_viz.slug}/put_map"
   });
   pm.init();
@@ -39,3 +40,5 @@
   $("#get-pie").click(function(){
       pm.mappingData();
   });
+=======
+>>>>>>> External Changes
