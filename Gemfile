@@ -35,11 +35,9 @@ gem "pyk", "0.2.7"
 gem 'chosen-rails'
 gem 'thin' 
 gem "roo"
-gem "redcarpet" #markdown editor https://github.com/vmg/redcarpet
 gem "nokogiri"
 gem "nestful"
 gem "carmen"
-gem "lazy_high_charts"
 gem 'agent_orange', git: "https://github.com/kevinelliott/agent_orange.git"
 gem 'paper_trail'
 gem "railties"
