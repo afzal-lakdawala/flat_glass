@@ -1,12 +1,5 @@
 Pykhub::Application.routes.draw do
-  
-  #oauth2callback
-  match '/auth/google_oauth2/callback' => 'api_oauths#create'
-  match '/auth/google_oauth2/revalidate' => 'api_oauths#revalidate'
-
-  #get "raw/index"
-  #post "raw/upload"
-  
+    
   devise_for :users, :controllers => {:sessions => "sessions", :registrations => "registrations", :confirmations => "confirmations"}
   
   #users
@@ -21,17 +14,6 @@ Pykhub::Application.routes.draw do
   get "/:user_id/:account_id/settings", to: "accounts#edit", as: "edit_account"
   get "/:user_id/:account_id/delete", to: "accounts#destroy", as: "delete_account"  
   
-  #collaboration
-  post "/:user_id/:account_id/collaboration", to: "permissions#create", as: "user_account_permissions"
-  get "/:user_id/:account_id/collaboration", to: "permissions#index", as: "user_account_permissions"
-  get "/:user_id/:account_id/collaboration/:id/delete", to: "permissions#destroy", as: "user_account_permissions_delete"
-  
-  #transfer account
-  post '/:user_id/:account_id/transfer', to: "accounts#transfer", as: "transfer_user_account"
-
-  #specfic files
-  get "/:user_id/:account_id/readme.md", to: "data_filzs#readme", as: "readme_user_account_data_filz"
-  get "/:user_id/:account_id/license.md", to: "data_filzs#license", as: "license_user_account_data_filz"
   
   #files
   get "/:user_id/:account_id/data", to: "data_filzs#index", as: "user_account_data_filzs"

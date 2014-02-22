@@ -8,7 +8,7 @@
     = stylesheet_link_tag "application", :media => "screen"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    %title PykHub
+    %title Flat Glass
   %body
     = render partial: "layouts/shared/loading"
     %header#main-header
@@ -18,8 +18,7 @@
         .breadcrumb-holder
           .container
             = yield(:breadcrumb)
-            = #link_to "What", "#", "data-toggle"=>"chardinjs", "data-intro"=>"This button toggles the overlay, you can click it, even when the overlay is visible", "data-position"=>"right"
-
+            
             - if @what_is_this_page
               = link_to "<span class='glyphicon glyphicon-question-sign'></span> What is this page?".html_safe, "#", title: "You new hear, boi?", "data-placement"=>"bottom", id: "title-help", "data-toggle"=>"chardinjs", "data-intro"=>"This button toggles the overlay, you can click it, even when the overlay is visible", "data-position"=>"left"
       - if @is_toolbar_enabled

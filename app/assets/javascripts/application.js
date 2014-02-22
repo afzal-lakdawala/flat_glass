@@ -14,9 +14,3 @@
 //= require_tree ./vendor/app/
 //= require_tree ./vendor/pyk/
 //= require_tree ./app/
-//= require vendor/lib/jquery.syntaxhighlighter.min
-//= require vendor/lib/showdown
-//= require vendor/lib/wmd
-//= require vendor/lib/functions
-//= require vendor/lib/jquery.inline-attach.min
-
