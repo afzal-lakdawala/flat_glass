@@ -118,7 +118,6 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
-    hash-deep-merge (0.1.1)
     hike (1.2.3)
     i18n (0.6.1)
     jbuilder (1.5.3)
@@ -132,9 +131,6 @@ GEM
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    lazy_high_charts (1.5.0)
-      bundler (>= 1.0)
-      hash-deep-merge
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -179,7 +175,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redcarpet (3.0.0)
     rmagick (2.13.2)
     roo (1.13.0)
       nokogiri
@@ -250,7 +245,6 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
-  lazy_high_charts
   nestful
   nokogiri
   paper_trail
@@ -258,7 +252,6 @@ DEPENDENCIES
   pyk (= 0.2.7)
   rails (= 3.2.13)
   railties
-  redcarpet
   rmagick
   roo
   sass-rails (~> 3.2.3)
