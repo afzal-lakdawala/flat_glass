@@ -5,18 +5,11 @@ class UsersController < ApplicationController
   
   def show
     @is_breadcrumb_enabled = false
-    @my_accounts     = @user.my_accounts
-    @shared_accounts = @user.shared_accounts
   end
 
   def edit
   end
-  
-  def integrations
-    @api_oauths = current_user.api_oauths
-    @api_accounts = current_user.api_accounts
-  end
-  
+    
   def update
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path, notice: t("u.s")

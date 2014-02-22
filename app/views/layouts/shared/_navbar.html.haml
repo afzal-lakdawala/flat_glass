@@ -19,6 +19,5 @@
             %li
               %a{href: user_path(current_user)}
                 = current_user.username
-            %li= link_to "<b class='glyphicon glyphicon-plus'></b>".html_safe, new_accounts_path
             %li= link_to "<b class='glyphicon glyphicon-cog'></b>".html_safe, edit_user_path
             %li= link_to "<b class='glyphicon glyphicon-off'></b>".html_safe, destroy_user_session_path, :method => :delete, style: "font-size: 14px;"

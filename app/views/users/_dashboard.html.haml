@@ -2,9 +2,12 @@
   %ol.breadcrumb
     %li.active Home
 
-- if @new_user
+- if current_user
   .row
     .col-sm-8{style: "margin-bottom: 200px;"}
       %h1 Welcome to Flat Glass
       %p.lead dalfkna ldfna lfknad flkadnf ladknf aldkfn adlkf nadlfk andfl kadnf lakdnf adlkfna dlkfnad lkfnad lfknad lfkadn flkadn fladknf aldkfn alkfnadlkfnadlfkn adlkfnadl fknadl fknadlf ad
-          
+-else
+  .row
+    .col-sm-8{style: "margin-bottom: 200px;"}
+      %h1 You are not signed in
