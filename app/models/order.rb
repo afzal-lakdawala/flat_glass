@@ -7,10 +7,11 @@ class Order < ActiveRecord::Base
   #CALLBACKS  
   #SCOPES  
   #CUSTOM SCOPES
-  def self.last31Days
+  def self.getGroupedlast31Days
     today    = Date.today.strftime("%Y-%m-%d")
-    previous = 31.days.ago.strftime("%Y-%m-%d")
-    Order.where(date: previous..today)
+    previous = 10000.days.ago.strftime("%Y-%m-%d")
+    Order.group(:date).where(date: previous..today)
+         .select("sum(no_orders) as value, date as label").order(:date).limit(30)
   end
 
   def self.changeDateFormat

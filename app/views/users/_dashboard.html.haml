@@ -8,18 +8,25 @@
       %h1 Welcome to Flat Glass
       %p.lead dalfkna ldfna lfknad flkadnf ladknf aldkfn adlkf nadlfk andfl kadnf lakdnf adlkfna dlkfnad lkfnad lfknad lfkadn flkadn fladknf aldkfn alkfnadlkfnadlfkn adlkfnadl fknadl fknadlf ad
       %hr
+      %h3
+        From : 
+        =10000.days.ago.strftime("%d %B %Y")
+
+        , To : 
+        =Date.today.strftime("%d %B %Y")
+
       #chart
+        %svg{:style => "height:500px"}
 -else
   .row
     .col-sm-8{style: "margin-bottom: 200px;"}
       %h1 You are not signed in
 
 :javascript
-  $(document).ready(function() {
+  $(document).ready(function() {  
     var column_chart = PykCharts.columnChart({
       selector: "#chart svg",
-      data: ""
+      data: [{ key: "Orders", values: #{@orders}}]
     });
-
 
   });
