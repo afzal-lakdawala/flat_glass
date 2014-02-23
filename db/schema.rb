@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001130537) do
+ActiveRecord::Schema.define(:version => 20140222124028) do
 
   create_table "core_visits", :force => true do |t|
     t.integer  "current_user_id"
@@ -44,16 +44,20 @@ ActiveRecord::Schema.define(:version => 20131001130537) do
   end
 
   create_table "orders", :id => false, :force => true do |t|
-    t.decimal "CUST_NR",      :precision => 20, :scale => 2
-    t.decimal "NO_ORDERS",    :precision => 20, :scale => 2
-    t.decimal "DAY",          :precision => 2,  :scale => 0
-    t.decimal "MONTH",        :precision => 2,  :scale => 0
-    t.decimal "YEAR",         :precision => 4,  :scale => 0
-    t.decimal "AVG_MARGIN",   :precision => 5,  :scale => 2
-    t.text    "SITE_CODE"
-    t.text    "CUR_CODE"
-    t.decimal "AVG_DEL_TIME", :precision => 20, :scale => 2
+    t.decimal "id",           :precision => 10, :scale => 0
+    t.decimal "cust_nr",      :precision => 10, :scale => 0
+    t.decimal "no_orders",    :precision => 10, :scale => 0
+    t.decimal "day",          :precision => 2,  :scale => 0
+    t.decimal "month",        :precision => 2,  :scale => 0
+    t.decimal "year",         :precision => 4,  :scale => 0
+    t.date    "date"
+    t.integer "avg_margin"
+    t.integer "avg_del_time"
+    t.text    "site_code"
+    t.text    "cur_code"
   end
+
+  add_index "orders", ["id"], :name => "index_orders_on_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

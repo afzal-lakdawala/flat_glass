@@ -4,10 +4,22 @@
 
 - if current_user
   .row
-    .col-sm-8{style: "margin-bottom: 200px;"}
+    .col-sm-12{style: "margin-bottom: 200px;"}
       %h1 Welcome to Flat Glass
       %p.lead dalfkna ldfna lfknad flkadnf ladknf aldkfn adlkf nadlfk andfl kadnf lakdnf adlkfna dlkfnad lkfnad lfknad lfkadn flkadn fladknf aldkfn alkfnadlkfnadlfkn adlkfnadl fknadl fknadlf ad
+      %hr
+      #chart
 -else
   .row
     .col-sm-8{style: "margin-bottom: 200px;"}
       %h1 You are not signed in
+
+:javascript
+  $(document).ready(function() {
+    var column_chart = PykCharts.columnChart({
+      selector: "#chart svg",
+      data: ""
+    });
+
+
+  });
