@@ -1,8 +1,0 @@
-= content_for :breadcrumb do
-  %ol.breadcrumb
-    %li= link_to "Home", root_url
-    %li= link_to @account.owner.username, user_path(@account.owner)
-    %li= link_to @account.slug, user_account_path(@account.owner, @account.slug)
-    %li= link_to "images", user_account_cms_images_path(@account.owner, @account.slug)
-    %li.active Upload image        
-= render 'form'
